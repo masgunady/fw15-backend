@@ -5,8 +5,11 @@ const db = new Pool({
 })
 
 db.connect().then(()=>{
+    // console.log(stat)
     console.log("Database connected!")
-}).catch(()=>{
+}).catch((error)=>{
+    console.log(error.message)
+    console.log(`Error Code : ${error.code}`)
     console.log("Database connection failed!")
 })
 
