@@ -7,6 +7,8 @@ const db = new Pool({
 db.connect().then(()=>{
     // console.log(stat)
     console.log("Database connected!")
+    let dateFormat = new Date()
+    console.log(dateFormat)
 }).catch((error)=>{
     console.log(error.message)
     console.log(`Error Code : ${error.code}`)

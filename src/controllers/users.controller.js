@@ -10,19 +10,21 @@ exports.getAllUsers = async(request, response)=>{
     })
 }
 exports.getOneUser = async(request, response)=>{
-    const data = await userModel.findOne(request.params.id)
+    try{
+        const data = await userModel.findOne(request.params.id)
   
-    if(data){
-        return response.json({
-            success: true,
-            message:"Detail User",
-            result:data
-        })
+        if(data){
+            return response.json({
+                success: true,
+                message:"Detail User",
+                result:data
+            })
+        }
+
+        return errorHandler(response, data)
+    }catch(err){
+        return errorHandler(response, err)
     }
-    return response.status(404).json({
-        success: false,
-        message:"User not found",
-    })
 }
 
 exports.createUser = async(request, response) => {
@@ -33,25 +35,69 @@ exports.createUser = async(request, response) => {
             message: `Create user ${request.body.email} successfully`,
             result: data
         })
-    }catch(error){
-        return errorHandler(response, error)
+    }catch(err){
+        return errorHandler(response, err)
     }
 }  
 
 exports.updateUser = async(request, response) => {
-    const data = await userModel.update(request.params.id, request.body)
-    return response.json({
-        success: true,
-        message: "Update user successfully",
-        response: data
-    })
+    try{
+        const data = await userModel.findOne(request.params.id)
+        if(data){
+            const data = await userModel.update(request.params.id, request.body)
+            return response.json({
+                success: true,
+                message: "Update user successfully",
+                response: data
+            })
+        }
+        return errorHandler(response, data)
+    }catch(err){
+        return errorHandler(response, err)
+    }
 }
 
 exports.deleteUser = async(request, response)=>{
-    const data = await userModel.destroy(request.params.id)
-    return response.json({
-        success: true,
-        message: "Delete user successfully",
-        result:data
-    })
+    try{
+        const data = await userModel.findOne(request.params.id)
+        if(data){
+            const data = await userModel.destroy(request.params.id)
+            return response.json({
+                success: true,
+                message: "Delete user successfully",
+                result:data
+            })
+        }
+        return errorHandler(response, data)
+    }catch(err){
+        return errorHandler(response, err)
+    }
+    // try{
+    //     const data = await userModel.destroy(request.params.id)
+    //     if(data){
+    //         console.log(data.rows)
+    //         // return response.json({
+    //         //     success: true,
+    //         //     message: "Delete user successfully",
+    //         //     result:data
+    //         // })
+    //     }
+    //     console.log(data)
+    //     return errorHandler(response, data)
+
+    // }catch(err){
+    //     return errorHandler(response, err)
+    // }
+
+
+    // const data = await userModel.destroy(request.params.id)
+    // if(data > 1){
+    //     return response.json({
+    //         success:true,
+    //         message: "Delete User Successfully",
+    //         response:data
+    //     })
+    // }
+
+    // return errorHandler(response, data)
 }
