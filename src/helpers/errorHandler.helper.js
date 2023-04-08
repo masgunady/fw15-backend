@@ -7,9 +7,10 @@ const errorHandler = (response, err) => {
     }
 
     if(err?.code === "22P02"){                   //No Params ID
-        return response.status(409).json({
+        console.log(err)
+        return response.status(422).json({
             success: false,
-            message: "Parameter ID not found!",
+            message: "Invalid Parameter ID!",
         })
     }
 
