@@ -3,7 +3,13 @@ const userModel = require("../models/users.model")
 
 exports.getAllUsers = async(request, response)=>{
     try{
-        const data = await userModel.findAll()
+        const data = await userModel.findAll(
+            request.query.page,
+            request.query.limit,
+            request.query.search,
+            request.query.sort,
+            request.query.sortBy,
+        )
         return response.json({
             success: true,
             message:"list of all users",
@@ -14,7 +20,6 @@ exports.getAllUsers = async(request, response)=>{
     }
 }
 exports.getOneUser = async(request, response)=>{
-
     try{
         const data = await userModel.findOne(request.params.id)
 
@@ -50,7 +55,6 @@ exports.getOneUser = async(request, response)=>{
 
 exports.createUser = async(request, response) => {
     try{
-
         if(request.body.fullName == ""){
             throw Error("input_data_fullName_null")
         }
@@ -103,7 +107,6 @@ exports.updateUser = async(request, response) => {
             throw Error("input_data_password_null")
         }
         
-
         const data = await userModel.update(request.params.id, request.body)
         if(!data){
             throw Error("data_not_found")
@@ -140,7 +143,6 @@ exports.deleteUser = async(request, response)=>{
     try {
         const data = await userModel.destroy(request.params.id)
         if(!data){
-            // return errorHandler(response, undefined)
             throw Error("data_not_found")
         }
         return response.json({

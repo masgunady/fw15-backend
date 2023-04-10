@@ -11,7 +11,7 @@ const errorHandler = (response, err) => {
         console.log(err)
         return response.status(422).json({
             success: false,
-            message: "Invalid Parameter ID!",
+            message: "Invalid Parameter!",
         })
     }
 

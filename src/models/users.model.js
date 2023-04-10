@@ -3,10 +3,18 @@ const db = require("../helpers/db.helper")
 // exports.findUser = function(){
 //     return db.query("SELECT * FROM \"users\" ")
 // }
-exports.findAll = async() => {
-    const {rows} = await db.query(`
-    SELECT * FROM users
-    `)  
+exports.findAll = async(page, limit, search, sort, sortBy) => {
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 5
+    search = search || ""
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    const offset = (page - 1) * limit
+    const queries = `
+    SELECT * FROM "users" WHERE "email" LIKE $3 ORDER BY "${sort}" ${sortBy} LIMIT $1 OFFSET $2
+    `
+    const values = [limit, offset, `%${search}%`]
+    const {rows} = await db.query(queries, values)  
     return rows
 }
 exports.findOne = async(id) => {
