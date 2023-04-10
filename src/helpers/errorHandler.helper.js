@@ -41,6 +41,7 @@ const errorHandler = (response, err) => {
             message:"Input data email cannot be empty",
         })
     }
+    console.log(err)
     if(err?.message?.includes("input_format_email_not_valid")){
         return response.status(400).json({
             success: false,
