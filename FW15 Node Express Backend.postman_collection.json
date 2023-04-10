@@ -22,11 +22,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/users",
+							"raw": "{{url}}/admin/users",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"admin",
 								"users"
 							]
 						}
@@ -39,18 +40,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/:id",
+							"raw": "{{url}}/admin/users/:id",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"admin",
 								"users",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "899"
 								}
 							]
 						}
@@ -66,8 +68,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
+									"key": "fullName",
+									"value": "nico robin",
+									"type": "text"
+								},
+								{
 									"key": "email",
-									"value": "shanks@mail.com",
+									"value": "robin@mail.com",
 									"type": "text"
 								},
 								{
@@ -78,11 +85,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/users",
+							"raw": "{{url}}/admin/users",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"admin",
 								"users"
 							]
 						}
@@ -98,30 +106,36 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
+									"key": "fullName",
+									"value": "robin",
+									"type": "text"
+								},
+								{
 									"key": "email",
-									"value": "roronoaaa@gmail.com",
+									"value": "robin@mail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "1233",
+									"value": "1234",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/users/:id",
+							"raw": "{{url}}/admin/users/:id",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"admin",
 								"users",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "17"
+									"value": "44"
 								}
 							]
 						}
@@ -138,18 +152,19 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{url}}/users/:id",
+							"raw": "{{url}}/admin/users/:id",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"admin",
 								"users",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "430"
 								}
 							]
 						}
