@@ -28,6 +28,18 @@ const errorHandler = (response, err) => {
             message:"Data ID not found",
         })
     }
+    if(err?.message?.includes("unauthorized")){
+        return response.status(401).json({
+            success: false,
+            message:"Unauthorized!",
+        })
+    }
+    if(err?.message?.includes("wrong_credentials")){
+        return response.status(400).json({
+            success: false,
+            message:"Wrong Email or Password!",
+        })
+    }
 
     if(err?.message?.includes("input_data_fullName_null")){
         return response.status(400).json({

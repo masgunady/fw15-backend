@@ -27,6 +27,16 @@ exports.findOne = async(id) => {
     return rows[0]
 }
 
+exports.findOneByEmail = async(email) => {
+    const queries = `
+  SELECT * FROM "users"
+  WHERE "email" = $1
+`  
+    const values = [email]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
 exports.insert = async(data)=>{
     const queries = `
     INSERT INTO "users" ("fullName","email", "password")
