@@ -53,13 +53,15 @@ exports.getOneUser = async(request, response)=>{
     // }
 }
 
-// const checkEmail = (request)=>{
-//     const inputEmail = request.body.email
-//     if(!inputEmail.includes("@") && !inputEmail.split("@")[1].includes(".")){
-//         return false
-//     }
-//     return true
-// }
+const validEmail = (request)=>{
+    const {email} = request.body
+    // console.log("include @ "+ email?.includes("@"))
+    // console.log("include . "+ email.split("@")[1]?.includes("."))
+    if(email.includes("@") && email.split("@")[1]?.includes(".")){
+        return false
+    }
+    return true
+}
 
 
 
@@ -71,12 +73,15 @@ exports.createUser = async(request, response) => {
         if(request.body.email == ""){
             throw Error("input_data_email_null")
         }
-        if(!request.body.email.includes("@")){
+        if(validEmail(request)){
             throw Error("input_format_email_not_valid")
         }
-        if(!request.body.email.split("@")[1].includes(".")){
-            throw Error("input_format_email_not_valid")
-        }
+        // if(!request.body.email.includes("@")){
+        //     throw Error("input_format_email_not_valid")
+        // }
+        // if(!request.body.email.split("@")[1].includes(".")){
+        //     throw Error("input_format_email_not_valid")
+        // }
         if(request.body.password == ""){
             throw Error("input_data_password_null")
         }
