@@ -1,5 +1,6 @@
 const errorHandler = require("../helpers/errorHandler.helper")
 const userModel = require("../models/users.model")
+const argon =  require("argon2")
 
 exports.getAllUsers = async(request, response)=>{
     try{
@@ -55,8 +56,6 @@ exports.getOneUser = async(request, response)=>{
 
 const validEmail = (request)=>{
     const {email} = request.body
-    // console.log("include @ "+ email?.includes("@"))
-    // console.log("include . "+ email.split("@")[1]?.includes("."))
     if(email.includes("@") && email.split("@")[1]?.includes(".")){
         return false
     }
@@ -76,21 +75,21 @@ exports.createUser = async(request, response) => {
         if(validEmail(request)){
             throw Error("input_format_email_not_valid")
         }
-        // if(!request.body.email.includes("@")){
-        //     throw Error("input_format_email_not_valid")
-        // }
-        // if(!request.body.email.split("@")[1].includes(".")){
-        //     throw Error("input_format_email_not_valid")
-        // }
+
         if(request.body.password == ""){
             throw Error("input_data_password_null")
         }
 
-        const data = await userModel.insert(request.body)  
+        const hash = await argon.hash(request.body.password)
+        const data = {
+            ...request.body,
+            password: hash
+        }
+        const user = await  userModel.insert(data)
         return response.json({
             success: true,
             message: `Create user ${request.body.email} successfully`,
-            result: data
+            result: user
         })
     }catch(err){
         return errorHandler(response, err)
@@ -124,15 +123,20 @@ exports.updateUser = async(request, response) => {
         if(request.body.password == ""){
             throw Error("input_data_password_null")
         }
-        
-        const data = await userModel.update(request.params.id, request.body)
-        if(!data){
+
+        const hash = await argon.hash(request.body.password)
+        const data = {
+            ...request.body,
+            password: hash
+        }
+        const user = await userModel.update(request.params.id, data)
+        if(!user){
             throw Error("data_not_found")
         }
         return response.json({
             success: true,
             message: "Update user successfully",
-            response: data
+            response: user
         })
         
         

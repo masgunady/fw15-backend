@@ -8,7 +8,7 @@ const errorHandler = (response, err) => {
     // console.log(err)
 
     if(err?.code === "22P02"){                   //No Params ID
-        console.log(err)
+        // console.log(err)
         return response.status(422).json({
             success: false,
             message: "Invalid Parameter!",
@@ -40,7 +40,26 @@ const errorHandler = (response, err) => {
             message:"Wrong Email or Password!",
         })
     }
+    // console.log(err)
+    if(err?.message?.includes("jwt malformed")){
+        return response.status(401).json({
+            success: false,
+            message:"Invalid Token!",
+        })
+    }
+    if(err?.message?.includes("invalid signature")){
+        return response.status(401).json({
+            success: false,
+            message:"Invalid Token Signature!",
+        })
+    }
 
+    if(err?.message?.includes("password_unmatch")){
+        return response.status(400).json({
+            success: false,
+            message:"Password and confirm password does not match",
+        })
+    }
     if(err?.message?.includes("input_data_fullName_null")){
         return response.status(400).json({
             success: false,
@@ -53,7 +72,7 @@ const errorHandler = (response, err) => {
             message:"Input data email cannot be empty",
         })
     }
-    console.log(err)
+    // console.log(err)
     if(err?.message?.includes("input_format_email_not_valid")){
         return response.status(400).json({
             success: false,
