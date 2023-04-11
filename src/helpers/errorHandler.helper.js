@@ -85,6 +85,12 @@ const errorHandler = (response, err) => {
             message:"Input data password cannot be empty",
         })
     }
+    if(err?.message?.includes("input_password_min_length_8")){
+        return response.status(400).json({
+            success: false,
+            message:"Input data password min length 8",
+        })
+    }
     
     console.log(err)
     return response.status(500).json({

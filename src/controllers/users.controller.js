@@ -66,21 +66,31 @@ const validEmail = (request)=>{
 
 exports.createUser = async(request, response) => {
     try{
-        if(request.body.fullName == ""){
+
+        const {fullName, email, password, confirmPassword} = request.body
+        if(fullName == ""){
             throw Error("input_data_fullName_null")
         }
-        if(request.body.email == ""){
+        if(email == ""){
             throw Error("input_data_email_null")
         }
         if(validEmail(request)){
             throw Error("input_format_email_not_valid")
         }
 
-        if(request.body.password == ""){
+        if(password == ""){
             throw Error("input_data_password_null")
         }
 
-        const hash = await argon.hash(request.body.password)
+        if(password.length < 8){
+            throw Error("input_password_min_length_8")
+        }
+
+        if(password !== confirmPassword){
+            throw Error("password_unmatch")
+        }
+
+        const hash = await argon.hash(password)
         const data = {
             ...request.body,
             password: hash
@@ -88,7 +98,7 @@ exports.createUser = async(request, response) => {
         const user = await  userModel.insert(data)
         return response.json({
             success: true,
-            message: `Create user ${request.body.email} successfully`,
+            message: `Create user ${email} successfully`,
             result: user
         })
     }catch(err){
