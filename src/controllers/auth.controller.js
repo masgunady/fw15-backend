@@ -4,27 +4,9 @@ const jwt = require("jsonwebtoken")
 const argon  = require("argon2")
 const {APP_SECRET} = process.env
 
-const validEmail = (request)=>{
-    const {email} = request.body
-    if(email.includes("@") && email.split("@")[1]?.includes(".")){
-        return false
-    }
-    return true
-}
-
 exports.login = async (request, response) => {
     try {
         const {email, password} = request.body
-
-        if(email === ""){
-            throw Error("input_data_email_null")
-        }
-        if(validEmail(request)){
-            throw Error("input_format_email_not_valid")
-        }
-        if(password === ""){
-            throw Error("input_data_password_null")
-        }
 
         const user = await userModel.findOneByEmail(email)
         if(!user){
@@ -71,27 +53,7 @@ exports.login = async (request, response) => {
 
 exports.register = async (request, response) => {
     try {
-        const {fullName, email, password, confirmPassword} = request.body
-
-        if(fullName === ""){
-            throw Error("input_data_fullName_null")
-        }
-        if(email === ""){
-            throw Error("input_data_email_null")
-        }
-        if(validEmail(request)){
-            throw Error("input_format_email_not_valid")
-        }
-        if(password === ""){
-            throw Error("input_data_password_null")
-        }
-        if(password.length < 8){
-            throw Error("input_password_min_length_8")
-        }
-
-        if(password !== confirmPassword){
-            throw Error("password_unmatch")
-        }
+        const {password} = request.body
 
 
         const hash = await argon.hash(password)

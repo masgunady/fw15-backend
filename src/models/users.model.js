@@ -51,7 +51,7 @@ exports.insert = async(data)=>{
 exports.update = async(id, data)=>{
     const queries = `
     UPDATE "users"
-    SET  "fullName"=$2, "email"=$3, "password"=$4
+    SET  "fullName"=COALESCE(NULLIF($2,''),"fullName"), "email"=COALESCE(NULLIF($3,''), "email"), "password"=COALESCE(NULLIF($4,''), "password")
     WHERE "id"=$1
     RETURNING *
     `

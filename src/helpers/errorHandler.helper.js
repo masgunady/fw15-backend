@@ -22,6 +22,12 @@ const errorHandler = (response, err) => {
         })
     }
 
+    if(err?.message?.includes("validation_rules")){
+        return response.status(400).json({
+            success: false,
+            message:"Validation Error!",
+        })
+    }
     if(err?.message?.includes("data_not_found")){
         return response.status(404).json({
             success: false,
@@ -54,43 +60,43 @@ const errorHandler = (response, err) => {
         })
     }
 
-    if(err?.message?.includes("password_unmatch")){
-        return response.status(400).json({
-            success: false,
-            message:"Password and confirm password does not match",
-        })
-    }
-    if(err?.message?.includes("input_data_fullName_null")){
-        return response.status(400).json({
-            success: false,
-            message:"Input data fullname cannot be empty",
-        })
-    }
-    if(err?.message?.includes("input_data_email_null")){
-        return response.status(400).json({
-            success: false,
-            message:"Input data email cannot be empty",
-        })
-    }
+    // if(err?.message?.includes("password_unmatch")){
+    //     return response.status(400).json({
+    //         success: false,
+    //         message:"Password and confirm password does not match",
+    //     })
+    // }
+    // if(err?.message?.includes("input_data_fullName_null")){
+    //     return response.status(400).json({
+    //         success: false,
+    //         message:"Input data fullname cannot be empty",
+    //     })
+    // }
+    // if(err?.message?.includes("input_data_email_null")){
+    //     return response.status(400).json({
+    //         success: false,
+    //         message:"Input data email cannot be empty",
+    //     })
+    // }
     // console.log(err)
-    if(err?.message?.includes("input_format_email_not_valid")){
-        return response.status(400).json({
-            success: false,
-            message:"Input data email format invalid",
-        })
-    }
-    if(err?.message?.includes("input_data_password_null")){
-        return response.status(400).json({
-            success: false,
-            message:"Input data password cannot be empty",
-        })
-    }
-    if(err?.message?.includes("input_password_min_length_8")){
-        return response.status(400).json({
-            success: false,
-            message:"Input data password min length 8",
-        })
-    }
+    // if(err?.message?.includes("input_format_email_not_valid")){
+    //     return response.status(400).json({
+    //         success: false,
+    //         message:"Input data email format invalid",
+    //     })
+    // }
+    // if(err?.message?.includes("input_data_password_null")){
+    //     return response.status(400).json({
+    //         success: false,
+    //         message:"Input data password cannot be empty",
+    //     })
+    // }
+    // if(err?.message?.includes("input_password_min_length_8")){
+    //     return response.status(400).json({
+    //         success: false,
+    //         message:"Input data password min length 8",
+    //     })
+    // }
     
     console.log(err)
     return response.status(500).json({

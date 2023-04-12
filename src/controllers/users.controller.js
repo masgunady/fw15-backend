@@ -35,60 +35,12 @@ exports.getOneUser = async(request, response)=>{
     }catch(err){
         return errorHandler(response, err)
     }
-
-    // Kode Versi 1.0
-    // try{
-    //     const data = await userModel.findOne(request.params.id)
-  
-    //     if(data){
-    //         return response.json({
-    //             success: true,
-    //             message:"Detail User",
-    //             result:data
-    //         })
-    //     }
-
-    //     return errorHandler(response, data)
-    // }catch(err){
-    //     return errorHandler(response, err)
-    // }
 }
-
-const validEmail = (request)=>{
-    const {email} = request.body
-    if(email.includes("@") && email.split("@")[1]?.includes(".")){
-        return false
-    }
-    return true
-}
-
-
 
 exports.createUser = async(request, response) => {
     try{
 
-        const {fullName, email, password, confirmPassword} = request.body
-        if(fullName == ""){
-            throw Error("input_data_fullName_null")
-        }
-        if(email == ""){
-            throw Error("input_data_email_null")
-        }
-        if(validEmail(request)){
-            throw Error("input_format_email_not_valid")
-        }
-
-        if(password == ""){
-            throw Error("input_data_password_null")
-        }
-
-        if(password.length < 8){
-            throw Error("input_password_min_length_8")
-        }
-
-        if(password !== confirmPassword){
-            throw Error("password_unmatch")
-        }
+        const {email, password} = request.body
 
         const hash = await argon.hash(password)
         const data = {
