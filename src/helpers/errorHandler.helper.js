@@ -1,10 +1,24 @@
 const errorHandler = (response, err) => {
-    if(err?.code === "23505"|| err?.message?.includes("duplicate key")){
+    console.log(err)
+    if(err?.message?.includes("users_username_key")){
         return response.status(409).json({
             success: false,
-            message: "Email has already been taken!",
+            message: "Username has already been taken!",
         })
     }
+    if(err?.message?.includes("users_username_key")){
+        return response.status(409).json({
+            success: false,
+            message: "Username has already been taken!",
+        })
+    }
+    if(err?.message?.includes("duplicate key")){
+        return response.status(409).json({
+            success: false,
+            message: "Error duplicate key!",
+        })
+    }
+
     
     // console.log(err)
     if(err?.code === "22P02"){                   //No Params ID
@@ -36,6 +50,12 @@ const errorHandler = (response, err) => {
         })
     }
 
+    if(err?.message?.includes("Cannot find module")){
+        return response.status(400).json({
+            success: false,
+            message:"Error definition resource routes!",
+        })
+    }
     if(err?.message?.includes("validation_rules")){
         return response.status(400).json({
             success: false,
@@ -57,7 +77,7 @@ const errorHandler = (response, err) => {
     if(err?.message?.includes("wrong_credentials")){
         return response.status(400).json({
             success: false,
-            message:"Wrong Email or Password!",
+            message:"Wrong Username or Email or Password!",
         })
     }
     // console.log(err)

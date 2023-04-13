@@ -9,7 +9,7 @@ router.get("/", (request, response)=>{
 })
 
 router.use("/auth", require("./auth.route"))
-router.use("/admin", authMiddleware, require("./admin.route"))
+router.use("/admin", authMiddleware, require("./admin/admin.route"))
 
 router.use("*", (request, response)=>{
     return response.status(404).json({

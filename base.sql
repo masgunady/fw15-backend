@@ -1,7 +1,7 @@
 -- Active: 1680760649585@@127.0.0.1@5432@postgres@public
 CREATE TABLE "users" (
     "id" INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    "username" VARCHAR(255),
+    "username" VARCHAR(255) UNIQUE,
     "email" VARCHAR(255) UNIQUE,
     "password" VARCHAR(255),
     "createdAt" TIMESTAMP DEFAULT NOW(),

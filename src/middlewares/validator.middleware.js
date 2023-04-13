@@ -13,7 +13,7 @@ const requirePassword = body("password").exists({checkFalsy:true, checkNull:true
 const requireConfirmPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!")
     .custom((value, {req}) =>  value === req.body.password).withMessage("The passwords do not match!")
 const requireStrongPassword = body("password").isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
-const requireFullName = body("fullName").isLength({min:2, max:80}).withMessage("Please insert your full name!")
+const requireUsername = body("username").isLength({min:2, max:80}).withMessage("Please insert your username!")
 
 
 const rules = {
@@ -21,13 +21,13 @@ const rules = {
         requireEmail,  requirePassword
     ],
     authRegister:[
-        requireFullName, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        requireUsername, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     createUser:[
-        requireFullName, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        requireUsername, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     updateUser:[
-        validParameter ,requireFullName, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        validParameter ,requireUsername, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     getAllUsers:[
         validQueryPage, validQueryLimit , validQuerySort ,validQuerySortBy

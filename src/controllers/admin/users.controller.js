@@ -1,8 +1,7 @@
-const errorHandler = require("../helpers/errorHandler.helper")
-const userModel = require("../models/users.model")
+const errorHandler = require("../../helpers/errorHandler.helper")
+const userModel = require("../../models/users.model")
 const argon =  require("argon2")
-const fileRemover = require("../helpers/fileRemover.helper")
-const fs = require("fs")
+const fileRemover = require("../../helpers/fileRemover.helper")
 
 exports.getAllUsers = async(request, response)=>{
     try{
@@ -22,6 +21,7 @@ exports.getAllUsers = async(request, response)=>{
         return errorHandler(response, err)
     }
 }
+
 exports.getOneUser = async(request, response)=>{
     try{
         const data = await userModel.findOne(request.params.id)
@@ -48,9 +48,9 @@ exports.createUser = async(request, response) => {
             ...request.body,
             password: hash
         }
-        if(request.file){
-            data.picture = request.file.filename
-        }
+        // if(request.file){
+        //     data.picture = request.file.filename
+        // }
         const user = await  userModel.insert(data)
         return response.json({
             success: true,
@@ -61,7 +61,6 @@ exports.createUser = async(request, response) => {
         fileRemover(request.file)
         return errorHandler(response, err)
     }
-
 }  
 
 exports.updateUser = async(request, response) => {
@@ -72,17 +71,17 @@ exports.updateUser = async(request, response) => {
             ...request.body,
             password: hash
         }
-        if(request.file){
-            data.picture = request.file.filename
-        }
+        // if(request.file){
+        //     data.picture = request.file.filename
+        // }
 
-        const oldPict = await userModel.findUserPict(request.params.id)
-        const fileName = `uploads/${oldPict.picture}`
-        fs.unlink(fileName, (err)=>{
-            if(err){
-                throw Error(err.message)
-            }
-        })
+        // const oldPict = await userModel.findUserPict(request.params.id)
+        // const fileName = `uploads/${oldPict.picture}`
+        // fs.unlink(fileName, (err)=>{
+        //     if(err){
+        //         throw Error(err.message)
+        //     }
+        // })
 
 
         const user = await userModel.update(request.params.id, data)

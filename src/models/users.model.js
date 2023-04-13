@@ -26,7 +26,7 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
-exports.findUserPict = async(id) => {
+exports.findPict = async(id) => {
     const queries = `
     SELECT "picture" FROM "users"
     WHERE "id" = $1
@@ -48,10 +48,10 @@ exports.findOneByEmail = async(email) => {
 
 exports.insert = async(data)=>{
     const queries = `
-    INSERT INTO "users" ("fullName","email", "password", "picture")
-    VALUES ($1, $2, $3, $4) RETURNING *
+    INSERT INTO "users" ("username","email", "password")
+    VALUES ($1, $2, $3) RETURNING *
     `
-    const values = [data.fullName, data.email, data.password, data.picture]
+    const values = [data.username, data.email, data.password]
     const {rows} = await db.query(queries, values)
 
     return rows[0]
@@ -60,14 +60,13 @@ exports.insert = async(data)=>{
 exports.update = async(id, data)=>{
     const queries = `
     UPDATE "users" SET
-    "fullName"=COALESCE(NULLIF($2,''),"fullName"),
+    "username"=COALESCE(NULLIF($2,''),"username"),
     "email"=COALESCE(NULLIF($3,''), "email"),
-    "password"=COALESCE(NULLIF($4,''), "password"),
-    "picture"=COALESCE(NULLIF($5,''), "picture")
+    "password"=COALESCE(NULLIF($4,''), "password")
     WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.fullName, data.email, data.password, data.picture]
+    const values = [id, data.username, data.email, data.password]
 
     const {rows} = await db.query(queries, values)
     return rows[0]
