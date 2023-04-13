@@ -1,0 +1,36 @@
+table users
+username, email, password
+
+table profile
+picture, fullName, phonenumber, gender, profession, nationality, birthdate
+
+table events
+picture, title, date, cityID, description
+
+table eventCategories
+eventId, CategoryId
+
+table category
+name
+
+table city
+picture, name, lat, long
+
+
+table partners
+picture, name
+
+table reservationSection
+name, price
+
+table reservation
+eventId, userId, statusId, paymentMethodId
+
+table reservationTicket
+resevationId, sectionId, quantity
+
+table reservationStatus
+name
+
+table wishlist
+userId, eventId
