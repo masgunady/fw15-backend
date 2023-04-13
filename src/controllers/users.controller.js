@@ -47,6 +47,9 @@ exports.createUser = async(request, response) => {
             ...request.body,
             password: hash
         }
+        if(request.file){
+            data.picture = request.file.filename
+        }
         const user = await  userModel.insert(data)
         return response.json({
             success: true,
@@ -57,39 +60,18 @@ exports.createUser = async(request, response) => {
         return errorHandler(response, err)
     }
 
-    // code versi 1.0
-    // try{
-    //     const data = await userModel.insert(request.body)  
-    //     return response.json({
-    //         success: true,
-    //         message: `Create user ${request.body.email} successfully`,
-    //         result: data
-    //     })
-    // }catch(err){
-    //     return errorHandler(response, err)
-    // }
 }  
 
 exports.updateUser = async(request, response) => {
     try{
 
-        if(request.body.fullName == ""){
-            throw Error("input_data_fullName_null")
-        }
-        if(request.body.email == ""){
-            throw Error("input_data_email_null")
-        }
-        if(!request.body.email.includes("@")){
-            throw Error("input_format_email_not_valid")
-        }
-        if(request.body.password == ""){
-            throw Error("input_data_password_null")
-        }
-
         const hash = await argon.hash(request.body.password)
         const data = {
             ...request.body,
             password: hash
+        }
+        if(request.file){
+            data.picture = request.file.filename
         }
         const user = await userModel.update(request.params.id, data)
         if(!user){
@@ -105,21 +87,7 @@ exports.updateUser = async(request, response) => {
     }catch(err){
         return errorHandler(response, err)
     }
-    // code versi 1.0
-    // try{
-    //     const data = await userModel.findOne(request.params.id)
-    //     if(data){
-    //         const data = await userModel.update(request.params.id, request.body)
-    //         return response.json({
-    //             success: true,
-    //             message: "Update user successfully",
-    //             response: data
-    //         })
-    //     }
-    //     return errorHandler(response, data)
-    // }catch(err){
-    //     return errorHandler(response, err)
-    // }
+
 }
 
 exports.deleteUser = async(request, response)=>{
@@ -138,21 +106,5 @@ exports.deleteUser = async(request, response)=>{
         return errorHandler(response,err)
     }
 
-
-    // code versi 1.0
-    // try{
-    //     const data = await userModel.findOne(request.params.id)
-    //     if(data){
-    //         const data = await userModel.destroy(request.params.id)
-    //         return response.json({
-    //             success: true,
-    //             message: "Delete user successfully",
-    //             result:data
-    //         })
-    //     }
-    //     return errorHandler(response, data)
-    // }catch(err){
-    //     return errorHandler(response, err)
-    // }
     
 }

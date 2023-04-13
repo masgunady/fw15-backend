@@ -1,9 +1,10 @@
 const {body,param,query, validationResult} = require("express-validator")
 // const errorHandler = require("../helpers/errorHandler.helper")
 
-const validParameter = param("id").isInt().withMessage("Parameter Invalid!")
+const validParameter = param("id").isInt().withMessage("Parameter ID Invalid!")
 const validQueryPage = query("page").isInt().withMessage("Parameter Page must be int format!")
-const validQuerySort = query("page").isString().withMessage("Parameter Page must be int format!")
+const validQueryLimit = query("limit").isInt().withMessage("Parameter Limit must be int format!")
+const validQuerySort = query("sort").escape().trim().isString().withMessage("Parameter Sort must be string format!")
 const validQuerySortBy = query("sortBy").toUpperCase().isIn(["ASC","DESC"]).withMessage("Query Parameter SortBy must be ASC or DESC format!")
 const requireEmail = body("email").normalizeEmail().isEmail().withMessage("Please insert your valid email!")
 const requirePassword = body("password").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
@@ -27,7 +28,10 @@ const rules = {
         validParameter ,requireFullName, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     getAllUsers:[
-        validQueryPage, validQuerySort ,validQuerySortBy
+        validQueryPage, validQueryLimit , validQuerySort ,validQuerySortBy
+    ],
+    getOneUser:[
+        validParameter
     ]
 }
 

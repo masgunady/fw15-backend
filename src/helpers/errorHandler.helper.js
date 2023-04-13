@@ -5,13 +5,27 @@ const errorHandler = (response, err) => {
             message: "Email has already been taken!",
         })
     }
+    
     // console.log(err)
-
     if(err?.code === "22P02"){                   //No Params ID
         // console.log(err)
         return response.status(422).json({
             success: false,
             message: "Invalid Parameter!",
+        })
+    }
+    if(err?.code === "42703"){                   //No Params ID
+        // console.log(err)
+        return response.status(422).json({
+            success: false,
+            message: "Invalid Parameter Sort Field!",
+        })
+    }
+    if(err?.code === "08P01"){                   //No Params ID
+        // console.log(err)
+        return response.status(422).json({
+            success: false,
+            message: "Invalid Value in Model",
         })
     }
 
@@ -60,12 +74,12 @@ const errorHandler = (response, err) => {
         })
     }
 
-    // if(err?.message?.includes("password_unmatch")){
-    //     return response.status(400).json({
-    //         success: false,
-    //         message:"Password and confirm password does not match",
-    //     })
-    // }
+    if(err?.message?.includes("this._makeMiddleware is not a function")){
+        return response.status(400).json({
+            success: false,
+            message:"Invalid Middleware declaration",
+        })
+    }
     // if(err?.message?.includes("input_data_fullName_null")){
     //     return response.status(400).json({
     //         success: false,
