@@ -1,6 +1,8 @@
 const errorHandler = require("../helpers/errorHandler.helper")
 const userModel = require("../models/users.model")
 const argon =  require("argon2")
+const fileRemover = require("../helpers/fileRemover.helper")
+const fs = require("fs")
 
 exports.getAllUsers = async(request, response)=>{
     try{
@@ -39,7 +41,6 @@ exports.getOneUser = async(request, response)=>{
 
 exports.createUser = async(request, response) => {
     try{
-
         const {email, password} = request.body
 
         const hash = await argon.hash(password)
@@ -57,6 +58,7 @@ exports.createUser = async(request, response) => {
             result: user
         })
     }catch(err){
+        fileRemover(request.file)
         return errorHandler(response, err)
     }
 
@@ -73,6 +75,16 @@ exports.updateUser = async(request, response) => {
         if(request.file){
             data.picture = request.file.filename
         }
+
+        const oldPict = await userModel.findUserPict(request.params.id)
+        const fileName = `uploads/${oldPict.picture}`
+        fs.unlink(fileName, (err)=>{
+            if(err){
+                throw Error(err.message)
+            }
+        })
+
+
         const user = await userModel.update(request.params.id, data)
         if(!user){
             throw Error("data_not_found")
@@ -85,6 +97,7 @@ exports.updateUser = async(request, response) => {
         
         
     }catch(err){
+        fileRemover(request.file)
         return errorHandler(response, err)
     }
 

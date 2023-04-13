@@ -9,6 +9,6 @@ userRouter.get("/",validate("getAllUsers"), userController.getAllUsers)
 userRouter.get("/:id",validate("getOneUser"), userController.getOneUser)
 userRouter.post("/", uploadMiddleware("picture"), validate("createUser"), userController.createUser)
 userRouter.patch("/:id", uploadMiddleware("picture"), validate("updateUser"), userController.updateUser)
-userRouter.delete("/:id", userController.deleteUser)
+userRouter.delete("/:id",validate("deleteUser"), userController.deleteUser)
 
 module.exports = userRouter

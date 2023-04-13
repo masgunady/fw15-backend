@@ -26,6 +26,15 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
+exports.findUserPict = async(id) => {
+    const queries = `
+    SELECT "picture" FROM "users"
+    WHERE "id" = $1
+  `  
+    const values = [id]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
 
 exports.findOneByEmail = async(email) => {
     const queries = `
