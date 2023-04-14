@@ -1,4 +1,4 @@
-const {body,param,query, validationResult} = require("express-validator")
+const {body,param,query,check, validationResult} = require("express-validator")
 const fileRemover = require("../helpers/fileRemover.helper")
 
 // const errorHandler = require("../helpers/errorHandler.helper")
@@ -15,6 +15,13 @@ const requireConfirmPassword = body("confirmPassword").exists({checkFalsy:true, 
 const requireStrongPassword = body("password").isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
 const requireUsername = body("username").isLength({min:2, max:80}).withMessage("Please insert your username!")
 
+const requireFullName = body("fullName").isLength({min:2, max:80}).withMessage("Please insert your fullname!")
+const requireGender = body("gender").toInt().isDecimal().withMessage("Invalid formats data gender!").isInt({min: 1, max:2}).withMessage("Insert gender 1 for male 2 for female!")
+const requirePhoneNumber = body("phoneNumber").isLength({min:8, max:13}).withMessage("Insert phone number without '0' examp : 851567267876!")
+const requireProfession = body("profession").isLength({min:1, max:35}).withMessage("Insert your profession")
+const requireNationality = body("nationality").isLength({min:1, max:35}).withMessage("Insert your nationality")
+const requireBirthDate = check("birthDate").isISO8601().toDate().withMessage("Insert your birth date format examp: 1992-10-10")
+
 
 const rules = {
     authLogin:[
@@ -29,7 +36,13 @@ const rules = {
     updateUser:[
         validParameter ,requireUsername, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
-    getAllUsers:[
+    createProfile:[
+        requireFullName, requireGender, requirePhoneNumber, requireProfession, requireNationality, requireBirthDate
+    ],
+    updateProfile:[
+        validParameter, requireFullName, requireGender, requirePhoneNumber, requireProfession, requireNationality, requireBirthDate
+    ],
+    getAll:[
         validQueryPage, validQueryLimit , validQuerySort ,validQuerySortBy
     ],
     getOne:[

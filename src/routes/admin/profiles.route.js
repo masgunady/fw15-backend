@@ -5,10 +5,10 @@ const uploadMiddleware = require("../../middlewares/upload.middleware")
 
 
 
-profileRoute.get("/", profileController.getAllUserProfiles)
-profileRoute.get("/:id", profileController.getOneUserProfile)
-profileRoute.post("/", uploadMiddleware("picture"), profileController.createUserProfile)
-profileRoute.patch("/:id", uploadMiddleware("picture"), profileController.updateUserProfile)
+profileRoute.get("/",validate("getAll"), profileController.getAllUserProfiles)
+profileRoute.get("/:id",validate("getOne"), profileController.getOneUserProfile)
+profileRoute.post("/", uploadMiddleware("picture"), validate("createProfile"), profileController.createUserProfile)
+profileRoute.patch("/:id", uploadMiddleware("picture"), validate("updateProfile"), profileController.updateUserProfile)
 profileRoute.delete("/:id",validate("delete"), profileController.deleteUserProfile)
 
 module.exports = profileRoute

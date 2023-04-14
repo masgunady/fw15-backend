@@ -5,7 +5,7 @@ const validate = require("../../middlewares/validator.middleware")
 
 
 
-userRouter.get("/",validate("getAllUsers"), userController.getAllUsers)
+userRouter.get("/",validate("getAll"), userController.getAllUsers)
 userRouter.get("/:id",validate("getOne"), userController.getOneUser)
 userRouter.post("/", validate("createUser"), userController.createUser)
 // userRouter.patch("/:id", uploadMiddleware("picture"), validate("updateUser"), userController.updateUser)

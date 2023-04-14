@@ -2,11 +2,15 @@ const db = require("../helpers/db.helper")
 const table = "eventCategories"
 
 
-exports.findAll = async() => {
+exports.findAll = async(page, limit) => {
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 5
+    const offset = (page - 1) * limit
     const queries = `
-    SELECT * FROM "${table}"
-    `
-    const {rows} = await db.query(queries)  
+  SELECT * FROM "${table}" LIMIT $1 OFFSET $2
+  `
+    const values = [limit, offset]
+    const {rows} = await db.query(queries, values)  
     return rows
 }
 
