@@ -10,5 +10,8 @@ admin.use("/partners", require("./partners.route"))
 admin.use("/reservationSections", require("./reservationSections.route"))
 admin.use("/reservationStatus", require("./reservationStatus.route"))
 admin.use("/paymentMethods", require("./paymentMethods.route"))
+admin.use("/reservations", require("./reservations.route"))
+admin.use("/reservationTickets", require("./reservationTickets.route"))
+admin.use("/wishlists", require("./wishlists.route"))
 
 module.exports = admin
