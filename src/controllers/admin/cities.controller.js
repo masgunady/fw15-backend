@@ -101,6 +101,16 @@ exports.updateCity = async(request, response) => {
 exports.deleteCity = async(request, response)=>{
   
     try {
+
+        const oldPict = await citiesModel.findPict(request.params.id)
+        const fileName = `uploads/${oldPict.picture}`
+        if(fileName){
+            fs.unlink(fileName, (response,err)=>{
+                if(err){
+                    return errorHandler(response, err)
+                }
+            })
+        }
         const data = await citiesModel.destroy(request.params.id)
         if(!data){
             throw Error("data_not_found")

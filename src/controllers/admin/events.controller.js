@@ -1,11 +1,11 @@
 const errorHandler = require("../../helpers/errorHandler.helper")
-const profilesModel = require("../../models/profiles.model")
+const eventsModel = require("../../models/events.model")
 const fileRemover = require("../../helpers/fileRemover.helper")
 const fs = require("fs")
 
-exports.getAllUserProfiles = async(request, response)=>{
+exports.getAllEvents = async(request, response)=>{
     try{
-        const data = await profilesModel.findAll(
+        const data = await eventsModel.findAll(
             request.query.page,
             request.query.limit,
             request.query.search,
@@ -14,7 +14,7 @@ exports.getAllUserProfiles = async(request, response)=>{
         )
         return response.json({
             success: true,
-            message:"list of all user profiles",
+            message:"list of all events",
             result:data
         })
     }catch(err){
@@ -22,16 +22,16 @@ exports.getAllUserProfiles = async(request, response)=>{
     }
 }
 
-exports.getOneUserProfile = async(request, response)=>{
+exports.getOneEvent = async(request, response)=>{
     try{
-        const data = await profilesModel.findOne(request.params.id)
+        const data = await eventsModel.findOne(request.params.id)
 
         if(!data){
             throw Error("data_not_found")
         }
         return response.json({
             success: true,
-            message:"Detail profile",
+            message:"Detail event",
             result:data
         })
     }catch(err){
@@ -39,7 +39,7 @@ exports.getOneUserProfile = async(request, response)=>{
     }
 }
 
-exports.createUserProfile = async(request, response) => {
+exports.createEvent = async(request, response) => {
     try{
         const data = {
             ...request.body
@@ -47,19 +47,20 @@ exports.createUserProfile = async(request, response) => {
         if(request.file){
             data.picture = request.file.filename
         }
-        const profile = await  profilesModel.insert(data)
+        const profile = await  eventsModel.insert(data)
         return response.json({
             success: true,
-            message: "Create user profile successfully",
+            message: "Create event successfully",
             result: profile
         })
     }catch(err){
         fileRemover(request.file)
         return errorHandler(response, err)
     }
-}  
+}
 
-exports.updateUserProfile = async(request, response) => {
+
+exports.updateEvent = async(request, response) => {
     try{
 
         const data = {
@@ -69,7 +70,7 @@ exports.updateUserProfile = async(request, response) => {
             data.picture = request.file.filename
         }
 
-        const oldPict = await profilesModel.findUserPict(request.params.id)
+        const oldPict = await eventsModel.findPict(request.params.id)
         const fileName = `uploads/${oldPict.picture}`
         if(fileName){
             fs.unlink(fileName, (response,err)=>{
@@ -80,13 +81,13 @@ exports.updateUserProfile = async(request, response) => {
         }
 
 
-        const user = await profilesModel.update(request.params.id, data)
+        const user = await eventsModel.update(request.params.id, data)
         if(!user){
             throw Error("data_not_found")
         }
         return response.json({
             success: true,
-            message: "Update user profile successfully",
+            message: "Update event successfully",
             response: user
         })
         
@@ -98,11 +99,10 @@ exports.updateUserProfile = async(request, response) => {
 
 }
 
-exports.deleteUserProfile = async(request, response)=>{
+exports.deleteEvent = async(request, response)=>{
   
     try {
-
-        const oldPict = await profilesModel.findUserPict(request.params.id)
+        const oldPict = await eventsModel.findPict(request.params.id)
         const fileName = `uploads/${oldPict.picture}`
         if(fileName){
             fs.unlink(fileName, (response,err)=>{
@@ -111,13 +111,13 @@ exports.deleteUserProfile = async(request, response)=>{
                 }
             })
         }
-        const data = await profilesModel.destroy(request.params.id)
+        const data = await eventsModel.destroy(request.params.id)
         if(!data){
             throw Error("data_not_found")
         }
         return response.json({
             success: true,
-            message: "Delete user profile successfully",
+            message: "Delete event successfully",
             result:data
         })
     } catch (err) {

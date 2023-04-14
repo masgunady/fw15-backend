@@ -13,7 +13,7 @@ CREATE TABLE "profiles" (
     "picture" VARCHAR(255),
     "fullName" VARCHAR(255),
     "phoneNumber" VARCHAR(255),
-    "gender" BOOLEAN,
+    "gender" INTEGER,
     "profession" VARCHAR(255),
     "nationality" VARCHAR(255),
     "birthDate" DATE,
@@ -39,7 +39,7 @@ CREATE TABLE "events" (
     "title" VARCHAR(255),
     "date" DATE,
     "cityId" INTEGER,
-    "descriptiona" TEXT,
+    "descriptions" TEXT,
     "createdAt" TIMESTAMP DEFAULT NOW(),
     "updatedAt" TIMESTAMP DEFAULT NULL
 );
