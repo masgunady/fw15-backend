@@ -18,6 +18,12 @@ const errorHandler = (response, err) => {
             message: "Error duplicate key!",
         })
     }
+    if(err?.message?.includes("no such file or directory")){
+        return response.status(409).json({
+            success: false,
+            message: "no such file or directory!",
+        })
+    }
 
     
     // console.log(err)

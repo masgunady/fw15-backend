@@ -1,8 +1,6 @@
 const db = require("../helpers/db.helper")
 
-// exports.findUser = function(){
-//     return db.query("SELECT * FROM \"users\" ")
-// }
+
 exports.findAll = async(page, limit, search, sort, sortBy) => {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
@@ -26,15 +24,7 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
-exports.findPict = async(id) => {
-    const queries = `
-    SELECT "picture" FROM "users"
-    WHERE "id" = $1
-  `  
-    const values = [id]
-    const {rows} = await db.query(queries,values)  
-    return rows[0]
-}
+
 
 exports.findOneByEmail = async(email) => {
     const queries = `

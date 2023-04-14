@@ -1,9 +1,7 @@
 const db = require("../helpers/db.helper")
 const table = "profiles"
 
-// exports.findUser = function(){
-//     return db.query("SELECT * FROM \"users\" ")
-// }
+
 exports.findAll = async(page, limit, search, sort, sortBy) => {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
@@ -27,7 +25,7 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
-exports.findPict = async(id) => {
+exports.findUserPict = async(id) => {
     const queries = `
     SELECT "picture" FROM "${table}"
     WHERE "id" = $1
@@ -79,13 +77,28 @@ exports.insert = async(data)=>{
 exports.update = async(id, data)=>{
     const queries = `
     UPDATE "${table}" SET
-    "username"=COALESCE(NULLIF($2,''),"username"),
-    "email"=COALESCE(NULLIF($3,''), "email"),
-    "password"=COALESCE(NULLIF($4,''), "password")
+    "userId"=$2,
+    "picture"=COALESCE(NULLIF($3,''), "picture"),
+    "fullName"=COALESCE(NULLIF($4,''), "fullName"),
+    "phoneNumber"=COALESCE(NULLIF($5,''), "phoneNumber"),
+    "gender"=$6,
+    "profession"=COALESCE(NULLIF($7,''), "profession"),
+    "nationality"=COALESCE(NULLIF($8,''), "nationality"),
+    "birthDate"=$9
     WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.username, data.email, data.password]
+    const values = [
+        id,
+        data.userId,
+        data.picture,
+        data.fullName,
+        data.phoneNumber,
+        data.gender,
+        data.profession,
+        data.nationality,
+        data.birthDate
+    ]
 
     const {rows} = await db.query(queries, values)
     return rows[0]
