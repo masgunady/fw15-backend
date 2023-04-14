@@ -1,7 +1,7 @@
 const errorHandler = require("../../helpers/errorHandler.helper")
 const userModel = require("../../models/users.model")
 const argon =  require("argon2")
-const fileRemover = require("../../helpers/fileRemover.helper")
+// const fileRemover = require("../../helpers/fileRemover.helper")
 
 exports.getAllUsers = async(request, response)=>{
     try{
@@ -58,7 +58,7 @@ exports.createUser = async(request, response) => {
             result: user
         })
     }catch(err){
-        fileRemover(request.file)
+        // fileRemover(request.file)
         return errorHandler(response, err)
     }
 }  
@@ -96,7 +96,7 @@ exports.updateUser = async(request, response) => {
         
         
     }catch(err){
-        fileRemover(request.file)
+        // fileRemover(request.file)
         return errorHandler(response, err)
     }
 

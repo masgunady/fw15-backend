@@ -7,7 +7,7 @@ CREATE TABLE "users" (
     "createdAt" TIMESTAMP DEFAULT NOW(),
     "updatedAt" TIMESTAMP DEFAULT NULL
 );
-CREATE TABLE "profile" (
+CREATE TABLE "profiles" (
     "id" INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "userId" INTEGER,
     "picture" VARCHAR(255),
@@ -71,7 +71,7 @@ CREATE TABLE "reservationStatus" (
     "updatedAt" TIMESTAMP DEFAULT NULL
 );
 
-CREATE TABLE "paymentMethod" (
+CREATE TABLE "paymentMethods" (
     "id" INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "name" VARCHAR(255),
     "createdAt" TIMESTAMP DEFAULT NOW(),
@@ -97,7 +97,7 @@ CREATE TABLE "reservationTickets" (
     "updatedAt" TIMESTAMP DEFAULT NULL
 );
 
-CREATE TABLE "wishlist" (
+CREATE TABLE "wishlists" (
     "id" INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "eventId" INTEGER,
     "userId" INTEGER,

@@ -32,10 +32,10 @@ const rules = {
     getAllUsers:[
         validQueryPage, validQueryLimit , validQuerySort ,validQuerySortBy
     ],
-    getOneUser:[
+    getOne:[
         validParameter
     ],
-    deleteUser:[
+    delete:[
         validParameter
     ]
 }
