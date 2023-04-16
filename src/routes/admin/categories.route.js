@@ -3,10 +3,10 @@ const categoriesController = require("../../controllers/admin/categories.control
 const validate = require("../../middlewares/validator.middleware")
 
 
-categoryRoute.get("/", categoriesController.getAllCategories)
-categoryRoute.get("/:id", categoriesController.getOneCategory)
-categoryRoute.post("/", categoriesController.createCategory)
-categoryRoute.patch("/:id", categoriesController.updateCategory)
+categoryRoute.get("/",validate("getAll"), categoriesController.getAllCategories)
+categoryRoute.get("/:id",validate("getOne"), categoriesController.getOneCategory)
+categoryRoute.post("/",validate("createCategory"), categoriesController.createCategory)
+categoryRoute.patch("/:id",validate("updateCategory"), categoriesController.updateCategory)
 categoryRoute.delete("/:id",validate("delete"), categoriesController.deleteCategory)
 
 module.exports = categoryRoute

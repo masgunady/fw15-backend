@@ -26,6 +26,15 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
+exports.findByName = async(name) => {
+    const queries = `
+    SELECT * FROM "${table}"
+    WHERE "name" = $1
+  `  
+    const values = [name]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
 
 exports.insert = async(data)=>{
     const queries = `

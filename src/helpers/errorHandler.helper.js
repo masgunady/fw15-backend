@@ -106,12 +106,12 @@ const errorHandler = (response, err) => {
             message:"Invalid Middleware declaration",
         })
     }
-    // if(err?.message?.includes("input_data_fullName_null")){
-    //     return response.status(400).json({
-    //         success: false,
-    //         message:"Input data fullname cannot be empty",
-    //     })
-    // }
+    if(err?.message?.includes("is_duplicate_data")){
+        return response.status(409).json({
+            success: false,
+            message:"Data is already exist!",
+        })
+    }
     // if(err?.message?.includes("input_data_email_null")){
     //     return response.status(400).json({
     //         success: false,

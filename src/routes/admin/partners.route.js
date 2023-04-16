@@ -5,10 +5,10 @@ const uploadMiddleware = require("../../middlewares/upload.middleware")
 
 
 
-partnerRoute.get("/", partnersController.getAllPartners)
-partnerRoute.get("/:id", partnersController.getOnePartner)
-partnerRoute.post("/", uploadMiddleware("picture"), partnersController.createPartner)
-partnerRoute.patch("/:id", uploadMiddleware("picture"), partnersController.updatePartner)
+partnerRoute.get("/", validate("getAll"), partnersController.getAllPartners)
+partnerRoute.get("/:id", validate("getOne"), partnersController.getOnePartner)
+partnerRoute.post("/", uploadMiddleware("picture"), validate("createPartner"), partnersController.createPartner)
+partnerRoute.patch("/:id", uploadMiddleware("picture"), validate("updatePartner"), partnersController.updatePartner)
 partnerRoute.delete("/:id",validate("delete"), partnersController.deletePartner)
 
 module.exports = partnerRoute

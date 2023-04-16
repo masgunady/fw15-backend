@@ -3,10 +3,10 @@ const paymentMethodsController = require("../../controllers/admin/paymentMethods
 const validate = require("../../middlewares/validator.middleware")
 
 
-paymentMethodRoute.get("/", paymentMethodsController.getAllPaymentMethods)
-paymentMethodRoute.get("/:id", paymentMethodsController.getOnePaymentMethod)
-paymentMethodRoute.post("/", paymentMethodsController.createPaymentMethod)
-paymentMethodRoute.patch("/:id", paymentMethodsController.updatePaymentMethod)
-paymentMethodRoute.delete("/:id",validate("delete"), paymentMethodsController.deletePaymentMethod)
+paymentMethodRoute.get("/", validate("getAll"), paymentMethodsController.getAllPaymentMethods)
+paymentMethodRoute.get("/:id", validate("getOne"), paymentMethodsController.getOnePaymentMethod)
+paymentMethodRoute.post("/", validate("createPaymentMethod"), paymentMethodsController.createPaymentMethod)
+paymentMethodRoute.patch("/:id", validate("updatePaymentMethod"), paymentMethodsController.updatePaymentMethod)
+paymentMethodRoute.delete("/:id", validate("delete"), paymentMethodsController.deletePaymentMethod)
 
 module.exports = paymentMethodRoute

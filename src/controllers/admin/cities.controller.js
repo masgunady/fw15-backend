@@ -41,18 +41,22 @@ exports.getOneCity = async(request, response)=>{
 
 exports.createCity = async(request, response) => {
     try{
-        const data = {
-            ...request.body
+        const checkName = await citiesModel.findByName(request.body.name)
+        if(!checkName){
+            const data = {
+                ...request.body
+            }
+            if(request.file){
+                data.picture = request.file.filename
+            }
+            const profile = await  citiesModel.insert(data)
+            return response.json({
+                success: true,
+                message: "Create city successfully",
+                result: profile
+            })
         }
-        if(request.file){
-            data.picture = request.file.filename
-        }
-        const profile = await  citiesModel.insert(data)
-        return response.json({
-            success: true,
-            message: "Create city successfully",
-            result: profile
-        })
+        throw Error("is_duplicate_data")
     }catch(err){
         fileRemover(request.file)
         return errorHandler(response, err)
@@ -61,47 +65,47 @@ exports.createCity = async(request, response) => {
 
 exports.updateCity = async(request, response) => {
     try{
-
-        const data = {
-            ...request.body
-        }
-        if(request.file){
-            data.picture = request.file.filename
-        }
-
-        const oldPict = await citiesModel.findPict(request.params.id)
-        const fileName = `uploads/${oldPict.picture}`
-        if(fileName){
-            fs.unlink(fileName, (response,err)=>{
-                if(err){
-                    return errorHandler(response, err)
+        const checkName = await citiesModel.findByName(request.body.name)
+        if(!checkName){
+            const data = {
+                ...request.body
+            }
+            if(request.file){
+                data.picture = request.file.filename
+            }
+  
+            const oldPict = await citiesModel.findPict(request.params.id)
+            if(oldPict){
+                const fileName = `uploads/${oldPict.picture}`
+                if(fileName){
+                    fs.unlink(fileName, (response,err)=>{
+                        if(err){
+                            return errorHandler(response, err)
+                        }
+                    })
                 }
+            }
+    
+            const user = await citiesModel.update(request.params.id, data)
+            if(!user){
+                throw Error("data_not_found")
+            }
+            return response.json({
+                success: true,
+                message: "Update city successfully",
+                response: user
             })
         }
-
-
-        const user = await citiesModel.update(request.params.id, data)
-        if(!user){
-            throw Error("data_not_found")
-        }
-        return response.json({
-            success: true,
-            message: "Update city successfully",
-            response: user
-        })
-        
-        
+        throw Error("is_duplicate_data")
     }catch(err){
         fileRemover(request.file)
         return errorHandler(response, err)
     }
-
 }
 
 exports.deleteCity = async(request, response)=>{
   
     try {
-
         const oldPict = await citiesModel.findPict(request.params.id)
         const fileName = `uploads/${oldPict.picture}`
         if(fileName){

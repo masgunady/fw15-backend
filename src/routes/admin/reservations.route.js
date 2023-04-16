@@ -3,10 +3,10 @@ const reservationsController = require("../../controllers/admin/reservations.con
 const validate = require("../../middlewares/validator.middleware")
 
 
-reservationRoute.get("/", reservationsController.getAllReservations)
-reservationRoute.get("/:id", reservationsController.getOneReservation)
-reservationRoute.post("/", reservationsController.createReservation)
-reservationRoute.patch("/:id", reservationsController.updateReservation)
-reservationRoute.delete("/:id",validate("delete"), reservationsController.deleteReservation)
+reservationRoute.get("/" ,validate("getData"), reservationsController.getAllReservations)
+reservationRoute.get("/:id" ,validate("getOne"), reservationsController.getOneReservation)
+reservationRoute.post("/" ,validate("createReservations"), reservationsController.createReservation)
+reservationRoute.patch("/:id" ,validate("updateReservations"), reservationsController.updateReservation)
+reservationRoute.delete("/:id" ,validate("delete"), reservationsController.deleteReservation)
 
 module.exports = reservationRoute

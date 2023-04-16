@@ -39,15 +39,20 @@ exports.getOneCategory = async(request, response)=>{
 
 exports.createCategory = async(request, response) => {
     try{
-        const data = {
-            ...request.body
+        const checkCategory = await categoriesModel.findCategoryName(request.body.name)
+        if(!checkCategory){
+            const data = {
+                ...request.body
+            }
+            const profile = await  categoriesModel.insert(data)
+            return response.json({
+                success: true,
+                message: "Create category successfully",
+                result: profile
+            })
         }
-        const profile = await  categoriesModel.insert(data)
-        return response.json({
-            success: true,
-            message: "Create category successfully",
-            result: profile
-        })
+        throw Error("is_duplicate_data")
+
     }catch(err){
         fileRemover(request.file)
         return errorHandler(response, err)
@@ -56,18 +61,23 @@ exports.createCategory = async(request, response) => {
 
 exports.updateCategory = async(request, response) => {
     try{
-        const data = {
-            ...request.body
+        const checkName = await categoriesModel.findByName(request.body.name)
+        if(!checkName){
+            const data = {
+                ...request.body
+            }
+            const user = await categoriesModel.update(request.params.id, data)
+            if(!user){
+                throw Error("data_not_found")
+            }
+            return response.json({
+                success: true,
+                message: "Update category successfully",
+                response: user
+            })
         }
-        const user = await categoriesModel.update(request.params.id, data)
-        if(!user){
-            throw Error("data_not_found")
-        }
-        return response.json({
-            success: true,
-            message: "Update category successfully",
-            response: user
-        })
+        throw Error("is_duplicate_data")
+
     }catch(err){
         fileRemover(request.file)
         return errorHandler(response, err)
