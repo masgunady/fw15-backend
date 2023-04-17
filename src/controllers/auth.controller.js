@@ -1,5 +1,6 @@
 const userModel = require("../models/users.model")
 const profileModel = require("../models/profiles.model")
+const forgotRequestModel = require("../models/forgotRequest.model")
 const errorHandler = require("../helpers/errorHandler.helper")
 const jwt = require("jsonwebtoken")
 const argon  = require("argon2")
@@ -13,10 +14,6 @@ exports.login = async (request, response) => {
         if(!user){
             throw Error("wrong_credentials")
         }
-        // const {username: checkUsername} = user
-        // if(username !== checkUsername){
-        //     throw Error("wrong_credentials")
-        // }
 
         const verify = await argon.verify(user.password, password)
         if(!verify){
@@ -33,8 +30,6 @@ exports.login = async (request, response) => {
         return errorHandler(response, err)
     }
 }
-
-
 
 
 exports.register = async (request, response) => {
@@ -62,6 +57,36 @@ exports.register = async (request, response) => {
             message: "Register Success!",
             result: {token}
         })
+    } catch (err) {
+        return errorHandler(response, err)
+    }
+}
+
+exports.forgotPassword = async (request, response) => {
+    try {
+        const {email} = request.body
+        const user = await userModel.findOneByEmail(email)
+        if(!user){
+            throw Error("no_user")
+        }
+        const randomNumber = Math.random()
+        const rounded = Math.round(randomNumber * 100000)
+        const padded = String(rounded).padEnd(6, "0")
+
+        const forgot = await forgotRequestModel.insert({
+            email: user.email,
+            code: padded
+        })
+
+        if(!forgot){
+            throw Error("forgot_failed")
+        }
+
+        return response.json({
+            success: true,
+            message: "Request reset password success!"
+        })
+
     } catch (err) {
         return errorHandler(response, err)
     }
