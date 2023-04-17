@@ -35,15 +35,6 @@ exports.findUserPict = async(id) => {
     return rows[0]
 }
 
-// exports.findOneByEmail = async(email) => {
-//     const queries = `
-//   SELECT * FROM "${table}"
-//   WHERE "email" = $1
-// `  
-//     const values = [email]
-//     const {rows} = await db.query(queries,values)  
-//     return rows[0]
-// }
 
 exports.insert = async(data)=>{
     const queries = `
@@ -77,14 +68,14 @@ exports.insert = async(data)=>{
 exports.update = async(id, data)=>{
     const queries = `
     UPDATE "${table}" SET
-    "userId"=$2,
+    "userId"=COALESCE(NULLIF($2::INTEGER, NULL), "userId"),
     "picture"=COALESCE(NULLIF($3,''), "picture"),
     "fullName"=COALESCE(NULLIF($4,''), "fullName"),
     "phoneNumber"=COALESCE(NULLIF($5,''), "phoneNumber"),
-    "gender"=$6,
+    "gender"=COALESCE(NULLIF($6::INTEGER, NULL), "gender"),
     "profession"=COALESCE(NULLIF($7,''), "profession"),
     "nationality"=COALESCE(NULLIF($8,''), "nationality"),
-    "birthDate"=$9
+    "birthDate"=COALESCE(NULLIF($9::DATE, NULL), "birthDate")
     WHERE "id"=$1
     RETURNING *
     `

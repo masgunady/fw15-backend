@@ -14,14 +14,21 @@ const requirePassword = body("password").exists({checkFalsy:true, checkNull:true
 const requireConfirmPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!")
     .custom((value, {req}) =>  value === req.body.password).withMessage("The passwords do not match!")
 const requireStrongPassword = body("password").isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
-const requireUsername = body("username").isLength({min:2, max:80}).withMessage("Please insert your username!")
+// const requireUsername = body("username").isLength({min:2, max:80}).withMessage("Please insert your username!")
 
-const requireFullName = body("fullName").toLowerCase().isLength({min:2, max:80}).withMessage("Please insert your fullname!")
-const requireGender = body("gender").toInt().isDecimal().withMessage("Invalid formats data gender!").isInt({min: 1, max:2}).withMessage("Insert gender 1 for male 2 for female!")
-const requirePhoneNumber = body("phoneNumber").isLength({min:8, max:13}).withMessage("Insert phone number without '0' examp : 851567267876!")
-const requireProfession = body("profession").toLowerCase().isLength({min:1, max:35}).withMessage("Insert your profession")
-const requireNationality = body("nationality").toLowerCase().isLength({min:1, max:35}).withMessage("Insert your nationality")
-const requireBirthDate = check("birthDate").isISO8601().toDate().withMessage("Insert your birth date format examp: 1992-10-10")
+const requireFullName = body("fullName").optional().toLowerCase().isLength({min:2, max:80}).withMessage("Please insert your fullname!")
+const requireGender = body("gender").optional().toInt().isDecimal().withMessage("Invalid formats data gender!").isInt({min: 1, max:2}).withMessage("Insert gender 1 for male 2 for female!")
+const requirePhoneNumber = body("phoneNumber").optional().isLength({min:8, max:13}).withMessage("Insert phone number without '0' examp : 851567267876!")
+const requireProfession = body("profession").optional().toLowerCase().isLength({min:1, max:35}).withMessage("Insert your profession")
+const requireNationality = body("nationality").optional().toLowerCase().isLength({min:1, max:35}).withMessage("Insert your nationality")
+const requireBirthDate = check("birthDate").optional().isISO8601().toDate().withMessage("Insert your birth date format examp: 1992-10-10")
+
+const requireFullNameUpdate = body("fullName").optional().toLowerCase().isLength({min:2, max:80}).withMessage("Please insert your fullname!")
+const requireGenderUpdate = body("gender").optional().toInt().isDecimal().withMessage("Invalid formats data gender!").isInt({min: 1, max:2}).withMessage("Insert gender 1 for male 2 for female!")
+const requirePhoneNumberUpdate = body("phoneNumber").optional().isLength({min:8, max:13}).withMessage("Insert phone number without '0' examp : 851567267876!")
+const requireProfessionUpdate = body("profession").optional().toLowerCase().isLength({min:1, max:35}).withMessage("Insert your profession")
+const requireNationalityUpdate = body("nationality").optional().toLowerCase().isLength({min:1, max:35}).withMessage("Insert your nationality")
+const requireBirthDateUpdate = check("birthDate").optional().isISO8601().toDate().withMessage("Insert your birth date format examp: 1992-10-10")
 
 const requireName = body("name").toLowerCase().isLength({min:3, max:80}).withMessage("Please insert name of content min 3 char!")
 
@@ -46,19 +53,19 @@ const rules = {
         requireEmail,  requirePassword
     ],
     authRegister:[
-        requireUsername, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     createUser:[
-        requireUsername, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     updateUser:[
-        validParameter ,requireUsername, requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        validParameter , requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     createProfile:[
         requireFullName, requireGender, requirePhoneNumber, requireProfession, requireNationality, requireBirthDate
     ],
     updateProfile:[
-        validParameter, requireFullName, requireGender, requirePhoneNumber, requireProfession, requireNationality, requireBirthDate
+        validParameter, requireUserId, requireFullNameUpdate, requireGenderUpdate, requirePhoneNumberUpdate, requireProfessionUpdate, requireNationalityUpdate, requireBirthDateUpdate
     ],
     createCategory:[
         requireName

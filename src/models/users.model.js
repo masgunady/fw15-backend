@@ -38,10 +38,10 @@ exports.findOneByEmail = async(email) => {
 
 exports.insert = async(data)=>{
     const queries = `
-    INSERT INTO "users" ("username","email", "password")
-    VALUES ($1, $2, $3) RETURNING *
+    INSERT INTO "users" ("email", "password")
+    VALUES ($1, $2) RETURNING *
     `
-    const values = [data.username, data.email, data.password]
+    const values = [data.email, data.password]
     const {rows} = await db.query(queries, values)
 
     return rows[0]
@@ -50,13 +50,12 @@ exports.insert = async(data)=>{
 exports.update = async(id, data)=>{
     const queries = `
     UPDATE "users" SET
-    "username"=COALESCE(NULLIF($2,''),"username"),
     "email"=COALESCE(NULLIF($3,''), "email"),
     "password"=COALESCE(NULLIF($4,''), "password")
     WHERE "id"=$1
     RETURNING *
     `
-    const values = [id, data.username, data.email, data.password]
+    const values = [id, data.email, data.password]
 
     const {rows} = await db.query(queries, values)
     return rows[0]

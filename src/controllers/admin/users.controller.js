@@ -48,9 +48,6 @@ exports.createUser = async(request, response) => {
             ...request.body,
             password: hash
         }
-        // if(request.file){
-        //     data.picture = request.file.filename
-        // }
         const user = await  userModel.insert(data)
         return response.json({
             success: true,
@@ -58,7 +55,6 @@ exports.createUser = async(request, response) => {
             result: user
         })
     }catch(err){
-        // fileRemover(request.file)
         return errorHandler(response, err)
     }
 }  
@@ -71,19 +67,6 @@ exports.updateUser = async(request, response) => {
             ...request.body,
             password: hash
         }
-        // if(request.file){
-        //     data.picture = request.file.filename
-        // }
-
-        // const oldPict = await userModel.findUserPict(request.params.id)
-        // const fileName = `uploads/${oldPict.picture}`
-        // fs.unlink(fileName, (err)=>{
-        //     if(err){
-        //         throw Error(err.message)
-        //     }
-        // })
-
-
         const user = await userModel.update(request.params.id, data)
         if(!user){
             throw Error("data_not_found")
@@ -96,7 +79,6 @@ exports.updateUser = async(request, response) => {
         
         
     }catch(err){
-        // fileRemover(request.file)
         return errorHandler(response, err)
     }
 

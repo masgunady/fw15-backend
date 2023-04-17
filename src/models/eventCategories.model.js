@@ -17,18 +17,6 @@ exports.findAll = async(page, limit, search, sort, sortBy) => {
     return rows
 }
 
-// exports.findAll = async(page, limit) => {
-//     page = parseInt(page) || 1
-//     limit = parseInt(limit) || 5
-//     const offset = (page - 1) * limit
-//     const queries = `
-//   SELECT * FROM "${table}" LIMIT $1 OFFSET $2
-//   `
-//     const values = [limit, offset]
-//     const {rows} = await db.query(queries, values)  
-//     return rows
-// }
-
 exports.findOne = async(id) => {
     const queries = `
     SELECT * FROM "${table}"

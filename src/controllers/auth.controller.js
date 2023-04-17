@@ -6,16 +6,16 @@ const {APP_SECRET} = process.env
 
 exports.login = async (request, response) => {
     try {
-        const {username, email, password} = request.body
+        const {email, password} = request.body
 
         const user = await userModel.findOneByEmail(email)
         if(!user){
             throw Error("wrong_credentials")
         }
-        const {username: checkUsername} = user
-        if(username !== checkUsername){
-            throw Error("wrong_credentials")
-        }
+        // const {username: checkUsername} = user
+        // if(username !== checkUsername){
+        //     throw Error("wrong_credentials")
+        // }
 
         const verify = await argon.verify(user.password, password)
         if(!verify){

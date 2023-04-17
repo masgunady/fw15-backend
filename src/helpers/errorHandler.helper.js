@@ -1,15 +1,10 @@
 const errorHandler = (response, err) => {
     console.log(err)
-    if(err?.message?.includes("users_username_key")){
+
+    if(err?.message?.includes("users_email_key")){
         return response.status(409).json({
             success: false,
-            message: "Username has already been taken!",
-        })
-    }
-    if(err?.message?.includes("users_username_key")){
-        return response.status(409).json({
-            success: false,
-            message: "Username has already been taken!",
+            message: "Email has already been taken!",
         })
     }
     if(err?.message?.includes("duplicate key")){
@@ -25,7 +20,6 @@ const errorHandler = (response, err) => {
         })
     }
 
-    
     // console.log(err)
     if(err?.code === "22P02"){                   //No Params ID
         // console.log(err)
