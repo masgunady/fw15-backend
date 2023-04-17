@@ -2,31 +2,31 @@ const db = require("../helpers/db.helper")
 const table = "wishlists"
 
 
-exports.findAll = async(page, limit) => {
-    page = parseInt(page) || 1
-    limit = parseInt(limit) || 5
-    const offset = (page - 1) * limit
-    const queries = `
-    SELECT * FROM "${table}" LIMIT $1 OFFSET $2
-    `
-    const values = [limit, offset]
-    const {rows} = await db.query(queries, values)  
-    return rows
-}
-// exports.findAll = async(page, limit, search, sort, sortBy) => {
+// exports.findAll = async(page, limit) => {
 //     page = parseInt(page) || 1
 //     limit = parseInt(limit) || 5
-//     search = search || ""
-//     sort = sort || "id"
-//     sortBy = sortBy || "ASC"
 //     const offset = (page - 1) * limit
 //     const queries = `
-//     SELECT * FROM "${table}" WHERE "id" LIKE $3 ORDER BY "${sort}" ${sortBy} LIMIT $1 OFFSET $2
+//     SELECT * FROM "${table}" LIMIT $1 OFFSET $2
 //     `
-//     const values = [limit, offset, `%${search}%`]
+//     const values = [limit, offset]
 //     const {rows} = await db.query(queries, values)  
 //     return rows
 // }
+exports.findAll = async(page, limit, search, sort, sortBy) => {
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 5
+    search = search || ""
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    const offset = (page - 1) * limit
+    const queries = `
+    SELECT * FROM "${table}" WHERE "id"::TEXT LIKE $3 ORDER BY "${sort}" ${sortBy} LIMIT $1 OFFSET $2
+    `
+    const values = [limit, offset, `%${search}%`]
+    const {rows} = await db.query(queries, values)  
+    return rows
+}
 
 exports.findOne = async(id) => {
     const queries = `
