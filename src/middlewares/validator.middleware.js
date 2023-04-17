@@ -3,6 +3,8 @@ const fileRemover = require("../helpers/fileRemover.helper")
 
 // const errorHandler = require("../helpers/errorHandler.helper")
 
+const requiireTermAndCondition = body("termAndCondition").isNumeric().toInt().isInt({min:0, max:1}).withMessage("Incorect Term and Condition!")
+
 const validParameter = param("id").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("Parameter ID Invalid!").isInt({min: 1}).withMessage("No data ID found!")
 const validQueryPage = query("page").isInt({min: 1}).withMessage("Parameter Page must be int format!")
 const validQueryLimit = query("limit").isInt({min: 0}).withMessage("Parameter Limit must be int format!")
@@ -29,6 +31,7 @@ const requirePhoneNumberUpdate = body("phoneNumber").optional().isLength({min:8,
 const requireProfessionUpdate = body("profession").optional().toLowerCase().isLength({min:1, max:35}).withMessage("Insert your profession")
 const requireNationalityUpdate = body("nationality").optional().toLowerCase().isLength({min:1, max:35}).withMessage("Insert your nationality")
 const requireBirthDateUpdate = check("birthDate").optional().isISO8601().toDate().withMessage("Insert your birth date format examp: 1992-10-10")
+const requireUserIdUpdate = body("userId").optional().isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
 
 const requireName = body("name").toLowerCase().isLength({min:3, max:80}).withMessage("Please insert name of content min 3 char!")
 
@@ -53,7 +56,7 @@ const rules = {
         requireEmail,  requirePassword
     ],
     authRegister:[
-        requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword, requiireTermAndCondition
     ],
     createUser:[
         requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
@@ -65,7 +68,7 @@ const rules = {
         requireFullName, requireGender, requirePhoneNumber, requireProfession, requireNationality, requireBirthDate
     ],
     updateProfile:[
-        validParameter, requireUserId, requireFullNameUpdate, requireGenderUpdate, requirePhoneNumberUpdate, requireProfessionUpdate, requireNationalityUpdate, requireBirthDateUpdate
+        validParameter, requireUserIdUpdate, requireFullNameUpdate, requireGenderUpdate, requirePhoneNumberUpdate, requireProfessionUpdate, requireNationalityUpdate, requireBirthDateUpdate
     ],
     createCategory:[
         requireName

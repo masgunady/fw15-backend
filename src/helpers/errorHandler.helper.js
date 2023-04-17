@@ -19,6 +19,12 @@ const errorHandler = (response, err) => {
             message: "no such file or directory!",
         })
     }
+    if(err?.message?.includes("invalid_term_and_condition")){
+        return response.status(409).json({
+            success: false,
+            message: "Please accept terms and condition!",
+        })
+    }
 
     // console.log(err)
     if(err?.code === "22P02"){                   //No Params ID

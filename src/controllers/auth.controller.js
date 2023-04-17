@@ -1,4 +1,5 @@
 const userModel = require("../models/users.model")
+const profileModel = require("../models/profiles.model")
 const errorHandler = require("../helpers/errorHandler.helper")
 const jwt = require("jsonwebtoken")
 const argon  = require("argon2")
@@ -38,7 +39,11 @@ exports.login = async (request, response) => {
 
 exports.register = async (request, response) => {
     try {
-        const {password} = request.body
+        const {fullName, password, termAndCondition} = request.body
+
+        if(termAndCondition !== 1){
+            throw Error("invalid_term_and_condition")
+        }
 
         const hash = await argon.hash(password)
         const data = {
@@ -46,6 +51,11 @@ exports.register = async (request, response) => {
             password: hash
         }
         const user = await  userModel.insert(data)
+        const profileData = {
+            fullName,
+            userId: user.id
+        }
+        await profileModel.insert(profileData)
         const token = jwt.sign({id: user.id}, APP_SECRET)
         return response.json({
             success: true,
