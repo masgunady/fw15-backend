@@ -3,7 +3,7 @@ const fileRemover = require("../helpers/fileRemover.helper")
 
 // const errorHandler = require("../helpers/errorHandler.helper")
 
-const validParameter = param("id").toInt().isDecimal().withMessage("Parameter ID Invalid!").isInt({min: 1}).withMessage("No data ID found!")
+const validParameter = param("id").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("Parameter ID Invalid!").isInt({min: 1}).withMessage("No data ID found!")
 const validQueryPage = query("page").isInt({min: 1}).withMessage("Parameter Page must be int format!")
 const validQueryLimit = query("limit").isInt({min: 0}).withMessage("Parameter Limit must be int format!")
 const validQuerySort = query("sort").escape().trim().isString().withMessage("Parameter Sort must be string format!")
@@ -27,16 +27,16 @@ const requireName = body("name").toLowerCase().isLength({min:3, max:80}).withMes
 
 const requireTitle = body("title").toLowerCase().isLength({min:3, max:80}).withMessage("Please insert your title min 3 char!")
 const requireDate = check("date").isISO8601().toDate().withMessage("Insert your date format examp: 1992-10-10")
-const requireCityId = body("cityId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
 const requireDescription = body("descriptions").isLength({min:3, max:300}).withMessage("Please insert your category name min 3 char and max 300 char!")
 
-const requireCategoryId = body("categoryId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
-const requireEventId = body("eventId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
-const requireUserId = body("userId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
-const requireStatusId = body("statusId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
-const requirePaymentMethodId = body("paymentMethodId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
-const requireReservationId = body("reservationId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
-const requireSectionId = body("sectionId").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireCityId = body("cityId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireCategoryId = body("categoryId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireEventId = body("eventId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireUserId = body("userId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireStatusId = body("statusId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requirePaymentMethodId = body("paymentMethodId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireReservationId = body("reservationId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireSectionId = body("sectionId").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
 
 const requirePrice = body("price").isNumeric().withMessage("Please insert valid price!").isLength({min:3, max:12}).withMessage("Please insert valid price!")
 const requireQuantity = body("quantity").isNumeric().withMessage("Please insert valid quantity!").isLength({min:1, max:10}).withMessage("Please insert valid quantity!").isInt({min: 1}).withMessage("Please insert valid quantity!")
