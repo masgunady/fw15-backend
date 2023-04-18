@@ -94,6 +94,33 @@ exports.update = async(id, data)=>{
     const {rows} = await db.query(queries, values)
     return rows[0]
 }
+exports.updateByUserId = async(userId, data)=>{
+    const queries = `
+    UPDATE "${table}" SET
+    "picture"=COALESCE(NULLIF($3,''), "picture"),
+    "fullName"=COALESCE(NULLIF($4,''), "fullName"),
+    "phoneNumber"=COALESCE(NULLIF($5,''), "phoneNumber"),
+    "gender"=COALESCE(NULLIF($6::INTEGER, NULL), "gender"),
+    "profession"=COALESCE(NULLIF($7,''), "profession"),
+    "nationality"=COALESCE(NULLIF($8,''), "nationality"),
+    "birthDate"=COALESCE(NULLIF($9::DATE, NULL), "birthDate")
+    WHERE "userId"=$1
+    RETURNING *
+    `
+    const values = [
+        userId,
+        data.picture,
+        data.fullName,
+        data.phoneNumber,
+        data.gender,
+        data.profession,
+        data.nationality,
+        data.birthDate
+    ]
+
+    const {rows} = await db.query(queries, values)
+    return rows[0]
+}
 
 exports.destroy = async(id)=>{
     const queries = `
