@@ -69,13 +69,22 @@ exports.forgotPassword = async (request, response) => {
         if(!user){
             throw Error("no_user")
         }
+
+        const activeReqCode = 1
+        const inActiveReqCode = 0
+        const checkRequest = await forgotRequestModel.findOneByEmailAndCode(email, activeReqCode)
+        if(checkRequest){
+            const statusCode = checkRequest.statusCode
+            await forgotRequestModel.updateStatusCode(email, statusCode, inActiveReqCode)
+        }
+        
         const randomNumber = Math.random()
         const rounded = Math.round(randomNumber * 100000)
         const padded = String(rounded).padEnd(6, "0")
-
         const forgot = await forgotRequestModel.insert({
             email: user.email,
-            code: padded
+            code: padded,
+            statusCode: activeReqCode
         })
 
         if(!forgot){
@@ -86,6 +95,9 @@ exports.forgotPassword = async (request, response) => {
             success: true,
             message: "Request reset password success!"
         })
+          
+          
+          
 
     } catch (err) {
         return errorHandler(response, err)

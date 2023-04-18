@@ -25,6 +25,18 @@ const errorHandler = (response, err) => {
             message: "Please accept terms and condition!",
         })
     }
+    if(err?.message?.includes("no_user")){
+        return response.status(409).json({
+            success: false,
+            message: "Your email not registered!",
+        })
+    }
+    if(err?.message?.includes("forgot_failed")){
+        return response.status(409).json({
+            success: false,
+            message: "Error: Error request forgot password!",
+        })
+    }
 
     // console.log(err)
     if(err?.code === "22P02"){                   //No Params ID

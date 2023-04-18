@@ -36,6 +36,16 @@ exports.findOneByEmail = async(email) => {
     return rows[0]
 }
 
+exports.findOneByEmailAndCode = async(email, statusCode) => {
+    const queries = `
+    SELECT * FROM "forgotRequest"
+    WHERE "email" = $1 AND "statusCode" = $2
+    `  
+    const values = [email, statusCode]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
 exports.findOneByCode = async(code) => {
     const queries = `
     SELECT * FROM "forgotRequest"
@@ -48,10 +58,10 @@ exports.findOneByCode = async(code) => {
 
 exports.insert = async(data)=>{
     const queries = `
-    INSERT INTO "forgotRequest" ("email", "code")
-    VALUES ($1, $2) RETURNING *
+    INSERT INTO "forgotRequest" ("email", "code", "statusCode")
+    VALUES ($1, $2, $3) RETURNING *
     `
-    const values = [data.email, data.code]
+    const values = [data.email, data.code, data.statusCode]
     const {rows} = await db.query(queries, values)
 
     return rows[0]
@@ -66,6 +76,23 @@ exports.update = async(id, data)=>{
     RETURNING *
     `
     const values = [id, data.email, data.code]
+
+    const {rows} = await db.query(queries, values)
+    return rows[0]
+}
+exports.updateStatusCode = async(email, statusCode, inActiveReqCode)=>{
+
+    console.log("email:" + email)
+    console.log("statusCode:" + statusCode)
+    console.log("inActiveReqCode:" + inActiveReqCode)
+
+    const queries = `
+    UPDATE "forgotRequest" SET
+    "statusCode"=$3
+    WHERE "email"=$1 AND "statusCode" = $2
+    RETURNING *
+    `
+    const values = [email, statusCode, inActiveReqCode]
 
     const {rows} = await db.query(queries, values)
     return rows[0]
