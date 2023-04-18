@@ -88,13 +88,8 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "username",
-											"value": "admin_zoro",
-											"type": "text"
-										},
-										{
 											"key": "email",
-											"value": "admin_zoro@mail.com",
+											"value": "adminsans@mail.com",
 											"type": "text"
 										},
 										{
@@ -138,13 +133,8 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "username",
-											"value": "admin1",
-											"type": "text"
-										},
-										{
 											"key": "email",
-											"value": "admin1@mail.com",
+											"value": "adminskuy@mail.com",
 											"type": "text"
 										},
 										{
@@ -219,7 +209,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/profiles?sort=id&sortBy=Desc&page=1&limit=5",
+									"raw": "{{url}}/admin/profiles?sort=fullName&sortBy=ASC&page=1&limit=5",
 									"host": [
 										"{{url}}"
 									],
@@ -230,11 +220,11 @@
 									"query": [
 										{
 											"key": "sort",
-											"value": "id"
+											"value": "fullName"
 										},
 										{
 											"key": "sortBy",
-											"value": "Desc"
+											"value": "ASC"
 										},
 										{
 											"key": "page",
@@ -267,7 +257,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "1"
 										}
 									]
 								}
@@ -284,7 +274,7 @@
 									"formdata": [
 										{
 											"key": "userId",
-											"value": "15",
+											"value": "5",
 											"type": "default"
 										},
 										{
@@ -319,7 +309,7 @@
 										},
 										{
 											"key": "birthDate",
-											"value": "1992-10-10",
+											"value": "1992-12-13",
 											"type": "default"
 										}
 									]
@@ -377,7 +367,7 @@
 										},
 										{
 											"key": "nationality",
-											"value": "malay",
+											"value": "austria",
 											"type": "default"
 										},
 										{
@@ -400,7 +390,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								}
@@ -430,6 +420,171 @@
 										{
 											"key": "id",
 											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CATEGORIES",
+					"item": [
+						{
+							"name": "GET ALL CATEGORIES",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Origin",
+										"value": "https://codepen.io",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/admin/categories?sort=id&sortBy=Desc&page=1&limit=10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"categories"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "id"
+										},
+										{
+											"key": "sortBy",
+											"value": "Desc"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET DETAIL CATEGORIES",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/categories/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE CATEGORIES",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "artss",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/admin/categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE CATEGORIES",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "abuy",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/admin/categories/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE CATEGORIES",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{url}}/admin/categories/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
 										}
 									]
 								}
@@ -520,11 +675,11 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/@var.sportphotography-1445.jpg"
+											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template (1).jpg"
 										},
 										{
 											"key": "name",
-											"value": "bandung",
+											"value": "jakarta",
 											"type": "default"
 										}
 									]
@@ -557,7 +712,7 @@
 										},
 										{
 											"key": "name",
-											"value": "palembang",
+											"value": "kupang",
 											"type": "default"
 										}
 									]
@@ -599,171 +754,6 @@
 									"path": [
 										"admin",
 										"cities",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "CATEGORIES",
-					"item": [
-						{
-							"name": "GET ALL CATEGORIES",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Origin",
-										"value": "https://codepen.io",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{url}}/admin/categories?sort=id&sortBy=Desc&page=1&limit=5",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"admin",
-										"categories"
-									],
-									"query": [
-										{
-											"key": "sort",
-											"value": "id"
-										},
-										{
-											"key": "sortBy",
-											"value": "Desc"
-										},
-										{
-											"key": "page",
-											"value": "1"
-										},
-										{
-											"key": "limit",
-											"value": "5"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET DETAIL CATEGORIES",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/admin/categories/:id",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"admin",
-										"categories",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "3"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "CREATE CATEGORIES",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "name",
-											"value": "arts",
-											"type": "default"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/admin/categories",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"admin",
-										"categories"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UPDATE CATEGORIES",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "name",
-											"value": "traditional",
-											"type": "default"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/admin/categories/:id",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"admin",
-										"categories",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE CATEGORIES",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": []
-								},
-								"url": {
-									"raw": "{{url}}/admin/categories/:id",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"admin",
-										"categories",
 										":id"
 									],
 									"variable": [
@@ -842,7 +832,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								}
@@ -860,26 +850,26 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template (1).jpg"
+											"src": []
 										},
 										{
 											"key": "title",
-											"value": "dangdutan",
+											"value": "nuzulul quran",
 											"type": "default"
 										},
 										{
 											"key": "date",
-											"value": "2023-10-10",
+											"value": "2023-09-09",
 											"type": "text"
 										},
 										{
 											"key": "cityId",
-											"value": "1",
+											"value": "8",
 											"type": "text"
 										},
 										{
 											"key": "descriptions",
-											"value": "waw deh",
+											"value": "good event",
 											"type": "text"
 										}
 									]
@@ -908,7 +898,7 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/Nuzulul Quran Jamiatussyuhada.jpg"
+											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template.jpg"
 										},
 										{
 											"key": "title",
@@ -945,7 +935,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "5"
 										}
 									]
 								}
@@ -999,7 +989,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/eventCategories",
+									"raw": "{{url}}/admin/eventCategories?sort=id&sortBy=Desc&page=1&limit=5",
 									"host": [
 										"{{url}}"
 									],
@@ -1010,23 +1000,19 @@
 									"query": [
 										{
 											"key": "sort",
-											"value": "id",
-											"disabled": true
+											"value": "id"
 										},
 										{
 											"key": "sortBy",
-											"value": "Desc",
-											"disabled": true
+											"value": "Desc"
 										},
 										{
 											"key": "page",
-											"value": "1",
-											"disabled": true
+											"value": "1"
 										},
 										{
 											"key": "limit",
-											"value": "5",
-											"disabled": true
+											"value": "5"
 										}
 									]
 								}
@@ -1226,7 +1212,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "5"
 										}
 									]
 								}
@@ -1248,7 +1234,7 @@
 										},
 										{
 											"key": "name",
-											"value": "kamu",
+											"value": "iam",
 											"type": "default"
 										}
 									]
@@ -1277,11 +1263,11 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/@var.sportphotography-1445.jpg"
+											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template.jpg"
 										},
 										{
 											"key": "name",
-											"value": "dia",
+											"value": "ituhy",
 											"type": "default"
 										}
 									]
@@ -1299,7 +1285,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "5"
 										}
 									]
 								}
@@ -1503,7 +1489,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "3"
 										}
 									]
 								}
@@ -1753,7 +1739,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "4"
 										}
 									]
 								}
@@ -1770,7 +1756,7 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "CC",
+											"value": "CCR",
 											"type": "default"
 										},
 										{
@@ -1882,7 +1868,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/reservations",
+									"raw": "{{url}}/admin/reservations?sort=id&sortBy=asc&page=1&limit=5",
 									"host": [
 										"{{url}}"
 									],
@@ -1893,23 +1879,19 @@
 									"query": [
 										{
 											"key": "sort",
-											"value": "id",
-											"disabled": true
+											"value": "id"
 										},
 										{
 											"key": "sortBy",
-											"value": "Desc",
-											"disabled": true
+											"value": "asc"
 										},
 										{
 											"key": "page",
-											"value": "1",
-											"disabled": true
+											"value": "1"
 										},
 										{
 											"key": "limit",
-											"value": "5",
-											"disabled": true
+											"value": "5"
 										}
 									]
 								}
@@ -2027,7 +2009,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								}
@@ -2081,7 +2063,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/reservationTickets",
+									"raw": "{{url}}/admin/reservationTickets?sort=id&sortBy=Desc&page=2&limit=5",
 									"host": [
 										"{{url}}"
 									],
@@ -2092,23 +2074,19 @@
 									"query": [
 										{
 											"key": "sort",
-											"value": "id",
-											"disabled": true
+											"value": "id"
 										},
 										{
 											"key": "sortBy",
-											"value": "Desc",
-											"disabled": true
+											"value": "Desc"
 										},
 										{
 											"key": "page",
-											"value": "1",
-											"disabled": true
+											"value": "2"
 										},
 										{
 											"key": "limit",
-											"value": "5",
-											"disabled": true
+											"value": "5"
 										}
 									]
 								}
@@ -2228,7 +2206,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "4"
 										}
 									]
 								}
@@ -2282,7 +2260,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/wishlists",
+									"raw": "{{url}}/admin/wishlists?sort=id&sortBy=desc&page=1&limit=5",
 									"host": [
 										"{{url}}"
 									],
@@ -2293,23 +2271,19 @@
 									"query": [
 										{
 											"key": "sort",
-											"value": "id",
-											"disabled": true
+											"value": "id"
 										},
 										{
 											"key": "sortBy",
-											"value": "Desc",
-											"disabled": true
+											"value": "desc"
 										},
 										{
 											"key": "page",
-											"value": "1",
-											"disabled": true
+											"value": "1"
 										},
 										{
 											"key": "limit",
-											"value": "5",
-											"disabled": true
+											"value": "5"
 										}
 									]
 								}
@@ -2334,7 +2308,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								}
@@ -2351,25 +2325,13 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "3",
+											"value": "5",
 											"type": "default"
 										},
 										{
 											"key": "userId",
-											"value": "3",
+											"value": "5",
 											"type": "default"
-										},
-										{
-											"key": "statusId",
-											"value": "2",
-											"type": "default",
-											"disabled": true
-										},
-										{
-											"key": "paymentMethodId",
-											"value": "2",
-											"type": "default",
-											"disabled": true
 										}
 									]
 								},
@@ -2403,18 +2365,6 @@
 											"key": "userId",
 											"value": "4",
 											"type": "default"
-										},
-										{
-											"key": "statusId",
-											"value": "4",
-											"type": "default",
-											"disabled": true
-										},
-										{
-											"key": "paymentMethodId",
-											"value": "4",
-											"type": "default",
-											"disabled": true
 										}
 									]
 								},
@@ -2431,7 +2381,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								}
@@ -2483,18 +2433,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "username",
-									"value": "admin_zoro",
-									"type": "default"
-								},
-								{
 									"key": "email",
-									"value": "admin_zoro@mail.com",
+									"value": "adminkece1@mail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "Admin123!",
+									"value": "Admin123#",
 									"type": "default"
 								}
 							]
@@ -2521,13 +2466,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "username",
-									"value": "admin3",
+									"key": "fullName",
+									"value": "Admin Kece1",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "admin3@mail.com",
+									"value": "adminkece1@mail.com",
 									"type": "default"
 								},
 								{
@@ -2538,6 +2483,11 @@
 								{
 									"key": "confirmPassword",
 									"value": "Admin123!",
+									"type": "default"
+								},
+								{
+									"key": "termAndCondition",
+									"value": "1",
 									"type": "default"
 								}
 							]
@@ -2550,6 +2500,145 @@
 							"path": [
 								"auth",
 								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FORGOT PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "adminkece1@mail.com",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/forgotPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"forgotPassword"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESET PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "903000",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "adminkece1@mail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "Admin123#",
+									"type": "default"
+								},
+								{
+									"key": "confirmPassword",
+									"value": "Admin123#",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/resetPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"resetPassword"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PROFILE",
+			"item": [
+				{
+					"name": "EDIT PROFILE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "Admin kece kita bro",
+									"type": "default"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/gndsu/Downloads/Nuzulul Quran Jamiatussyuhada.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
 							]
 						}
 					},
@@ -2577,7 +2666,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjgxMjkzNDMzfQ._D-stcynBgkYWR4uU8ZVIFG6MZF0jq1IFhmo8u83PMk",
+				"value": "{{token}}",
 				"type": "string"
 			}
 		]

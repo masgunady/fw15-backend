@@ -130,6 +130,13 @@ const errorHandler = (response, err) => {
             message:"Data is already exist!",
         })
     }
+
+    if(err?.message?.includes("could not determine data type of parameter")){
+        return response.status(409).json({
+            success: false,
+            message:"internal error - Model parameter!",
+        })
+    }
     // if(err?.message?.includes("input_data_email_null")){
     //     return response.status(400).json({
     //         success: false,
