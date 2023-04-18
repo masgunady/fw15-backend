@@ -13,9 +13,13 @@ const validQuerySortBy = query("sortBy").toUpperCase().isIn(["ASC","DESC"]).with
 
 const requireEmail = body("email").normalizeEmail().isEmail().withMessage("Please insert your valid email!")
 const requirePassword = body("password").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
-const requireConfirmPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!")
-    .custom((value, {req}) =>  value === req.body.password).withMessage("The passwords do not match!")
+const requireConfirmPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!").custom((value, {req}) =>  value === req.body.password).withMessage("The passwords do not match!")
 const requireStrongPassword = body("password").isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
+
+const requireEmailUpdate = body("email").optional().normalizeEmail().isEmail().withMessage("Please insert your valid email!")
+const requirePasswordUpdate = body("password").optional().exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
+const requireConfirmPasswordUpdate = body("confirmPassword").optional().exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!").custom((value, {req}) =>  value === req.body.password).withMessage("The passwords do not match!")
+const requireStrongPasswordUpdate = body("password").optional().isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
 // const requireUsername = body("username").isLength({min:2, max:80}).withMessage("Please insert your username!")
 
 const requireFullName = body("fullName").optional().toLowerCase().isLength({min:2, max:80}).withMessage("Please insert your fullname!")
@@ -51,6 +55,7 @@ const requireSectionId = body("sectionId").isNumeric().withMessage("Please inser
 const requirePrice = body("price").isNumeric().withMessage("Please insert valid price!").isLength({min:3, max:12}).withMessage("Please insert valid price!")
 const requireQuantity = body("quantity").isNumeric().withMessage("Please insert valid quantity!").isLength({min:1, max:10}).withMessage("Please insert valid quantity!").isInt({min: 1}).withMessage("Please insert valid quantity!")
 
+const requireResetCode = body("code").isNumeric().withMessage("Please insert valid Code!").isLength({min:6, max:6}).withMessage("Please insert valid code!")
 const rules = {
     authLogin:[
         requireEmail,  requirePassword
@@ -62,7 +67,7 @@ const rules = {
         requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
     ],
     updateUser:[
-        validParameter , requireEmail, requirePassword, requireStrongPassword, requireConfirmPassword
+        validParameter , requireEmailUpdate, requirePasswordUpdate, requireStrongPasswordUpdate, requireConfirmPasswordUpdate
     ],
     createProfile:[
         requireFullName, requireGender, requirePhoneNumber, requireProfession, requireNationality, requireBirthDate
@@ -135,6 +140,10 @@ const rules = {
     ],
     updateWishlist:[
         validParameter, requireEventId, requireUserId
+    ],
+
+    resetPassword:[
+        requireEmail,requirePassword, requireStrongPassword, requireConfirmPassword, requireResetCode
     ],
     getData:[
         validQueryPage, validQueryLimit

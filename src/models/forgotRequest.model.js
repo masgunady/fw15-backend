@@ -36,7 +36,18 @@ exports.findOneByEmail = async(email) => {
     return rows[0]
 }
 
-exports.findOneByEmailAndCode = async(email, statusCode) => {
+exports.findOneByEmailAndCode= async(email, code) => {
+    const queries = `
+    SELECT * FROM "forgotRequest"
+    WHERE "email" = $1 AND "code" = $2
+    `  
+    const values = [email, code]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
+
+exports.findOneByEmailAndStatusCode = async(email, statusCode) => {
     const queries = `
     SELECT * FROM "forgotRequest"
     WHERE "email" = $1 AND "statusCode" = $2

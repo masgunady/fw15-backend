@@ -37,6 +37,12 @@ const errorHandler = (response, err) => {
             message: "Error: Error request forgot password!",
         })
     }
+    if(err?.message?.includes("code_invalid")){
+        return response.status(409).json({
+            success: false,
+            message: "Code invalid, pelase insert the newest code or request again!",
+        })
+    }
 
     // console.log(err)
     if(err?.code === "22P02"){                   //No Params ID

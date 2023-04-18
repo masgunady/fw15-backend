@@ -72,7 +72,8 @@ exports.forgotPassword = async (request, response) => {
 
         const activeReqCode = 1
         const inActiveReqCode = 0
-        const checkRequest = await forgotRequestModel.findOneByEmailAndCode(email, activeReqCode)
+        const checkRequest = await forgotRequestModel.findOneByEmailAndStatusCode(email, activeReqCode)
+
         if(checkRequest){
             const statusCode = checkRequest.statusCode
             await forgotRequestModel.updateStatusCode(email, statusCode, inActiveReqCode)
@@ -102,4 +103,42 @@ exports.forgotPassword = async (request, response) => {
     } catch (err) {
         return errorHandler(response, err)
     }
+}
+
+exports.resetPassword = async (request, response) => {
+    try {
+        const {code, email, password} = request.body
+        const find = await forgotRequestModel.findOneByEmailAndCode(email, code)
+        
+        if(!find){
+            throw Error("code_invalid")
+        }
+
+        if(find.statusCode !== 1){
+            throw Error("code_invalid")
+        }
+
+        const selectedUser = await userModel.findOneByEmail(email)
+
+        const hash = await argon.hash(password)
+        const data = {
+            password: hash
+        }
+
+        const user = await userModel.update(selectedUser.id, data)
+        if(!user){
+            throw Error("forgot_failed")
+        }
+
+        const inActiveReqCode = 0
+        await forgotRequestModel.updateStatusCode(email, find.statusCode, inActiveReqCode)
+
+        return response.json({
+            success: true,
+            message: "reset password success"
+        })
+    } catch (err) {
+        return errorHandler(response, err)
+    }
+
 }
