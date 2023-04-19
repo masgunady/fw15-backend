@@ -27,10 +27,33 @@ exports.findOne = async(id) => {
     return rows[0]
 }
 
+// exports.findOneByUserId = async(userId) => {
+//     const queries = `
+//     SELECT * FROM "${table}"
+//     WHERE "userId" = $1
+//   `  
+//     const values = [userId]
+//     const {rows} = await db.query(queries,values)  
+//     return rows[0]
+// }
+
 exports.findOneByUserId = async(userId) => {
     const queries = `
-    SELECT * FROM "${table}"
-    WHERE "userId" = $1
+    SELECT
+    "usr"."id",
+    "prof"."picture",
+    "prof"."fullName",
+    "prof"."phoneNumber",
+    "prof"."gender",
+    "prof"."profession",
+    "prof"."nationality",
+    "prof"."birthDate",
+    "prof"."createdAt",
+    "prof"."updatedAt",
+    "usr"."email"
+    FROM "${table}" "prof"
+    INNER JOIN "users" "usr" ON "usr"."id" = "prof"."userId"
+    WHERE "prof"."userId" = $1
   `  
     const values = [userId]
     const {rows} = await db.query(queries,values)  
