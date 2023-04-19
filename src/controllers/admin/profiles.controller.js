@@ -66,18 +66,19 @@ exports.updateUserProfile = async(request, response) => {
             ...request.body
         }
         if(request.file){
+            const oldPict = await profilesModel.findUserPict(request.params.id)
+            const fileName = `uploads/${oldPict.picture}`
+            if(fileName){
+                fs.unlink(fileName, (response,err)=>{
+                    if(err){
+                        return errorHandler(response, err)
+                    }
+                })
+            }
             data.picture = request.file.filename
         }
 
-        const oldPict = await profilesModel.findUserPict(request.params.id)
-        const fileName = `uploads/${oldPict.picture}`
-        if(fileName){
-            fs.unlink(fileName, (response,err)=>{
-                if(err){
-                    return errorHandler(response, err)
-                }
-            })
-        }
+
 
 
         const user = await profilesModel.update(request.params.id, data)
