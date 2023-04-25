@@ -17,6 +17,16 @@ exports.findAll = async(page, limit, search, sort, sortBy) => {
     return rows
 }
 
+exports.findAllCategory = async(sort, sortBy) => {
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    const queries = `
+    SELECT * FROM "${table}" ORDER BY "${sort}" ${sortBy}
+    `
+    const {rows} = await db.query(queries)  
+    return rows
+}
+
 exports.findOne = async(id) => {
     const queries = `
     SELECT * FROM "${table}"

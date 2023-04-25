@@ -11,6 +11,9 @@ router.get("/", (request, response)=>{
 router.use("/auth", require("./auth.route"))
 router.use("/admin", authMiddleware, require("./admin/admin.route"))
 router.use("/profile", authMiddleware, require("./profile.route"))
+router.use("/category", authMiddleware, require("./category.route"))
+router.use("/city", authMiddleware, require("./city.route"))
+router.use("/partner", authMiddleware, require("./partner.route"))
 
 router.use("*", (request, response)=>{
     return response.status(404).json({

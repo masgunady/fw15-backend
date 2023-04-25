@@ -17,6 +17,16 @@ exports.findAll = async(page, limit, search, sort, sortBy) => {
     return rows
 }
 
+exports.findCity = async(sort, sortBy) => {
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    const queries = `
+    SELECT * FROM "${table}"ORDER BY "${sort}" ${sortBy} LIMIT 7 OFFSET 1
+    `
+    const {rows} = await db.query(queries)  
+    return rows
+}
+
 exports.findOne = async(id) => {
     const queries = `
     SELECT * FROM "${table}"
