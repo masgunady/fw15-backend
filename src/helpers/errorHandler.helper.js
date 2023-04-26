@@ -43,6 +43,24 @@ const errorHandler = (response, err) => {
             message: "Code invalid, pelase insert the newest code or request again!",
         })
     }
+    if(err?.message?.includes("data_user_not_found")){
+        return response.status(404).json({
+            success: false,
+            message: "Invalid! User not found",
+        })
+    }
+    if(err?.message?.includes("password_not_match")){
+        return response.status(404).json({
+            success: false,
+            message: "Invalid! Old Password not match",
+        })
+    }
+    if(err?.message?.includes("change_password_failed")){
+        return response.status(404).json({
+            success: false,
+            message: "Error: change password failed",
+        })
+    }
 
     // console.log(err)
     if(err?.code === "22P02"){                   //No Params ID

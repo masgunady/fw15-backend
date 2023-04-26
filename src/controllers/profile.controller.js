@@ -9,7 +9,7 @@ exports.updateProfile = async (request, response) => {
         const user = await profilesModel.findOneByUserId(id)
 
         const data = {
-            ...request.body
+            ...request.body 
         }
 
         if(request.file){
