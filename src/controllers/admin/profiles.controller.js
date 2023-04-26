@@ -1,6 +1,7 @@
 const errorHandler = require("../../helpers/errorHandler.helper")
 const profilesModel = require("../../models/profiles.model")
 const fileRemover = require("../../helpers/fileRemover.helper")
+const usersModel = require("../../models/users.model")
 const fs = require("fs")
 
 exports.getAllUserProfiles = async(request, response)=>{
@@ -44,6 +45,19 @@ exports.createUserProfile = async(request, response) => {
         const data = {
             ...request.body
         }
+
+        const userId = data.userId
+        const checkId = await usersModel.findOne(userId)
+
+        if(!checkId){
+            throw Error("data_user_not_found")
+        }
+
+        const checkDuplicateId = await profilesModel.findUserId(userId)
+        if(checkDuplicateId){
+            throw Error("is_duplicate_data")
+        }
+
         if(request.file){
             data.picture = request.file.filename
         }
@@ -65,6 +79,21 @@ exports.updateUserProfile = async(request, response) => {
         const data = {
             ...request.body
         }
+        
+        if(data.userId){
+            const userId = data.userId
+            const checkId = await usersModel.findOne(userId)
+  
+            if(!checkId){
+                throw Error("data_user_not_found")
+            }
+  
+            const checkValidRequest = await profilesModel.findOne(request.params.id)
+            if(userId !== checkValidRequest.userId){
+                throw Error("invalid_request_userId")
+            }
+        }
+        
         if(request.file){
             const oldPict = await profilesModel.findUserPict(request.params.id)
             const fileName = `uploads/${oldPict.picture}`
@@ -77,9 +106,6 @@ exports.updateUserProfile = async(request, response) => {
             }
             data.picture = request.file.filename
         }
-
-
-
 
         const user = await profilesModel.update(request.params.id, data)
         if(!user){

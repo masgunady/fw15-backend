@@ -6,15 +6,16 @@ const fileRemover = require("../helpers/fileRemover.helper")
 const requiireTermAndCondition = body("termAndCondition").isNumeric().toInt().isInt({min:0, max:1}).withMessage("Incorect Term and Condition!")
 
 const validParameter = param("id").isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("Parameter ID Invalid!").isInt({min: 1}).withMessage("No data ID found!")
-const validQueryPage = query("page").isInt({min: 1}).withMessage("Parameter Page must be int format!")
-const validQueryLimit = query("limit").isInt({min: 0}).withMessage("Parameter Limit must be int format!")
-const validQuerySort = query("sort").escape().trim().isString().withMessage("Parameter Sort must be string format!")
-const validQuerySortBy = query("sortBy").toUpperCase().isIn(["ASC","DESC"]).withMessage("Query Parameter SortBy must be ASC or DESC format!")
+const validQueryPage = query("page").optional().isInt({min: 1}).withMessage("Parameter Page must be int format!")
+const validQueryLimit = query("limit").optional().isInt({min: 0}).withMessage("Parameter Limit must be int format!")
+const validQuerySort = query("sort").optional().escape().trim().isString().withMessage("Parameter Sort must be string format!")
+const validQuerySortBy = query("sortBy").optional().toUpperCase().isIn(["ASC","DESC"]).withMessage("Query Parameter SortBy must be ASC or DESC format!")
 
 const requireEmail = body("email").normalizeEmail().isEmail().withMessage("Please insert your valid email!")
 const requirePassword = body("password").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
 const requireConfirmPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!").custom((value, {req}) =>  value === req.body.password).withMessage("The passwords do not match!")
 const requireStrongPassword = body("password").isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
+
 
 const requireEmailUpdate = body("email").optional().normalizeEmail().isEmail().withMessage("Please insert your valid email!")
 const requirePasswordUpdate = body("password").optional().exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
@@ -56,6 +57,12 @@ const requirePrice = body("price").isNumeric().withMessage("Please insert valid 
 const requireQuantity = body("quantity").isNumeric().withMessage("Please insert valid quantity!").isLength({min:1, max:10}).withMessage("Please insert valid quantity!").isInt({min: 1}).withMessage("Please insert valid quantity!")
 
 const requireResetCode = body("code").isNumeric().withMessage("Please insert valid Code!").isLength({min:6, max:6}).withMessage("Please insert valid code!")
+
+const requireOldPassword = body("oldPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
+const requireNewPassword = body("newPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
+const requireStrongNewPassword = body("newPassword").isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
+const requireConfirmNewPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!").custom((value, {req}) =>  value === req.body.newPassword).withMessage("The passwords do not match!")
+
 const rules = {
     authLogin:[
         requireEmail,  requirePassword
@@ -144,6 +151,12 @@ const rules = {
 
     resetPassword:[
         requireEmail,requirePassword, requireStrongPassword, requireConfirmPassword, requireResetCode
+    ],
+    changePassword:[
+        requireOldPassword, requireNewPassword, requireStrongNewPassword, requireConfirmNewPassword
+    ],
+    updateProfileUser:[
+        requireUserIdUpdate, requireFullNameUpdate, requireGenderUpdate, requirePhoneNumberUpdate, requireProfessionUpdate, requireNationalityUpdate, requireBirthDateUpdate, requireEmailUpdate
     ],
     getData:[
         validQueryPage, validQueryLimit

@@ -46,7 +46,7 @@ const errorHandler = (response, err) => {
     if(err?.message?.includes("data_user_not_found")){
         return response.status(404).json({
             success: false,
-            message: "Invalid! User not found",
+            message: "Invalid! ID or User not found",
         })
     }
     if(err?.message?.includes("password_not_match")){
@@ -110,6 +110,12 @@ const errorHandler = (response, err) => {
             message:"Data ID not found",
         })
     }
+    if(err?.message?.includes("profile_not_found")){
+        return response.status(404).json({
+            success: false,
+            message:"Data Profile not found",
+        })
+    }
     if(err?.message?.includes("unauthorized")){
         return response.status(401).json({
             success: false,
@@ -127,6 +133,12 @@ const errorHandler = (response, err) => {
         return response.status(401).json({
             success: false,
             message:"Invalid Token!",
+        })
+    }
+    if(err?.message?.includes("invalid_request_userId")){
+        return response.status(400).json({
+            success: false,
+            message:"Invalid Request User ID!",
         })
     }
     if(err?.message?.includes("invalid signature")){

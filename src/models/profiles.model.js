@@ -26,6 +26,15 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
+exports.findUserId = async(id) => {
+    const queries = `
+    SELECT * FROM "${table}"
+    WHERE "userId" = $1
+  `  
+    const values = [id]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
 
 // exports.findOneByUserId = async(userId) => {
 //     const queries = `
@@ -41,6 +50,7 @@ exports.findOneByUserId = async(userId) => {
     const queries = `
     SELECT
     "usr"."id",
+    "prof"."userId",
     "prof"."picture",
     "prof"."fullName",
     "prof"."phoneNumber",

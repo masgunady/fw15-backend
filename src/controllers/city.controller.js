@@ -20,8 +20,6 @@ exports.getCity  = async (request, response) => {
 
 exports.getAllCities  = async (request, response) => {
     try {
-        // const parameter = {...request.query}
-        // const city = await cityModel.findAll(parameter)
         const {page, limit, search, sort, sortBy} = request.query
 
         const city = await cityModel.findAll(page, limit, search, sort, sortBy)

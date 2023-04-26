@@ -5,11 +5,17 @@ const profilesModel = require("../models/profiles.model")
 exports.updateProfile = async (request, response) => {
     try {
         const {id} = request.user
-        // console.log(request.user)
         const user = await profilesModel.findOneByUserId(id)
 
         const data = {
             ...request.body 
+        }
+
+
+        if(data.userId){
+            if(user.id !== data.userId){
+                throw Error("invalid_request_userId")
+            }
         }
 
         if(request.file){

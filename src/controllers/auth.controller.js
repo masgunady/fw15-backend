@@ -96,9 +96,6 @@ exports.forgotPassword = async (request, response) => {
             success: true,
             message: "Request reset password success!"
         })
-          
-          
-          
 
     } catch (err) {
         return errorHandler(response, err)

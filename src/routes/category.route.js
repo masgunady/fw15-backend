@@ -1,6 +1,7 @@
 const categoryRouter = require("express").Router()
 const categoryController = require("../controllers/category.controller")
+const validate = require("../middlewares/validator.middleware")
 
-categoryRouter.get("/", categoryController.getCategory)
+categoryRouter.get("/", validate("getAll"), categoryController.getCategory)
 
 module.exports = categoryRouter
