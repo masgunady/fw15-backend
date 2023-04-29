@@ -110,6 +110,12 @@ const errorHandler = (response, err) => {
             message:"Data ID not found",
         })
     }
+    if(err?.message?.includes("event_not_found")){
+        return response.status(404).json({
+            success: false,
+            message:"Data Event not found",
+        })
+    }
     if(err?.message?.includes("profile_not_found")){
         return response.status(404).json({
             success: false,
@@ -126,6 +132,12 @@ const errorHandler = (response, err) => {
         return response.status(400).json({
             success: false,
             message:"Wrong Username or Email or Password!",
+        })
+    }
+    if(err?.message?.includes("create_wishlist_failed")){
+        return response.status(400).json({
+            success: false,
+            message:"Create wishlist failed!",
         })
     }
     // console.log(err)

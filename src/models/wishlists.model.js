@@ -25,6 +25,25 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
+exports.findOneByUserId = async(id) => {
+    const queries = `
+    SELECT * FROM "${table}"
+    WHERE "userId" = $1
+  `  
+    const values = [id]
+    const {rows} = await db.query(queries,values)  
+    return rows
+}
+
+exports.findOneByUserIdAndEventId = async(userId, eventId) => {
+    const queries = `
+    SELECT * FROM "${table}"
+    WHERE "userId" = $1 AND "eventId" = $2
+  `  
+    const values = [userId, eventId]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
 
 exports.insert = async(data)=>{
     const queries = `

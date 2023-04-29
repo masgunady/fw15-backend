@@ -1,5 +1,7 @@
 const errorHandler = require("../../helpers/errorHandler.helper")
 const wishlistsModel = require("../../models/wishlists.model")
+const eventsModel = require("../../models/events.model")
+const usersModel = require("../../models/users.model")
 
 exports.getAllWishlists = async(request, response)=>{
     try{
@@ -41,6 +43,32 @@ exports.createWishlist = async(request, response) => {
         const data = {
             ...request.body
         }
+
+        const userId = data.userId
+        const eventId = data.eventId
+
+        if(eventId){
+            const eventId = data.eventId
+            const checkEvent = await eventsModel.findOne(eventId)
+            if(!checkEvent){
+                throw Error("event_not_found")
+            }
+        }
+
+        if(userId){
+            const userId = data.userId
+            const checkUser = await usersModel.findOne(userId)
+            if(!checkUser){
+                throw Error("data_not_found")
+            }
+        }
+
+        const checkDuplicate = await wishlistsModel.findOneByUserIdAndEventId(userId, eventId)
+        
+        if(checkDuplicate){
+            throw Error("is_duplicate_data")
+        }        
+
         const profile = await  wishlistsModel.insert(data)
         return response.json({
             success: true,
@@ -57,6 +85,31 @@ exports.updateWishlist = async(request, response) => {
         const data = {
             ...request.body
         }
+        const userId = data.userId
+        const eventId = data.eventId
+
+        if(eventId){
+            const eventId = data.eventId
+            const checkEvent = await eventsModel.findOne(eventId)
+            if(!checkEvent){
+                throw Error("event_not_found")
+            }
+        }
+
+        if(userId){
+            const userId = data.userId
+            const checkUser = await usersModel.findOne(userId)
+            if(!checkUser){
+                throw Error("data_not_found")
+            }
+        }
+
+        const checkDuplicate = await wishlistsModel.findOneByUserIdAndEventId(userId, eventId)
+        
+        if(checkDuplicate){
+            throw Error("is_duplicate_data")
+        }
+
         const user = await wishlistsModel.update(request.params.id, data)
         if(!user){
             throw Error("data_not_found")

@@ -63,6 +63,8 @@ const requireNewPassword = body("newPassword").exists({checkFalsy:true, checkNul
 const requireStrongNewPassword = body("newPassword").isStrongPassword().withMessage("password must be at least 8 characters, with at least 1 letter, with at least 1 number, Include both Upper case and Lower case characters and include the symbols!")
 const requireConfirmNewPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!").custom((value, {req}) =>  value === req.body.newPassword).withMessage("The passwords do not match!")
 
+const requireEventIdUpdate = body("eventId").optional().isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+
 const rules = {
     authLogin:[
         requireEmail,  requirePassword
@@ -146,7 +148,7 @@ const rules = {
         requireEventId, requireUserId
     ],
     updateWishlist:[
-        validParameter, requireEventId, requireUserId
+        validParameter, requireEventIdUpdate, requireUserId
     ],
 
     resetPassword:[

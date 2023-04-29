@@ -1,6 +1,7 @@
 const errorHandler = require("../helpers/errorHandler.helper")
 const fileRemover = require("../helpers/fileRemover.helper")
 const profilesModel = require("../models/profiles.model")
+const usersModel = require("../models/users.model")
 
 exports.updateProfile = async (request, response) => {
     try {
@@ -30,11 +31,23 @@ exports.updateProfile = async (request, response) => {
         if(!profile){
             throw Error("update_profile_failed")
         }
+        let updatedUser
+
+        if(data.email){
+            updatedUser = await usersModel.update(id, data)
+        }else{
+            updatedUser = await usersModel.findOne(id)
+        }
+
+        const results = {
+            ...profile,
+            email: updatedUser?.email
+        }
 
         return response.json({
             success: true,
             message: "profile updated",
-            results: profile
+            results: results
         })
     } catch (err) {
         return errorHandler(response, err)
