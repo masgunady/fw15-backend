@@ -16,6 +16,7 @@ router.use("/city", authMiddleware, require("./city.route"))
 router.use("/partner", authMiddleware, require("./partner.route"))
 router.use("/change-password", authMiddleware, require("./changePassword.route"))
 router.use("/wishlist", authMiddleware, require("./wishlist.route"))
+router.use("/event", require("./event.route"))
 
 router.use("*", (request, response)=>{
     return response.status(404).json({

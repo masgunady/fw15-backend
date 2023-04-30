@@ -64,6 +64,12 @@ const requireStrongNewPassword = body("newPassword").isStrongPassword().withMess
 const requireConfirmNewPassword = body("confirmPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert confirm password!").custom((value, {req}) =>  value === req.body.newPassword).withMessage("The passwords do not match!")
 
 const requireEventIdUpdate = body("eventId").optional().isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+const requireCategoryIdUpdate = body("categoryId").optional().isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
+
+const requireTitleUpdate = body("title").optional().toLowerCase().isLength({min:3, max:80}).withMessage("Please insert your title min 3 char!")
+const requireDateUpdate = check("date").optional().isISO8601().toDate().withMessage("Insert your date format examp: 1992-10-10")
+const requireDescriptionUpdate = body("descriptions").optional().isLength({min:3, max:300}).withMessage("Please insert your category name min 3 char and max 300 char!")
+const requireCityIdUpdate = body("cityId").optional().isNumeric().withMessage("Please insert valid number!").toInt().isDecimal().withMessage("ID Invalid!").isInt({min: 1}).withMessage("ID must be int!")
 
 const rules = {
     authLogin:[
@@ -100,13 +106,13 @@ const rules = {
         requireTitle, requireDate, requireCityId, requireDescription
     ],
     updateEvent:[
-        validParameter, requireTitle, requireDate, requireCityId, requireDescription
+        validParameter, requireTitleUpdate, requireDateUpdate, requireCityIdUpdate, requireDescriptionUpdate
     ],
     createEventCategory:[
         requireEventId, requireCategoryId
     ],
     updateEventCategory:[
-        validParameter, requireEventId, requireCategoryId
+        validParameter, requireEventIdUpdate, requireCategoryIdUpdate
     ],
     createPartner:[
         requireName

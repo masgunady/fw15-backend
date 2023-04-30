@@ -5,7 +5,7 @@ exports.findAll = async(page, limit, search, sort, sortBy) => {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
     search = search || ""
-    sort = sort || "id"
+    sort = sort || "id" 
     sortBy = sortBy || "ASC"
     const offset = (page - 1) * limit
     const queries = `
@@ -27,9 +27,17 @@ exports.findOne = async(id) => {
 }
 exports.findOneByUserId = async(id) => {
     const queries = `
-    SELECT * FROM "${table}"
+    SELECT
+    "e"."title",
+    "e"."date",
+    "c"."name" AS "location",
+    "w"."userId"
+    FROM "wishlists" "w"
+    JOIN "events" "e" ON "e"."id" = "w"."eventId"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     WHERE "userId" = $1
-  `  
+
+    `  
     const values = [id]
     const {rows} = await db.query(queries,values)  
     return rows

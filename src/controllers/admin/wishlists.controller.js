@@ -48,7 +48,6 @@ exports.createWishlist = async(request, response) => {
         const eventId = data.eventId
 
         if(eventId){
-            const eventId = data.eventId
             const checkEvent = await eventsModel.findOne(eventId)
             if(!checkEvent){
                 throw Error("event_not_found")
@@ -56,7 +55,6 @@ exports.createWishlist = async(request, response) => {
         }
 
         if(userId){
-            const userId = data.userId
             const checkUser = await usersModel.findOne(userId)
             if(!checkUser){
                 throw Error("data_not_found")
@@ -64,16 +62,15 @@ exports.createWishlist = async(request, response) => {
         }
 
         const checkDuplicate = await wishlistsModel.findOneByUserIdAndEventId(userId, eventId)
-        
         if(checkDuplicate){
             throw Error("is_duplicate_data")
         }        
 
-        const profile = await  wishlistsModel.insert(data)
+        const wishlist = await  wishlistsModel.insert(data)
         return response.json({
             success: true,
             message: "Create wishlist successfully",
-            result: profile
+            result: wishlist
         })
     }catch(err){
         return errorHandler(response, err)
@@ -85,11 +82,16 @@ exports.updateWishlist = async(request, response) => {
         const data = {
             ...request.body
         }
+
+        const checkId = await wishlistsModel.findOne(request.params.id)
+        if(!checkId){
+            throw Error("data_not_found")
+        }
+
         const userId = data.userId
         const eventId = data.eventId
 
         if(eventId){
-            const eventId = data.eventId
             const checkEvent = await eventsModel.findOne(eventId)
             if(!checkEvent){
                 throw Error("event_not_found")
@@ -97,7 +99,6 @@ exports.updateWishlist = async(request, response) => {
         }
 
         if(userId){
-            const userId = data.userId
             const checkUser = await usersModel.findOne(userId)
             if(!checkUser){
                 throw Error("data_not_found")
@@ -105,19 +106,20 @@ exports.updateWishlist = async(request, response) => {
         }
 
         const checkDuplicate = await wishlistsModel.findOneByUserIdAndEventId(userId, eventId)
-        
         if(checkDuplicate){
-            throw Error("is_duplicate_data")
+            if(checkDuplicate.id !== request.params.id){
+                throw Error("is_duplicate_data")
+            }  
         }
 
-        const user = await wishlistsModel.update(request.params.id, data)
-        if(!user){
+        const wishlist = await wishlistsModel.update(request.params.id, data)
+        if(!wishlist){
             throw Error("data_not_found")
         }
         return response.json({
             success: true,
             message: "Update wishlist successfully",
-            response: user
+            response: wishlist
         })
     }catch(err){
         return errorHandler(response, err)

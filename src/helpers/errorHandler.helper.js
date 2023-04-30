@@ -134,6 +134,12 @@ const errorHandler = (response, err) => {
             message:"Wrong Username or Email or Password!",
         })
     }
+    if(err?.message?.includes("data_event_not_created_by_you")){
+        return response.status(400).json({
+            success: false,
+            message:"This event not created by you!",
+        })
+    }
     if(err?.message?.includes("create_wishlist_failed")){
         return response.status(400).json({
             success: false,

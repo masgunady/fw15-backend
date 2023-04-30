@@ -1,5 +1,7 @@
 const errorHandler = require("../../helpers/errorHandler.helper")
 const eventCategoriesModel = require("../../models/eventCategories.model")
+const eventsModel = require("../../models/events.model")
+const categoriesModel = require("../../models/categories.model")
 
 exports.getAllEventCategories = async(request, response)=>{
     try{
@@ -41,11 +43,34 @@ exports.createEventCategory = async(request, response) => {
         const data = {
             ...request.body
         }
-        const profile = await  eventCategoriesModel.insert(data)
+
+        const eventId = data.eventId
+        const categoryId = data.categoryId
+
+        if(eventId){
+            const checkEvent = await eventsModel.findOne(eventId)
+            if(!checkEvent){
+                throw Error("data_not_found")
+            }
+        }
+          
+        if(categoryId){
+            const checkCategory = await categoriesModel.findOne(categoryId)
+            if(!checkCategory){
+                throw Error("data_not_found")
+            }
+        }
+
+        const checkDuplicate = await eventCategoriesModel.findOneByEventIdAndCategoryId(eventId, categoryId)
+        if(checkDuplicate){
+            throw Error("is_duplicate_data")
+        }
+
+        const eventCategory = await  eventCategoriesModel.insert(data)
         return response.json({
             success: true,
             message: "Create event category successfully",
-            result: profile
+            result: eventCategory
         })
     }catch(err){
         return errorHandler(response, err)
@@ -57,14 +82,45 @@ exports.updateEventCategory = async(request, response) => {
         const data = {
             ...request.body
         }
-        const user = await eventCategoriesModel.update(request.params.id, data)
-        if(!user){
+
+        const checkId = await eventCategoriesModel.findOne(request.params.id)
+        if(!checkId){
+            throw Error("data_not_found")
+        }
+
+        const eventId = data.eventId
+        const categoryId = data.categoryId
+
+        if(eventId){
+            const checkEvent = await eventsModel.findOne(eventId)
+            if(!checkEvent){
+                throw Error("data_not_found")
+            }
+        }
+          
+        if(categoryId){
+            const checkCategory = await categoriesModel.findOne(categoryId)
+            if(!checkCategory){
+                throw Error("data_not_found")
+            }
+        }
+
+        const checkDuplicate = await eventCategoriesModel.findOneByEventIdAndCategoryId(eventId, categoryId)
+
+        if(checkDuplicate){
+            if(checkDuplicate.id !== request.params.id){
+                throw Error("is_duplicate_data")
+            }  
+        }
+
+        const eventCategory = await eventCategoriesModel.update(request.params.id, data)
+        if(!eventCategory){
             throw Error("data_not_found")
         }
         return response.json({
             success: true,
             message: "Update event category successfully",
-            response: user
+            response: eventCategory
         })
     }catch(err){
         return errorHandler(response, err)

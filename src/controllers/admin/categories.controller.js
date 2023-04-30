@@ -39,19 +39,20 @@ exports.getOneCategory = async(request, response)=>{
 
 exports.createCategory = async(request, response) => {
     try{
-        const checkCategory = await categoriesModel.findCategoryName(request.body.name)
-        if(!checkCategory){
-            const data = {
-                ...request.body
-            }
-            const profile = await  categoriesModel.insert(data)
-            return response.json({
-                success: true,
-                message: "Create category successfully",
-                result: profile
-            })
+        const data = {
+            ...request.body
         }
-        throw Error("is_duplicate_data")
+        
+        const checkCategory = await categoriesModel.findByName(request.body.name)
+        if(checkCategory){
+            throw Error("is_duplicate_data")
+        }
+        const profile = await  categoriesModel.insert(data)
+        return response.json({
+            success: true,
+            message: "Create category successfully",
+            result: profile
+        })
 
     }catch(err){
         fileRemover(request.file)
@@ -61,22 +62,22 @@ exports.createCategory = async(request, response) => {
 
 exports.updateCategory = async(request, response) => {
     try{
-        const checkName = await categoriesModel.findByName(request.body.name)
-        if(!checkName){
-            const data = {
-                ...request.body
-            }
-            const user = await categoriesModel.update(request.params.id, data)
-            if(!user){
-                throw Error("data_not_found")
-            }
-            return response.json({
-                success: true,
-                message: "Update category successfully",
-                response: user
-            })
+        const data = {
+            ...request.body
         }
-        throw Error("is_duplicate_data")
+        const checkName = await categoriesModel.findByName(request.body.name)
+        if(checkName){
+            throw Error("is_duplicate_data")
+        }
+        const user = await categoriesModel.update(request.params.id, data)
+        if(!user){
+            throw Error("data_not_found")
+        }
+        return response.json({
+            success: true,
+            message: "Update category successfully",
+            response: user
+        })
 
     }catch(err){
         fileRemover(request.file)
