@@ -27,6 +27,25 @@ exports.findOne = async(id) => {
     return rows[0]
 }
 
+exports.findByUserId = async(id) => {
+    const queries = `
+    SELECT * FROM "${table}"
+    WHERE "userId" = $1
+  `  
+    const values = [id]
+    const {rows} = await db.query(queries,values)  
+    return rows
+}
+exports.findByIdAndUserId = async(id, userId) => {
+    const queries = `
+    SELECT * FROM "${table}"
+    WHERE "id" = $1 AND "userId" = $2
+  `  
+    const values = [id, userId]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
 exports.insert = async(data)=>{
     const queries = `
     INSERT INTO "${table}" (
@@ -50,10 +69,10 @@ exports.insert = async(data)=>{
 exports.update = async(id, data)=>{
     const queries = `
     UPDATE "${table}" SET
-    "eventId"= $2,
-    "userId"= $3,
-    "statusId"= $4,
-    "paymentMethodId"= $5
+    "eventId"= COALESCE(NULLIF($2::INTEGER, NULL), "eventId"),
+    "userId"= COALESCE(NULLIF($3::INTEGER, NULL), "userId"),
+    "statusId"= COALESCE(NULLIF($4::INTEGER, NULL), "statusId"),
+    "paymentMethodId"= COALESCE(NULLIF($5::INTEGER, NULL), "paymentMethodId")
     WHERE "id" = $1
     RETURNING *
     `

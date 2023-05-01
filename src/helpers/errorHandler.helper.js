@@ -43,6 +43,12 @@ const errorHandler = (response, err) => {
             message: "Code invalid, pelase insert the newest code or request again!",
         })
     }
+    if(err?.message?.includes("payment_method_not_found")){
+        return response.status(404).json({
+            success: false,
+            message: "Invalid! Payment method not found",
+        })
+    }
     if(err?.message?.includes("data_user_not_found")){
         return response.status(404).json({
             success: false,
@@ -98,6 +104,12 @@ const errorHandler = (response, err) => {
             message:"Error definition resource routes!",
         })
     }
+    if(err?.message?.includes("change_paymentMethod_failed")){
+        return response.status(400).json({
+            success: false,
+            message:"change paymentMethod failed!",
+        })
+    }
     if(err?.message?.includes("validation_rules")){
         return response.status(400).json({
             success: false,
@@ -110,6 +122,12 @@ const errorHandler = (response, err) => {
             message:"Data ID not found",
         })
     }
+    if(err?.message?.includes("section_not_found")){
+        return response.status(404).json({
+            success: false,
+            message:"Data section not found",
+        })
+    }
     if(err?.message?.includes("event_not_found")){
         return response.status(404).json({
             success: false,
@@ -120,6 +138,12 @@ const errorHandler = (response, err) => {
         return response.status(404).json({
             success: false,
             message:"Data Profile not found",
+        })
+    }
+    if(err?.message?.includes("reservation_not_found")){
+        return response.status(404).json({
+            success: false,
+            message:"Data Reservation not found! reservationId invalid",
         })
     }
     if(err?.message?.includes("unauthorized")){
