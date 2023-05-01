@@ -10,6 +10,9 @@ const validQueryPage = query("page").optional().isInt({min: 1}).withMessage("Par
 const validQueryLimit = query("limit").optional().isInt({min: 0}).withMessage("Parameter Limit must be int format!")
 const validQuerySort = query("sort").optional().escape().trim().isString().withMessage("Parameter Sort must be string format!")
 const validQuerySortBy = query("sortBy").optional().toUpperCase().isIn(["ASC","DESC"]).withMessage("Query Parameter SortBy must be ASC or DESC format!")
+const validQuerySearchName = query("searchName").optional().escape().trim().isString().withMessage("Query Parameter must be string!")
+const validQuerySearchCategory = query("searchCategory").optional().escape().trim().isString().withMessage("Query Parameter must be string!")
+const validQuerySearchLocation = query("searchLocation").optional().escape().trim().isString().withMessage("Query Parameter must be string!")
 
 const requireEmail = body("email").normalizeEmail().isEmail().withMessage("Please insert your valid email!")
 const requirePassword = body("password").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
@@ -105,6 +108,9 @@ const rules = {
     createEvent:[
         requireTitle, requireDate, requireCityId, requireDescription
     ],
+    createEventManage:[
+        requireTitle, requireDate, requireCityId, requireDescription, requireCategoryId
+    ],
     updateEvent:[
         validParameter, requireTitleUpdate, requireDateUpdate, requireCityIdUpdate, requireDescriptionUpdate
     ],
@@ -156,6 +162,15 @@ const rules = {
     updateWishlist:[
         validParameter, requireEventIdUpdate, requireUserId
     ],
+    createReservation:[
+        requireEventId
+    ],
+    createReservationTicket:[
+        requireReservationId, requireSectionId, requireQuantity
+    ],
+    makePayment:[
+        requireReservationId, requirePaymentMethodId
+    ],
 
     resetPassword:[
         requireEmail,requirePassword, requireStrongPassword, requireConfirmPassword, requireResetCode
@@ -170,7 +185,7 @@ const rules = {
         validQueryPage, validQueryLimit
     ],
     getAll:[
-        validQueryPage, validQueryLimit , validQuerySort ,validQuerySortBy
+        validQueryPage, validQueryLimit , validQuerySort ,validQuerySortBy, validQuerySearchName, validQuerySearchCategory, validQuerySearchLocation
     ],
     getOne:[
         validParameter

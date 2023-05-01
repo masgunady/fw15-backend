@@ -12,7 +12,6 @@ exports.updateProfile = async (request, response) => {
             ...request.body 
         }
 
-
         if(data.userId){
             if(user.id !== data.userId){
                 throw Error("invalid_request_userId")

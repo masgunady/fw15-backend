@@ -89,7 +89,7 @@
 									"urlencoded": [
 										{
 											"key": "email",
-											"value": "adminsans@mail.com",
+											"value": "adminkece1@mail.com",
 											"type": "text"
 										},
 										{
@@ -117,7 +117,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "4"
 										}
 									]
 								}
@@ -134,7 +134,7 @@
 									"urlencoded": [
 										{
 											"key": "email",
-											"value": "adminskuy@mail.com",
+											"value": "admins@mail.com",
 											"type": "text"
 										},
 										{
@@ -209,7 +209,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/profiles?sort=fullName&sortBy=ASC&page=1&limit=5",
+									"raw": "{{url}}/admin/profiles?sort=id&sortBy=desc&page=1&limit=5",
 									"host": [
 										"{{url}}"
 									],
@@ -220,11 +220,11 @@
 									"query": [
 										{
 											"key": "sort",
-											"value": "fullName"
+											"value": "id"
 										},
 										{
 											"key": "sortBy",
-											"value": "ASC"
+											"value": "desc"
 										},
 										{
 											"key": "page",
@@ -274,17 +274,17 @@
 									"formdata": [
 										{
 											"key": "userId",
-											"value": "5",
+											"value": "6",
 											"type": "default"
 										},
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/@var.sportphotography-1445.jpg"
+											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template.jpg"
 										},
 										{
 											"key": "fullName",
-											"value": "Azraqi",
+											"value": "admins",
 											"type": "default"
 										},
 										{
@@ -299,7 +299,7 @@
 										},
 										{
 											"key": "profession",
-											"value": "programmer",
+											"value": "admins",
 											"type": "default"
 										},
 										{
@@ -337,27 +337,28 @@
 									"formdata": [
 										{
 											"key": "userId",
-											"value": "1",
+											"value": "4",
 											"type": "default"
 										},
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template (1).jpg"
+											"src": "/C:/Users/gndsu/Downloads/@var.sportphotography-1445.jpg",
+											"disabled": true
 										},
 										{
 											"key": "fullName",
-											"value": "aze",
+											"value": "keren sekali",
 											"type": "default"
 										},
 										{
 											"key": "phoneNumber",
-											"value": "91239821",
+											"value": "090988662",
 											"type": "default"
 										},
 										{
 											"key": "gender",
-											"value": "2",
+											"value": "1",
 											"type": "default"
 										},
 										{
@@ -367,7 +368,7 @@
 										},
 										{
 											"key": "nationality",
-											"value": "austria",
+											"value": "korea",
 											"type": "default"
 										},
 										{
@@ -390,7 +391,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "1"
 										}
 									]
 								}
@@ -419,7 +420,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3"
+											"value": "4"
 										}
 									]
 								}
@@ -509,7 +510,7 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "artss",
+											"value": "festival",
 											"type": "default"
 										}
 									]
@@ -675,11 +676,11 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template (1).jpg"
+											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template.jpg"
 										},
 										{
 											"key": "name",
-											"value": "jakarta",
+											"value": "magelang",
 											"type": "default"
 										}
 									]
@@ -832,7 +833,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "11"
 										}
 									]
 								}
@@ -850,11 +851,11 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": []
+											"src": "/C:/Users/gndsu/Downloads/ART.jpg"
 										},
 										{
 											"key": "title",
-											"value": "nuzulul quran",
+											"value": "PAMERAN GAMBAR",
 											"type": "default"
 										},
 										{
@@ -864,13 +865,18 @@
 										},
 										{
 											"key": "cityId",
-											"value": "8",
+											"value": "4",
 											"type": "text"
 										},
 										{
 											"key": "descriptions",
-											"value": "good event",
+											"value": "PAMERKAN LUKISANMU",
 											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "2",
+											"type": "default"
 										}
 									]
 								},
@@ -898,27 +904,32 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template.jpg"
+											"src": "/C:/Users/gndsu/Downloads/MUSIC.jpg",
+											"disabled": true
 										},
 										{
 											"key": "title",
-											"value": "hajatan",
-											"type": "default"
+											"value": "DANGDUTAN BRO",
+											"type": "default",
+											"disabled": true
 										},
 										{
 											"key": "date",
 											"value": "2023-09-09",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "cityId",
-											"value": "1",
-											"type": "text"
+											"value": "4",
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "descriptions",
 											"value": "mantappp",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
@@ -935,7 +946,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "5"
+											"value": "11"
 										}
 									]
 								}
@@ -989,7 +1000,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/eventCategories?sort=id&sortBy=Desc&page=1&limit=5",
+									"raw": "{{url}}/admin/eventCategories?sort=id&sortBy=Desc&page=1&limit=10",
 									"host": [
 										"{{url}}"
 									],
@@ -1012,7 +1023,7 @@
 										},
 										{
 											"key": "limit",
-											"value": "5"
+											"value": "10"
 										}
 									]
 								}
@@ -1054,7 +1065,7 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "2",
+											"value": "4",
 											"type": "default"
 										},
 										{
@@ -1087,12 +1098,12 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "5",
+											"value": "4",
 											"type": "default"
 										},
 										{
 											"key": "categoryId",
-											"value": "5",
+											"value": "2",
 											"type": "default"
 										}
 									]
@@ -1110,7 +1121,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "4"
 										}
 									]
 								}
@@ -1139,7 +1150,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "6"
 										}
 									]
 								}
@@ -1234,7 +1245,7 @@
 										},
 										{
 											"key": "name",
-											"value": "iam",
+											"value": "iamsss",
 											"type": "default"
 										}
 									]
@@ -1404,12 +1415,12 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "economy",
+											"value": "sultan",
 											"type": "default"
 										},
 										{
 											"key": "price",
-											"value": "10000",
+											"value": "30000",
 											"type": "default"
 										}
 									]
@@ -2325,12 +2336,12 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "5",
+											"value": "4",
 											"type": "default"
 										},
 										{
 											"key": "userId",
-											"value": "5",
+											"value": "4",
 											"type": "default"
 										}
 									]
@@ -2358,7 +2369,7 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "4",
+											"value": "2",
 											"type": "default"
 										},
 										{
@@ -2381,7 +2392,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "1"
 										}
 									]
 								}
@@ -2410,7 +2421,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "2"
 										}
 									]
 								}
@@ -2434,12 +2445,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "adminkece1@mail.com",
+									"value": "adminskuy@mail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "Admin123#",
+									"value": "Admin123!",
 									"type": "default"
 								}
 							]
@@ -2515,7 +2526,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "adminkece1@mail.com",
+									"value": "adminskuy@mail.com",
 									"type": "default"
 								}
 							]
@@ -2550,22 +2561,22 @@
 							"urlencoded": [
 								{
 									"key": "code",
-									"value": "903000",
+									"value": "236270",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "adminkece1@mail.com",
+									"value": "adminskuy@mail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "Admin123#",
+									"value": "Admin123!",
 									"type": "default"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "Admin123#",
+									"value": "Admin123!",
 									"type": "default"
 								}
 							]
@@ -2596,6 +2607,23 @@
 			"name": "PROFILE",
 			"item": [
 				{
+					"name": "GET PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "EDIT PROFILE",
 					"request": {
 						"method": "POST",
@@ -2605,13 +2633,43 @@
 							"formdata": [
 								{
 									"key": "fullName",
-									"value": "Admin kece kita bro",
+									"value": "azraqi zaydan alfatih",
 									"type": "default"
 								},
 								{
 									"key": "picture",
 									"type": "file",
-									"src": "/C:/Users/gndsu/Downloads/Nuzulul Quran Jamiatussyuhada.jpg"
+									"src": "/C:/Users/gndsu/Downloads/@var.sportphotography-1445.jpg"
+								},
+								{
+									"key": "email",
+									"value": "azraqizaydan@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "08978787878",
+									"type": "default"
+								},
+								{
+									"key": "gender",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "profession",
+									"value": "Magang",
+									"type": "default"
+								},
+								{
+									"key": "nationality",
+									"value": "malaysia",
+									"type": "default"
+								},
+								{
+									"key": "birthDate",
+									"value": "1990-10-10",
+									"type": "default"
 								}
 							]
 						},
@@ -2626,19 +2684,619 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "CATEGORY",
+			"item": [
 				{
-					"name": "GET PROFILE",
+					"name": "GET CATEGORY",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/profile",
+							"raw": "{{url}}/category",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"profile"
+								"category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CITY",
+			"item": [
+				{
+					"name": "GET CITY",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/city",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL CITY",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/city/all-cities?page=1&limit=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"city",
+								"all-cities"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PARTNER",
+			"item": [
+				{
+					"name": "GET PARTNER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/partner",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partner"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CHANGE PASSWORD",
+			"item": [
+				{
+					"name": "CHANGE PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "Admin123!",
+									"type": "default"
+								},
+								{
+									"key": "newPassword",
+									"value": "Admin123@",
+									"type": "default"
+								},
+								{
+									"key": "confirmPassword",
+									"value": "Admin123@",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/change-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WISHLIST",
+			"item": [
+				{
+					"name": "GET WISHLIST",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/wishlist",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MANAGE WISHLIST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "eventId",
+									"value": "3",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/wishlist",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EVENT",
+			"item": [
+				{
+					"name": "MANAGE EVENT",
+					"item": [
+						{
+							"name": "GET EVENT MANAGE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/event/manage",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"manage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET DETAI EVENT MANAGE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/event/manage/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"manage",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE EVENT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "picture",
+											"type": "file",
+											"src": "/C:/Users/gndsu/Downloads/ART.jpg"
+										},
+										{
+											"key": "title",
+											"value": "SAUR ON THE ROAD",
+											"type": "default"
+										},
+										{
+											"key": "date",
+											"value": "1990-10-10",
+											"type": "default"
+										},
+										{
+											"key": "cityId",
+											"value": "8",
+											"type": "default"
+										},
+										{
+											"key": "descriptions",
+											"value": "MALEM MALEM",
+											"type": "default"
+										},
+										{
+											"key": "categoryId",
+											"value": "2",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/event/manage",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"manage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE EVENT",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "picture",
+											"type": "file",
+											"src": "/C:/Users/gndsu/Downloads/ART.jpg"
+										},
+										{
+											"key": "title",
+											"value": "our art event",
+											"type": "default"
+										},
+										{
+											"key": "date",
+											"value": "1990-10-10",
+											"type": "default"
+										},
+										{
+											"key": "cityId",
+											"value": "3",
+											"type": "default"
+										},
+										{
+											"key": "descriptions",
+											"value": "keren sekali",
+											"type": "default"
+										},
+										{
+											"key": "categoryId",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/event/manage/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"manage",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE EVENT",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{url}}/event/manage/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event",
+										"manage",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET EVENT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event?searchName=&searchCategory=&searchLocation=&page=1&limit=50&sort=id&sortBy=asc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event"
+							],
+							"query": [
+								{
+									"key": "searchName",
+									"value": ""
+								},
+								{
+									"key": "searchCategory",
+									"value": ""
+								},
+								{
+									"key": "searchLocation",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								},
+								{
+									"key": "sort",
+									"value": "id"
+								},
+								{
+									"key": "sortBy",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET DETAIL EVENT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "eventId",
+									"value": "5",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/event/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RESERVATIONS",
+			"item": [
+				{
+					"name": "CREATE RESERVATION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "eventId",
+									"value": "2",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/reservation",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE RESERVATION TICKET",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reservationId",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "sectionId",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/reservation/ticket",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservation",
+								"ticket"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PAYMENT",
+			"item": [
+				{
+					"name": "MAKE PAYMENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reservationId",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "paymentMethodId",
+									"value": "5",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/payment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HISTORY",
+			"item": [
+				{
+					"name": "GET HISTORY",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/history",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET HISTORY DETAIL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/history/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"history",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
 							]
 						}
 					},

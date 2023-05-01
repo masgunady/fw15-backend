@@ -12,17 +12,24 @@ exports.makePayment = async (request, response) => {
         }
 
         let sectionStatus
-        if(request.body.paymentMethodId === "5" ){
+        if(request.body.paymentMethodId == 5 ){
             sectionStatus = 1
         }else{
             sectionStatus = 3
         }
+        console.log(request.body.paymentMethodId)
+        console.log(sectionStatus)
+
 
         const data = {
             statusId: sectionStatus,
             ...request.body
         }
   
+        const reservations = await reservationsModel.findOne(data.reservationId)
+        if(!reservations){
+            throw Error("reservation_not_found")
+        }
         const paymentMethod = await paymentMethodsModel.findOne(data.paymentMethodId)
         if(!paymentMethod){
             throw Error("payment_method_not_found")

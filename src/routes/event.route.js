@@ -5,13 +5,13 @@ const uploadMiddleware = require("../middlewares/upload.middleware")
 const authMiddleware = require("../middlewares/auth.middleware")
 
 
-eventRouter.get("/", eventController.getEvent)
-eventRouter.get("/manage", authMiddleware, eventController.getOurEventCreate)
-eventRouter.get("/:id", eventController.getDetailEvent)
-eventRouter.post("/manage", authMiddleware, uploadMiddleware("picture"), validate("createEvent"), eventController.createOurEvent)
-eventRouter.patch("/manage/:id", authMiddleware, uploadMiddleware("picture"), eventController.updateOurEvent)
-eventRouter.get("/manage/:id", authMiddleware, eventController.getDetailEvent)
-eventRouter.delete("/manage/:id", authMiddleware,validate("delete"), eventController.deleteEvent)
+eventRouter.get("/", validate("getAll"), eventController.getEvent)
+eventRouter.get("/manage", validate("getAll"), authMiddleware, eventController.getOurEventCreate)
+eventRouter.get("/:id", validate("getOne"), eventController.getDetailEvent)
+eventRouter.post("/manage", authMiddleware, uploadMiddleware("picture"), validate("createEventManage"), eventController.createOurEvent)
+eventRouter.patch("/manage/:id", authMiddleware, uploadMiddleware("picture"), validate("getOne"), eventController.updateOurEvent)
+eventRouter.get("/manage/:id", authMiddleware, validate("getOne"), eventController.getDetailEvent)
+eventRouter.delete("/manage/:id", authMiddleware, validate("delete"), eventController.deleteEvent)
 
 // eventRouter.post("/" , eventController.manageWishlist)
 

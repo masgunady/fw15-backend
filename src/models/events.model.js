@@ -19,7 +19,7 @@ exports.findAll = async(page, limit, search, sort, sortBy) => {
 
 exports.findEvent = async (searchName, searchCategory, searchLocation, page, limit, sort, sortBy) => {
     page = parseInt(page) || 1
-    limit = parseInt(limit) || 25
+    limit = parseInt(limit) || 10
     searchName = searchName || ""
     searchCategory = searchCategory || ""
     searchLocation = searchLocation || ""
