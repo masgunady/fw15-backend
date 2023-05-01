@@ -40,7 +40,12 @@ exports.manageWishlist = async (request, response) => {
 
         const checkDuplicate = await wishlistsModel.findOneByUserIdAndEventId(id, eventId)
         if(checkDuplicate){
-            throw Error("is_duplicate_data")
+            const deleteWishlist = await wishlistsModel.DeleteByUserIdAndEventId(id, eventId)
+            return response.json({
+                success: true,
+                message: "remove wishlist success",
+                results: deleteWishlist
+            })
         }
 
 

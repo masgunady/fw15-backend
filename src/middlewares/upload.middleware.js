@@ -16,20 +16,20 @@ const limits = {
     fileSize: 1 * 1024 * 1024
 }
 // chaining mimetypes with regex
-// const fileFilter = (req, file, cb) => {
-//     const fileTypes = /jpeg|jpg|png/
-//     const mimeType = fileTypes.test(file.mimetype)
-//     if(!mimeType){
-//         cb(Error("fileformat_error"))
-//     }
-//     cb(null, true)
-// }
 const fileFilter = (req, file, cb) => {
-    if(file.mimetype !== "image/jpeg"){
-        return cb(Error("fileformat_error"))
+    const fileTypes = /jpeg|jpg|png/
+    const mimeType = fileTypes.test(file.mimetype)
+    if(!mimeType){
+        cb(Error("fileformat_error"))
     }
     cb(null, true)
 }
+// const fileFilter = (req, file, cb) => {
+//     if(file.mimetype !== "image/jpeg"){
+//         return cb(Error("fileformat_error"))
+//     }
+//     cb(null, true)
+// }
 
 const upload = multer({storage, limits, fileFilter})
 

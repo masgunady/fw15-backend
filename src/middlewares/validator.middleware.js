@@ -162,6 +162,9 @@ const rules = {
     updateWishlist:[
         validParameter, requireEventIdUpdate, requireUserId
     ],
+    manageWishlist:[
+        requireEventId
+    ],
     createReservation:[
         requireEventId
     ],

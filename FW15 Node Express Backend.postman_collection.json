@@ -610,7 +610,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/admin/cities?sort=id&sortBy=Desc&page=1&limit=5",
+									"raw": "{{url}}/admin/cities?sort=id&sortBy=Desc&page=1&limit=7",
 									"host": [
 										"{{url}}"
 									],
@@ -633,7 +633,7 @@
 										},
 										{
 											"key": "limit",
-											"value": "5"
+											"value": "7"
 										}
 									]
 								}
@@ -676,11 +676,11 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/Biru Gelap Minimalis Ucapan Peringatan Nuzulul Quran untuk Instagram Post Template.jpg"
+											"src": "/C:/Users/gndsu/Downloads/SEMARANG.jpg"
 										},
 										{
 											"key": "name",
-											"value": "magelang",
+											"value": "semarang",
 											"type": "default"
 										}
 									]
@@ -1241,11 +1241,11 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/Nuzulul Quran Jamiatussyuhada.jpg"
+											"src": "/C:/Users/gndsu/Downloads/partner6.png"
 										},
 										{
 											"key": "name",
-											"value": "iamsss",
+											"value": "partner6",
 											"type": "default"
 										}
 									]
@@ -2445,12 +2445,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "adminskuy@mail.com",
+									"value": "gunadi@mail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "Admin123!",
+									"value": "User123!",
 									"type": "default"
 								}
 							]
@@ -2478,22 +2478,22 @@
 							"urlencoded": [
 								{
 									"key": "fullName",
-									"value": "Admin Kece1",
+									"value": "user2",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "adminkece1@mail.com",
+									"value": "user2@mail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "Admin123!",
+									"value": "User123!",
 									"type": "default"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "Admin123!",
+									"value": "User123!",
 									"type": "default"
 								},
 								{
@@ -2526,7 +2526,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "adminskuy@mail.com",
+									"value": "user2@mail.com",
 									"type": "default"
 								}
 							]
@@ -2561,22 +2561,22 @@
 							"urlencoded": [
 								{
 									"key": "code",
-									"value": "236270",
+									"value": "514790",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "adminskuy@mail.com",
+									"value": "user2@mail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "Admin123!",
+									"value": "User123#",
 									"type": "default"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "Admin123!",
+									"value": "User123#",
 									"type": "default"
 								}
 							]
@@ -2633,17 +2633,17 @@
 							"formdata": [
 								{
 									"key": "fullName",
-									"value": "azraqi zaydan alfatih",
+									"value": "gunadi pratama s",
 									"type": "default"
 								},
 								{
 									"key": "picture",
 									"type": "file",
-									"src": "/C:/Users/gndsu/Downloads/@var.sportphotography-1445.jpg"
+									"src": "/C:/Users/gndsu/Downloads/profile2.jpg"
 								},
 								{
 									"key": "email",
-									"value": "azraqizaydan@gmail.com",
+									"value": "gunadi@mail.com",
 									"type": "default"
 								},
 								{
@@ -2658,17 +2658,17 @@
 								},
 								{
 									"key": "profession",
-									"value": "Magang",
+									"value": "programmer",
 									"type": "default"
 								},
 								{
 									"key": "nationality",
-									"value": "malaysia",
+									"value": "indonesia",
 									"type": "default"
 								},
 								{
 									"key": "birthDate",
-									"value": "1990-10-10",
+									"value": "1992-10-10",
 									"type": "default"
 								}
 							]
@@ -2794,17 +2794,17 @@
 							"urlencoded": [
 								{
 									"key": "oldPassword",
-									"value": "Admin123!",
+									"value": "User123#",
 									"type": "default"
 								},
 								{
 									"key": "newPassword",
-									"value": "Admin123@",
+									"value": "User123!",
 									"type": "default"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "Admin123@",
+									"value": "User123!",
 									"type": "default"
 								}
 							]
@@ -2853,7 +2853,7 @@
 							"urlencoded": [
 								{
 									"key": "eventId",
-									"value": "3",
+									"value": "2",
 									"type": "default"
 								}
 							]
@@ -2914,7 +2914,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "15"
+											"value": "2"
 										}
 									]
 								}
@@ -2932,31 +2932,31 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/gndsu/Downloads/ART.jpg"
+											"src": "/C:/Users/gndsu/Downloads/SPORTS.png"
 										},
 										{
 											"key": "title",
-											"value": "SAUR ON THE ROAD",
+											"value": "tarkam nusantara",
 											"type": "default"
 										},
 										{
 											"key": "date",
-											"value": "1990-10-10",
+											"value": "2023-10-11",
 											"type": "default"
 										},
 										{
 											"key": "cityId",
-											"value": "8",
+											"value": "2",
 											"type": "default"
 										},
 										{
 											"key": "descriptions",
-											"value": "MALEM MALEM",
+											"value": "sepakbola tarkam modern",
 											"type": "default"
 										},
 										{
 											"key": "categoryId",
-											"value": "2",
+											"value": "5",
 											"type": "default"
 										}
 									]
@@ -3071,7 +3071,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/event?searchName=&searchCategory=&searchLocation=&page=1&limit=50&sort=id&sortBy=asc",
+							"raw": "{{url}}/event?searchName=&searchCategory=&searchLocation=&page=1&limit=10&sort=id&sortBy=asc",
 							"host": [
 								"{{url}}"
 							],
@@ -3097,7 +3097,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "50"
+									"value": "10"
 								},
 								{
 									"key": "sort",
@@ -3122,13 +3122,7 @@
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "eventId",
-									"value": "5",
-									"type": "default"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
 							"raw": "{{url}}/event/:id",
@@ -3142,7 +3136,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5"
+									"value": "1"
 								}
 							]
 						}
@@ -3191,17 +3185,17 @@
 							"urlencoded": [
 								{
 									"key": "reservationId",
-									"value": "1",
+									"value": "3",
 									"type": "default"
 								},
 								{
 									"key": "sectionId",
-									"value": "2",
+									"value": "1",
 									"type": "default"
 								},
 								{
 									"key": "quantity",
-									"value": "1",
+									"value": "5",
 									"type": "default"
 								}
 							]
@@ -3234,12 +3228,12 @@
 							"urlencoded": [
 								{
 									"key": "reservationId",
-									"value": "2",
+									"value": "3",
 									"type": "default"
 								},
 								{
 									"key": "paymentMethodId",
-									"value": "5",
+									"value": "2",
 									"type": "default"
 								}
 							]
@@ -3295,7 +3289,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}

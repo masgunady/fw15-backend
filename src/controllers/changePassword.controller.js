@@ -24,6 +24,7 @@ exports.changePassword = async (request, response) => {
             password: hash
         }
 
+        // return console.log(data)
         const changePass = await userModel.update(id, data)
         if(!changePass){
             throw Error("change_password_failed")

@@ -28,6 +28,7 @@ exports.findOne = async(id) => {
 exports.findOneByUserId = async(id) => {
     const queries = `
     SELECT
+    "e"."id",
     "e"."title",
     "e"."date",
     "c"."name" AS "location",
@@ -43,6 +44,8 @@ exports.findOneByUserId = async(id) => {
     return rows
 }
 
+
+
 exports.findOneByUserIdAndEventId = async(userId, eventId) => {
     const queries = `
     SELECT * FROM "${table}"
@@ -50,6 +53,18 @@ exports.findOneByUserIdAndEventId = async(userId, eventId) => {
   `  
     const values = [userId, eventId]
     const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
+exports.DeleteByUserIdAndEventId = async(userId, eventId)=>{
+    const queries = `
+DELETE FROM "${table}"
+WHERE "userId" = $1 AND "eventId" = $2
+RETURNING *
+`
+    const values = [userId, eventId]
+
+    const {rows} = await db.query(queries, values)
     return rows[0]
 }
 
@@ -94,7 +109,6 @@ exports.destroy = async(id)=>{
   RETURNING *
   `
     const values = [id]
-
     const {rows} = await db.query(queries, values)
     return rows[0]
 }
