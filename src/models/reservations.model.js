@@ -31,11 +31,48 @@ exports.findByUserId = async(id) => {
     const queries = `
     SELECT * FROM "${table}"
     WHERE "userId" = $1
-  `  
+    `  
     const values = [id]
     const {rows} = await db.query(queries,values)  
     return rows
 }
+
+exports.findHistoryByUserId = async(id) => {
+    const queries = `
+    SELECT
+    "e"."title",
+    "c"."name",
+    "e"."date"
+    FROM "reservations" "r"
+    INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    INNER JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    WHERE "r"."userId" = $1
+    `  
+    const values = [id]
+    const {rows} = await db.query(queries,values)  
+    return rows
+}
+
+exports.findHistoryByIdAndUserId = async(id, userId) => {
+    const queries = `
+    SELECT
+    "e"."title",
+    "c"."name",
+    "e"."date",
+    "rstat"."name" AS "reservationStatus",
+    "pm"."name" AS "paymentStatus"
+    FROM "reservations" "r"
+    INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    INNER JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    INNER JOIN "reservationStatus" "rstat" ON "rstat"."id" = "r"."statusId"
+    INNER JOIN "paymentMethods" "pm" ON "pm"."id" = "r"."paymentMethodId"
+    WHERE "r"."id" = $1 AND "r"."userId" = $2
+    `  
+    const values = [id, userId]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
 exports.findByIdAndUserId = async(id, userId) => {
     const queries = `
     SELECT * FROM "${table}"
