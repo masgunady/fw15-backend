@@ -15,7 +15,7 @@ exports.getAllEventCategories = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all event categories",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -31,7 +31,7 @@ exports.getOneEventCategory = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail event category",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -70,7 +70,7 @@ exports.createEventCategory = async(request, response) => {
         return response.json({
             success: true,
             message: "Create event category successfully",
-            result: eventCategory
+            results: eventCategory
         })
     }catch(err){
         return errorHandler(response, err)
@@ -120,7 +120,7 @@ exports.updateEventCategory = async(request, response) => {
         return response.json({
             success: true,
             message: "Update event category successfully",
-            response: eventCategory
+            results: eventCategory
         })
     }catch(err){
         return errorHandler(response, err)
@@ -136,7 +136,7 @@ exports.deleteEventCategory = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete event category successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

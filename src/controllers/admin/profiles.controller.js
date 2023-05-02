@@ -16,7 +16,7 @@ exports.getAllUserProfiles = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all user profiles",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -33,7 +33,7 @@ exports.getOneUserProfile = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail profile",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -65,7 +65,7 @@ exports.createUserProfile = async(request, response) => {
         return response.json({
             success: true,
             message: "Create user profile successfully",
-            result: profile
+            results: profile
         })
     }catch(err){
         fileRemover(request.file)
@@ -114,7 +114,7 @@ exports.updateUserProfile = async(request, response) => {
         return response.json({
             success: true,
             message: "Update user profile successfully",
-            response: user
+            results: user
         })
         
         
@@ -145,7 +145,7 @@ exports.deleteUserProfile = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete user profile successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

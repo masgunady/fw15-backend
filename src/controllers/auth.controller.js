@@ -24,7 +24,7 @@ exports.login = async (request, response) => {
         return response.json({
             success: true,
             message: "Login Success!",
-            result: {token}
+            results: {token}
         })
     } catch (err) {
         return errorHandler(response, err)
@@ -55,7 +55,7 @@ exports.register = async (request, response) => {
         return response.json({
             success: true,
             message: "Register Success!",
-            result: {token}
+            results: {token}
         })
     } catch (err) {
         return errorHandler(response, err)

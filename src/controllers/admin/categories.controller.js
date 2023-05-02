@@ -14,7 +14,7 @@ exports.getAllCategories = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all categories",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -30,7 +30,7 @@ exports.getOneCategory = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail category",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -51,7 +51,7 @@ exports.createCategory = async(request, response) => {
         return response.json({
             success: true,
             message: "Create category successfully",
-            result: profile
+            results: profile
         })
 
     }catch(err){
@@ -76,7 +76,7 @@ exports.updateCategory = async(request, response) => {
         return response.json({
             success: true,
             message: "Update category successfully",
-            response: user
+            results: user
         })
 
     }catch(err){
@@ -94,7 +94,7 @@ exports.deleteCategory = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete category successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

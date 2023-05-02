@@ -15,7 +15,7 @@ exports.getAllPartners = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all partners",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -32,7 +32,7 @@ exports.getOnePartner = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail partner",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -53,7 +53,7 @@ exports.createPartner = async(request, response) => {
             return response.json({
                 success: true,
                 message: "Create partner successfully",
-                result: profile
+                results: profile
             })
         }
         throw Error("is_duplicate_data")
@@ -95,7 +95,7 @@ exports.updatePartner = async(request, response) => {
             return response.json({
                 success: true,
                 message: "Update partner successfully",
-                response: user
+                results: user
             })
         }
         throw Error("is_duplicate_data")
@@ -126,7 +126,7 @@ exports.deletePartner = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete partner successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

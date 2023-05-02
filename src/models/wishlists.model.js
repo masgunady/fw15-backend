@@ -109,6 +109,7 @@ exports.destroy = async(id)=>{
   RETURNING *
   `
     const values = [id]
+
     const {rows} = await db.query(queries, values)
     return rows[0]
 }

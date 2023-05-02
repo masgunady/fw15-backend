@@ -15,7 +15,7 @@ exports.getAllCities = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all citY",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -32,7 +32,7 @@ exports.getOneCity = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail city",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -53,7 +53,7 @@ exports.createCity = async(request, response) => {
             return response.json({
                 success: true,
                 message: "Create city successfully",
-                result: profile
+                results: profile
             })
         }
         throw Error("is_duplicate_data")
@@ -94,7 +94,7 @@ exports.updateCity = async(request, response) => {
             return response.json({
                 success: true,
                 message: "Update city successfully",
-                response: user
+                results: user
             })
         }
         throw Error("is_duplicate_data")
@@ -123,7 +123,7 @@ exports.deleteCity = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete city successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

@@ -13,7 +13,7 @@ exports.getAllPaymentMethods = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all payment methods",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -29,7 +29,7 @@ exports.getOnePaymentMethod = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail payment method",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -45,7 +45,7 @@ exports.createPaymentMethod = async(request, response) => {
         return response.json({
             success: true,
             message: "Create payment method successfully",
-            result: profile
+            results: profile
         })
     }catch(err){
         return errorHandler(response, err)
@@ -64,7 +64,7 @@ exports.updatePaymentMethod = async(request, response) => {
         return response.json({
             success: true,
             message: "Update payment method successfully",
-            response: user
+            results: user
         })
     }catch(err){
         return errorHandler(response, err)
@@ -80,7 +80,7 @@ exports.deletePaymentMethod = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete payment method successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

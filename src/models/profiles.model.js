@@ -53,14 +53,15 @@ exports.findOneByUserId = async(userId) => {
     "prof"."userId",
     "prof"."picture",
     "prof"."fullName",
+    "usr"."email",
     "prof"."phoneNumber",
     "prof"."gender",
     "prof"."profession",
     "prof"."nationality",
     "prof"."birthDate",
     "prof"."createdAt",
-    "prof"."updatedAt",
-    "usr"."email"
+    "prof"."updatedAt"
+    
     FROM "${table}" "prof"
     INNER JOIN "users" "usr" ON "usr"."id" = "prof"."userId"
     WHERE "prof"."userId" = $1
