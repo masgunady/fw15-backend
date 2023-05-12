@@ -30,6 +30,7 @@ exports.makePayment = async (request, response) => {
         if(!reservations){
             throw Error("reservation_not_found")
         }
+        
         const paymentMethod = await paymentMethodsModel.findOne(data.paymentMethodId)
         if(!paymentMethod){
             throw Error("payment_method_not_found")

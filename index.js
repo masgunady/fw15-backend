@@ -3,17 +3,39 @@ require("dotenv").config({
 })
 
 const express = require("express")
+
+const cors = require("cors")
+
 const app = express()
 app.use(express.urlencoded({extended:false}))
 
-app.use((request, response, next)=> {
-    // response.setHeader("Access-Control-Allow-Origin", "https://cdpn.io")
-    response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500")
-    // response.setHeader("Access-Control-Allow-Origin", "*")
-    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
-    response.setHeader("Access-Control-Allow-Headers", "Content-type")
-    next()
-})
+// app.use(cors({
+//     origin: "http://localhost:5173",
+//     optionsSuccessStatus: 200,
+// }))
+
+var whitelist = ["http://localhost:5173", "http://127.0.0.1:5173"]
+var corsOptions = {
+    origin: function (origin, callback) {
+        if ((origin === undefined) || (whitelist.indexOf(origin) !== -1)) {
+            callback(null, true)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
+    }
+}
+
+app.use(cors(corsOptions))
+
+
+// app.use((request, response, next)=> {
+//     response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5173"),
+//     response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS"),
+//     response.setHeader("Access-Control-Allow-Headers", "Content-type")
+//     next()
+// })
+
+app.use("/uploads", express.static("uploads"))
 
 app.use("/", require("./src/routes"))
 

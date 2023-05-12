@@ -2,7 +2,7 @@
 
 const errorHandler = require("../helpers/errorHandler.helper")
 const reservationsModel = require("../models/reservations.model")
-const reservationSectionsModel = require("../models/reservationSections.model")
+// const reservationSectionsModel = require("../models/reservationSections.model")
 const eventsModel = require("../models/events.model")
 const reservationTicketsModel = require("../models/reservationTickets.model")
 
@@ -31,10 +31,21 @@ exports.createReservation = async (request, response) => {
         }
 
         const reservation = await reservationsModel.insert(data)
+
+        const reservationId = reservation.id
+        const sectionId = request.body.sectionId
+        const quantity = request.body.quantity
+
+        const dataReservationTickets = {
+            reservationId, sectionId, quantity
+        }
+
+        const reservationTicket = await reservationTicketsModel.insert(dataReservationTickets)
+
         return response.json({
             success: true,
             message: "Success add reservation",
-            results: reservation
+            results: reservationTicket
         })
 
     } catch (err) {
@@ -42,36 +53,36 @@ exports.createReservation = async (request, response) => {
     }
 }
 
-exports.pickTicket = async (request, response) => {
-    try {
-        const {id} = request.user
-        if(!id){
-            throw Error("unauthorized")
-        }
+// exports.pickTicket = async (request, response) => {
+//     try {
+//         const {id} = request.user
+//         if(!id){
+//             throw Error("unauthorized")
+//         }
 
-        const data = {
-            ...request.body
-        }
-        const reservation = await reservationsModel.findByIdAndUserId(data.reservationId, id)
-        if(!reservation){
-            throw Error("reservation_not_found")
-        }
+//         const data = {
+//             ...request.body
+//         }
+//         const reservation = await reservationsModel.findByIdAndUserId(data.reservationId, id)
+//         if(!reservation){
+//             throw Error("reservation_not_found")
+//         }
 
-        const section = await reservationSectionsModel.findOne(data.sectionId)
-        if(!section){
-            throw Error("section_not_found")
-        }
+//         const section = await reservationSectionsModel.findOne(data.sectionId)
+//         if(!section){
+//             throw Error("section_not_found")
+//         }
 
-        const ticket = await reservationTicketsModel.insert(data)
-        return response.json({
-            success: true,
-            message: "add ticket successfully",
-            results: ticket
-        })
+//         const ticket = await reservationTicketsModel.insert(data)
+//         return response.json({
+//             success: true,
+//             message: "add ticket successfully",
+//             results: ticket
+//         })
 
-    } catch (err) {
-        return errorHandler(response, err)
-    }
-}
+//     } catch (err) {
+//         return errorHandler(response, err)
+//     }
+// }
 
 

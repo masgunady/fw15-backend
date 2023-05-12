@@ -4,7 +4,7 @@ const table = "cities"
 
 exports.findAll = async(page, limit, search, sort, sortBy) => {
     page = parseInt(page) || 1
-    limit = parseInt(limit) || 5
+    limit = parseInt(limit) || 7
     search = search || ""
     sort = sort || "id"
     sortBy = sortBy || "ASC"
@@ -21,7 +21,7 @@ exports.findCity = async(sort, sortBy) => {
     sort = sort || "id"
     sortBy = sortBy || "ASC"
     const queries = `
-    SELECT * FROM "${table}"ORDER BY "${sort}" ${sortBy} LIMIT 7 OFFSET 1
+    SELECT * FROM "${table}"ORDER BY "${sort}" ${sortBy} LIMIT 10 OFFSET 1
     `
     const {rows} = await db.query(queries)  
     return rows

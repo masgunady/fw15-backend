@@ -177,6 +177,18 @@ const errorHandler = (response, err) => {
             message:"Invalid Token!",
         })
     }
+    if(err?.message?.includes("jwt expired")){
+        return response.status(401).json({
+            success: false,
+            message:"Unauthorized: Token expired, please relogin!",
+        })
+    }
+    if(err?.message?.includes("invalid token")){
+        return response.status(401).json({
+            success: false,
+            message:"Unauthorized: Invalid Token, please relogin!",
+        })
+    }
     if(err?.message?.includes("invalid_request_userId")){
         return response.status(400).json({
             success: false,

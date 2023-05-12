@@ -4,7 +4,7 @@ const cityModel = require("../models/cities.model")
 exports.getCity  = async (request, response) => {
     try {
         const {sort, sortBy} = request.query
-        const city = await cityModel.findCity(sort, sortBy)
+        const city = await cityModel.findAll(sort, sortBy)
         if(!city){
             throw Error("data_not_found")
         }

@@ -5,6 +5,6 @@ const validate = require("../middlewares/validator.middleware")
 
 
 reservationRouter.post("/", validate("createReservation"), reservationController.createReservation)
-reservationRouter.post("/ticket", validate("createReservationTicket"), reservationController.pickTicket)
+// reservationRouter.post("/ticket", validate("createReservationTicket"), reservationController.pickTicket)
 
 module.exports = reservationRouter

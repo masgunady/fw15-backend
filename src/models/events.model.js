@@ -29,6 +29,7 @@ exports.findEvent = async (searchName, searchCategory, searchLocation, page, lim
     const queries = `
     SELECT
     "e"."id",
+    "e"."picture",
     "e"."title" as "title",
     "e"."date",
     "c"."name" as "category",
