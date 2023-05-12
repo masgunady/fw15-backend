@@ -11,10 +11,15 @@ exports.getEvent = async (request, response) => {
     try {
         const {searchName,searchCategory, searchLocation, page, limit, sort, sortBy} = request.query
         const data = await eventsModel.findEvent(searchName, searchCategory, searchLocation, page, limit, sort, sortBy)
+        const countEvent = await eventsModel.countEvent(searchName, searchCategory, searchLocation)
+        
+        const totalPage = Math.ceil(parseInt(countEvent.totalData)/parseInt(limit))
+                
         return response.json({
             success: true,
             message: "list of event",
-            results: data
+            results: data,
+            totalPage: totalPage
         })
 
     } catch (err) {
@@ -87,7 +92,8 @@ exports.createOurEvent = async (request, response) => {
         }
 
         if(request.file){
-            data.picture = request.file.filename
+            // data.picture = request.file.filename
+            data.picture = request.file.path
         }
         const event = await eventsModel.insert(data)
 
@@ -158,7 +164,8 @@ exports.updateOurEvent = async (request, response) => {
             if(checkEvent.picture){
                 fileRemover({filename: checkEvent.picture})
             }
-            data.picture = request.file.filename
+            // data.picture = request.file.filename
+            data.picture = request.file.path
         }
 
         const event = await eventsModel.update(request.params.id, data)

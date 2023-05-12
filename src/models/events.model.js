@@ -46,6 +46,26 @@ exports.findEvent = async (searchName, searchCategory, searchLocation, page, lim
     return rows
 }
 
+exports.countEvent = async (searchName, searchCategory, searchLocation) => {
+
+    searchName = searchName || ""
+    searchCategory = searchCategory || ""
+    searchLocation = searchLocation || ""
+    
+    const queries = `
+    SELECT
+    COUNT(*) AS "totalData"
+    FROM "eventCategories" "ec"
+    JOIN "events" "e" ON "e"."id" = "ec"."eventId"
+    JOIN "categories" "c" ON "c"."id" = "ec"."categoryId"
+    JOIN "cities" "city" ON "city"."id" = "e"."cityId"
+    WHERE "e"."title" LIKE $1 AND "c"."name" LIKE $2 AND "city"."name" LIKE $3
+  `
+    const values = [`%${searchName}%`, `%${searchCategory}%`, `%${searchLocation}%`]
+    const {rows} = await db.query(queries, values)
+    return rows[0]
+}
+
 exports.findOne = async(id) => {
     const queries = `
     SELECT * FROM "${table}"
