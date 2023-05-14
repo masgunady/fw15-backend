@@ -19,12 +19,12 @@ exports.findAll = async(page, limit, search, sort, sortBy) => {
 
 exports.findEvent = async (searchName, searchCategory, searchLocation, page, limit, sort, sortBy) => {
     page = parseInt(page) || 1
-    limit = parseInt(limit) || 10
+    limit = parseInt(limit) || 100
     searchName = searchName || ""
     searchCategory = searchCategory || ""
     searchLocation = searchLocation || ""
     sort = sort || "id"
-    sortBy = sortBy || "ASC"
+    sortBy = sortBy || "DESC"
     const offset = (page - 1) * limit
     const queries = `
     SELECT

@@ -4,8 +4,15 @@ const citiesModel = require("../models/cities.model")
 const categoriesModel = require("../models/categories.model")
 const eventCategoriesModel = require("../models/eventCategories.model")
 const fileRemover = require("../helpers/fileRemover.helper")
-const fs = require("fs")
 
+// const fs = require("fs")
+const cloudinary = require("cloudinary").v2
+// const { CloudinaryStorage } = require("multer-storage-cloudinary")
+cloudinary.config({
+    cloud_name: "dxs0yxeyr",
+    api_key: "236157336681252",
+    api_secret: "V2uHsegpJtBpFlUl3WSwkxdCL0I"
+})
 
 exports.getEvent = async (request, response) => {
     try {
@@ -94,7 +101,9 @@ exports.createOurEvent = async (request, response) => {
         if(request.file){
             // data.picture = request.file.filename
             data.picture = request.file.path
+            
         }
+        // return console.log(request.file)
         const event = await eventsModel.insert(data)
 
         const eventCategoriesData = {
@@ -203,15 +212,30 @@ exports.deleteEvent = async (request, response) => {
         if(id !== findUser.createdBy){
             throw Error("data_event_not_created_by_you")
         }
+        
 
-        const fileName = `uploads/${findUser.picture}`
-        if(fileName){
-            fs.unlink(fileName, (response, err) => {
-                if(err){
-                    return errorHandler(response, err)
-                }
-            })
-        }
+        const filePict = findUser.picture
+        const urlArray = filePict.split("/")
+        const directoryOne = urlArray[urlArray.length-3]
+        const directoryTwo = urlArray[urlArray.length-2]
+        const fileNamed = urlArray[urlArray.length-1].split(".")[0]
+        const id_image = `${directoryOne.toString()}/${directoryTwo.toString()}/${fileNamed.toString()}`
+        console.log(id_image)
+        
+        await cloudinary.uploader.destroy(id_image, (error, results) => {
+            console.log(error, results)
+        })
+        
+
+
+        // const fileName = `uploads/${findUser.picture}`
+        // if(fileName){
+        //     fs.unlink(fileName, (response, err) => {
+        //         if(err){
+        //             return errorHandler(response, err)
+        //         }
+        //     })
+        // }
         const data = await eventsModel.destroy(request.params.id)
         if(!data){
             throw Error("data_not_found")

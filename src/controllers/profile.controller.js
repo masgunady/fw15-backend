@@ -2,6 +2,13 @@ const errorHandler = require("../helpers/errorHandler.helper")
 const fileRemover = require("../helpers/fileRemover.helper")
 const profilesModel = require("../models/profiles.model")
 const usersModel = require("../models/users.model")
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({
+    cloud_name: "dxs0yxeyr",
+    api_key: "236157336681252",
+    api_secret: "V2uHsegpJtBpFlUl3WSwkxdCL0I"
+})
 
 exports.updateProfile = async (request, response) => {
     try {
@@ -12,16 +19,34 @@ exports.updateProfile = async (request, response) => {
             ...request.body 
         }
 
+        console.log(data)
+
         if(data.userId){
             if(user.id !== data.userId){
                 throw Error("invalid_request_userId")
             }
         }
 
+        
+
         if(request.file){
             if(user.picture){
                 fileRemover({filename: user.picture})
             }
+
+
+            const filePict = user.picture
+            const urlArray = filePict.split("/")
+            const directoryOne = urlArray[urlArray.length-3]
+            const directoryTwo = urlArray[urlArray.length-2]
+            const fileNamed = urlArray[urlArray.length-1].split(".")[0]
+            const id_image = `${directoryOne.toString()}/${directoryTwo.toString()}/${fileNamed.toString()}`
+            console.log(id_image)
+        
+            await cloudinary.uploader.destroy(id_image, (error, results) => {
+                console.log(error, results)
+            })
+            
             // data.picture = request.file.filename
             data.picture = request.file.path
         }

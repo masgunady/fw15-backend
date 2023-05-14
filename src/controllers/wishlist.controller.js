@@ -33,7 +33,7 @@ exports.manageWishlist = async (request, response) => {
         }
         const eventId = data.eventId
         const checkEvent = await eventsModel.findOne(eventId)
-        console.log(checkEvent)
+        // console.log(checkEvent)
         if(!checkEvent){
             throw Error("data_not_found")
         }

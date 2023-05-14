@@ -40,13 +40,21 @@ exports.findByUserId = async(id) => {
 exports.findHistoryByUserId = async(id) => {
     const queries = `
     SELECT
-    "e"."title",
-    "c"."name",
-    "e"."date"
-    FROM "reservations" "r"
-    INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
-    INNER JOIN "cities" "c" ON "c"."id" = "e"."cityId"
-    WHERE "r"."userId" = $1
+    reservations."id", 
+    events.title, 
+    cities."name", 
+    events."date"
+  FROM
+    reservations
+    LEFT JOIN
+    events
+    ON 
+      reservations."eventId" = events."id"
+    LEFT JOIN
+    cities
+    ON 
+      events."cityId" = cities."id"
+    WHERE reservations."userId" = $1
     `  
     const values = [id]
     const {rows} = await db.query(queries,values)  

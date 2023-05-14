@@ -4,7 +4,7 @@ const errorHandler = require("../helpers/errorHandler.helper")
 const reservationsModel = require("../models/reservations.model")
 // const reservationSectionsModel = require("../models/reservationSections.model")
 const eventsModel = require("../models/events.model")
-const reservationTicketsModel = require("../models/reservationTickets.model")
+// const reservationTicketsModel = require("../models/reservationTickets.model")
 
 
 exports.createReservation = async (request, response) => {
@@ -32,26 +32,61 @@ exports.createReservation = async (request, response) => {
 
         const reservation = await reservationsModel.insert(data)
 
-        const reservationId = reservation.id
-        const sectionId = request.body.sectionId
-        const quantity = request.body.quantity
-
-        const dataReservationTickets = {
-            reservationId, sectionId, quantity
-        }
-
-        const reservationTicket = await reservationTicketsModel.insert(dataReservationTickets)
-
         return response.json({
             success: true,
             message: "Success add reservation",
-            results: reservationTicket
+            results: reservation
         })
 
     } catch (err) {
         return errorHandler(response, err)
     }
 }
+// exports.createReservation = async (request, response) => {
+//     try {
+//         const {id} = request.user
+//         if(!id){
+//             throw Error("unauthorized")
+//         }
+//         const reservationStatus = 1
+//         const paymentMethod = 5
+
+//         const data = {
+//             ...request.body,
+//             userId: id,
+//             statusId: reservationStatus,
+//             paymentMethodId: paymentMethod
+//         }
+
+//         if(data.eventId){
+//             const checkEvent = await eventsModel.findOne(data.eventId)
+//             if(!checkEvent){
+//                 throw Error("data_not_found")
+//             }
+//         }
+
+//         const reservation = await reservationsModel.insert(data)
+
+//         const reservationId = reservation.id
+//         const sectionId = request.body.sectionId
+//         const quantity = request.body.quantity
+
+//         const dataReservationTickets = {
+//             reservationId, sectionId, quantity
+//         }
+
+//         const reservationTicket = await reservationTicketsModel.insert(dataReservationTickets)
+
+//         return response.json({
+//             success: true,
+//             message: "Success add reservation",
+//             results: reservationTicket
+//         })
+
+//     } catch (err) {
+//         return errorHandler(response, err)
+//     }
+// }
 
 // exports.pickTicket = async (request, response) => {
 //     try {
