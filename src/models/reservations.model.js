@@ -42,7 +42,7 @@ exports.findHistoryByUserId = async(id) => {
     SELECT
     reservations."id", 
     events.title, 
-    cities."name", 
+    cities."name" AS "location", 
     events."date"
   FROM
     reservations

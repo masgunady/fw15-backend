@@ -58,6 +58,7 @@ exports.getOurEventCreate = async (request, response) => {
         }
         const eventOurCreate = await eventsModel.findEventByUserCreated(id)
         
+        
         if(!eventOurCreate){
             throw Error("data_not_found")
         }

@@ -33,8 +33,6 @@ exports.updateProfile = async (request, response) => {
             if(user.picture){
                 fileRemover({filename: user.picture})
             }
-
-
             const filePict = user.picture
             const urlArray = filePict.split("/")
             const directoryOne = urlArray[urlArray.length-3]
