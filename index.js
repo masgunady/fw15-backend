@@ -14,18 +14,20 @@ app.use(express.urlencoded({extended:false}))
 //     optionsSuccessStatus: 200,
 // }))
 
-var whitelist = ["https://gndsulistiawan-fw15-frontend.netlify.app","http://localhost:5173", "http://127.0.0.1:5173"]
-var corsOptions = {
-    origin: function (origin, callback) {
-        if ((origin === undefined) || (whitelist.indexOf(origin) !== -1)) {
-            callback(null, true)
-        } else {
-            callback(new Error("Not allowed by CORS"))
-        }
-    }
-}
+// var whitelist = ["https://gndsulistiawan-fw15-frontend.netlify.app","http://localhost:5173", "http://127.0.0.1:5173"]
+// var corsOptions = {
+//     origin: function (origin, callback) {
+//         if ((origin === undefined) || (whitelist.indexOf(origin) !== -1)) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error("Not allowed by CORS"))
+//         }
+//     }
+// }
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+
+app.use(cors())
 
 
 // app.use((request, response, next)=> {
