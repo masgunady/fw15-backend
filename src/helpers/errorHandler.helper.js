@@ -7,12 +7,12 @@ const errorHandler = (response, err) => {
             message: "Email has already been taken!",
         })
     }
-    if(err?.message?.includes("duplicate key")){
-        return response.status(409).json({
-            success: false,
-            message: "Error duplicate key!",
-        })
-    }
+    // if(err?.message?.includes("duplicate key")){
+    //     return response.status(409).json({
+    //         success: false,
+    //         message: "Error duplicate key!",
+    //     })
+    // }
     if(err?.message?.includes("no such file or directory")){
         return response.status(409).json({
             success: false,
