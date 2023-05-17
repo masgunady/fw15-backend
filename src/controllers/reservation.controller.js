@@ -13,6 +13,7 @@ exports.createReservation = async (request, response) => {
         if(!id){
             throw Error("unauthorized")
         }
+        console.log(request.body)
         const reservationStatus = 1
         const paymentMethod = 5
 

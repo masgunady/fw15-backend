@@ -1,18 +1,24 @@
 const errorHandler = (response, err) => {
     console.log(err)
 
+    if(err?.message?.includes("invalid input syntax for type integer")){
+        return response.status(409).json({
+            success: false,
+            message: "Invalid parameter!",
+        })
+    }
     if(err?.message?.includes("users_email_key")){
         return response.status(409).json({
             success: false,
             message: "Email has already been taken!",
         })
     }
-    // if(err?.message?.includes("duplicate key")){
-    //     return response.status(409).json({
-    //         success: false,
-    //         message: "Error duplicate key!",
-    //     })
-    // }
+    if(err?.message?.includes("duplicate key")){
+        return response.status(409).json({
+            success: false,
+            message: "Error duplicate key!",
+        })
+    }
     if(err?.message?.includes("no such file or directory")){
         return response.status(409).json({
             success: false,
