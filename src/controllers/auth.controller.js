@@ -36,7 +36,7 @@ exports.register = async (request, response) => {
     try {
         const {fullName, password, termAndCondition} = request.body
 
-        if(termAndCondition !== 1){
+        if(termAndCondition === false){
             throw Error("invalid_term_and_condition")
         }
 

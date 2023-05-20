@@ -41,6 +41,8 @@ exports.findOne = async(id) => {
 exports.getInfo = async(id) => {
     const queries = `
     SELECT
+    "r"."id" AS "reservationId",
+    "e"."id" AS "eventId",
     "e"."title" AS "eventName",
     "rs"."name" AS "section",
     "rs"."price" AS "price",

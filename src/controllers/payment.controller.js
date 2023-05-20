@@ -2,6 +2,7 @@ const errorHandler = require("../helpers/errorHandler.helper")
 const paymentMethodsModel = require("../models/paymentMethods.model")
 const reservatioinTicketsModel = require("../models/reservationTickets.model")
 const reservationsModel = require("../models/reservations.model")
+const eventsModel = require("../models/events.model")
 
 
 exports.makePayment = async (request, response) => {
@@ -11,14 +12,16 @@ exports.makePayment = async (request, response) => {
             throw Error("unauthorized")
         }
 
-        let sectionStatus
-        if(request.body.paymentMethodId == 5 ){
-            sectionStatus = 1
-        }else{
-            sectionStatus = 3
-        }
-        console.log(request.body.paymentMethodId)
-        console.log(sectionStatus)
+        // let sectionStatus
+        // if(request.body.paymentMethodId == 5 ){
+        //     sectionStatus = 1
+        // }else{
+        //     sectionStatus = 3
+        // }
+        // console.log(request.body.paymentMethodId)
+        // console.log(sectionStatus)
+
+        const sectionStatus = 3
 
 
         const data = {
@@ -43,6 +46,7 @@ exports.makePayment = async (request, response) => {
         }
 
         const information = await reservatioinTicketsModel.getInfo(data.reservationId)
+        
         if(!information){
             throw Error("reservation_not_found")
         }

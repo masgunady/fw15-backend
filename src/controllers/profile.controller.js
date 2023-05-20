@@ -35,11 +35,10 @@ exports.updateProfile = async (request, response) => {
             }
             const filePict = user.picture
             const urlArray = filePict.split("/")
-            const directoryOne = urlArray[urlArray.length-3]
             const directoryTwo = urlArray[urlArray.length-2]
             const fileNamed = urlArray[urlArray.length-1].split(".")[0]
-            const id_image = `${directoryOne.toString()}/${directoryTwo.toString()}/${fileNamed.toString()}`
-            console.log(id_image)
+            const id_image = `${directoryTwo.toString()}/${fileNamed.toString()}`
+            // return console.log(id_image)
         
             await cloudinary.uploader.destroy(id_image, (error, results) => {
                 console.log(error, results)

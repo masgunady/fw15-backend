@@ -11,6 +11,14 @@ const errorHandler = (response, err) => {
         return response.status(409).json({
             success: false,
             message: "Email has already been taken!",
+            results: [
+                {
+                    value: "form email",
+                    msg: "Email has already been taken!!",
+                    param: "email",
+                    location: "body"
+                }
+            ]
         })
     }
     if(err?.message?.includes("duplicate key")){

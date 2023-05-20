@@ -13,7 +13,7 @@ exports.getAllReservationSections = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all reservation sections",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -29,7 +29,7 @@ exports.getOneReservationSection = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail reservation section",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -45,7 +45,7 @@ exports.createReservationSection = async(request, response) => {
         return response.json({
             success: true,
             message: "Create reservation section successfully",
-            result: profile
+            results: profile
         })
     }catch(err){
         return errorHandler(response, err)
@@ -64,7 +64,7 @@ exports.updateReservationSection = async(request, response) => {
         return response.json({
             success: true,
             message: "Update reservation section successfully",
-            response: user
+            results: user
         })
     }catch(err){
         return errorHandler(response, err)
@@ -80,7 +80,7 @@ exports.deleteReservationSection = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete reservation section successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)
