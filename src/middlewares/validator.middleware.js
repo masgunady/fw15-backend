@@ -59,7 +59,7 @@ const requireSectionId = body("sectionId").isNumeric().withMessage("Please inser
 const requirePrice = body("price").isNumeric().withMessage("Please insert valid price!").isLength({min:3, max:12}).withMessage("Please insert valid price!")
 const requireQuantity = body("quantity").isNumeric().withMessage("Please insert valid quantity!").isLength({min:1, max:10}).withMessage("Please insert valid quantity!").isInt({min: 1}).withMessage("Please insert valid quantity!")
 
-const requireResetCode = body("code").isNumeric().withMessage("Please insert valid Code!").isLength({min:7, max:7}).withMessage("Please insert valid code!")
+const requireResetCode = body("code").isNumeric().withMessage("Please insert valid Code!").isLength({min:1, max:7}).withMessage("Please insert valid code!")
 
 const requireOldPassword = body("oldPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
 const requireNewPassword = body("newPassword").exists({checkFalsy:true, checkNull:true}).withMessage("Please insert your password!")
