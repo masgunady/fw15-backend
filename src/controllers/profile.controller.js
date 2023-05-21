@@ -19,8 +19,6 @@ exports.updateProfile = async (request, response) => {
             ...request.body 
         }
 
-        console.log(data)
-
         if(data.userId){
             if(user.id !== data.userId){
                 throw Error("invalid_request_userId")
@@ -32,18 +30,22 @@ exports.updateProfile = async (request, response) => {
         if(request.file){
             if(user.picture){
                 fileRemover({filename: user.picture})
-            }
-            const filePict = user.picture
-            const urlArray = filePict.split("/")
-            const directoryTwo = urlArray[urlArray.length-2]
-            const fileNamed = urlArray[urlArray.length-1].split(".")[0]
-            const id_image = `${directoryTwo.toString()}/${fileNamed.toString()}`
-            // return console.log(id_image)
-        
-            await cloudinary.uploader.destroy(id_image, (error, results) => {
-                console.log(error, results)
-            })
+
+                const filePict = user.picture
+                const urlArray = filePict.split("/")
+                const directoryName = urlArray[urlArray.length-2]
+                const fileNamed = urlArray[urlArray.length-1].split(".")[0]
+                const id_image = `${directoryName.toString()}/${fileNamed.toString()}`
+    
+                console.log(id_image)
+                // return console.log(id_image)
             
+                await cloudinary.uploader.destroy(id_image, (error, results) => {
+                    console.log(error, results)
+                })
+                
+            }
+          
             // data.picture = request.file.filename
             data.picture = request.file.path
         }
