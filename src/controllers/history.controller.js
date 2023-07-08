@@ -15,7 +15,7 @@ exports.getHistory = async (request, response) => {
 
         return response.json({
             success: true,
-            message: "list of your hostory",
+            message: "list of your history",
             results: history
         })
     } catch (err) {

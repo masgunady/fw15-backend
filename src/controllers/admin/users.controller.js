@@ -15,7 +15,7 @@ exports.getAllUsers = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all users",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -32,7 +32,7 @@ exports.getOneUser = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail User",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -52,7 +52,7 @@ exports.createUser = async(request, response) => {
         return response.json({
             success: true,
             message: `Create user ${email} successfully`,
-            result: user
+            results: user
         })
     }catch(err){
         return errorHandler(response, err)
@@ -94,7 +94,7 @@ exports.deleteUser = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete user successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

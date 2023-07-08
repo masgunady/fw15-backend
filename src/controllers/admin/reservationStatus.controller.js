@@ -13,7 +13,7 @@ exports.getAllReservationStatus = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all reservation status",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -29,7 +29,7 @@ exports.getOneReservationStatus = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail reservation status",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -45,7 +45,7 @@ exports.createReservationStatus = async(request, response) => {
         return response.json({
             success: true,
             message: "Create reservation status successfully",
-            result: profile
+            results: profile
         })
     }catch(err){
         return errorHandler(response, err)
@@ -80,7 +80,7 @@ exports.deleteReservationStatus = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete reservation status successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

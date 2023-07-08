@@ -64,16 +64,27 @@ exports.findHistoryByUserId = async(id) => {
 exports.findHistoryByIdAndUserId = async(id, userId) => {
     const queries = `
     SELECT
+    "r"."id" AS "reservationId",
+    "e"."id" AS "eventId",
+    "e"."picture",
     "e"."title",
-    "c"."name",
+    "c"."name" AS "location",
     "e"."date",
-    "rstat"."name" AS "reservationStatus",
-    "pm"."name" AS "paymentStatus"
+    "rsec"."name" AS "ticketSection",
+    "rsec"."price" AS "ticketPrice",
+    "rt"."quantity",
+    ("rsec"."price"::numeric * "rt"."quantity"::numeric) AS "totalPrice",
+    "rstat"."name" AS "paymentStatus",
+    "pm"."name" AS "paymentMethod",
+    "r"."createdAt" AS "paymentDate"
+
     FROM "reservations" "r"
     INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
     INNER JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     INNER JOIN "reservationStatus" "rstat" ON "rstat"."id" = "r"."statusId"
     INNER JOIN "paymentMethods" "pm" ON "pm"."id" = "r"."paymentMethodId"
+    INNER JOIN "reservationTickets" "rt" ON "rt"."reservationId" = "r"."id"
+    INNER JOIN "reservationSections" "rsec" ON "rsec"."id" = "rt"."sectionId"
     WHERE "r"."id" = $1 AND "r"."userId" = $2
     `  
     const values = [id, userId]

@@ -2,7 +2,11 @@ const errorHandler = require("../helpers/errorHandler.helper")
 const eventsModel = require("../models/events.model")
 const citiesModel = require("../models/cities.model")
 const categoriesModel = require("../models/categories.model")
+const moment = require("moment")
 const eventCategoriesModel = require("../models/eventCategories.model")
+const fbaseAdmin = require("../helpers/firebase")
+
+const deviceTokenModel = require("../models/deviceToken.model")
 const fileRemover = require("../helpers/fileRemover.helper")
 
 // const fs = require("fs")
@@ -106,14 +110,27 @@ exports.createOurEvent = async (request, response) => {
         }
         // return console.log(request.file)
         const event = await eventsModel.insert(data)
-
         const eventCategoriesData = {
             eventId: event.id,
             categoryId: data.categoryId
         }
-
         await eventCategoriesModel.insert(eventCategoriesData)
-        
+
+        const listDeviceToken = await deviceTokenModel.findAll(1, 1000)
+        // console.log(listDeviceToken)
+        const eventName = request.body.title.toUpperCase()
+        const dateEvent = moment(request.body.date).format("LLLL")
+        const message = listDeviceToken.map(item => ({
+            token: item.token,
+            notification: {
+                title: "There is new event!",
+                body: `${eventName} will be held at ${dateEvent}, check it out!`
+            }
+        }))
+
+        const messaging = fbaseAdmin.messaging()
+        messaging.sendEach(message)
+
         return response.json({
             success: true,
             message: "Create event successfully",

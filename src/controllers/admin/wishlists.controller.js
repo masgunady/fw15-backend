@@ -15,7 +15,7 @@ exports.getAllWishlists = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all wishlists",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -31,7 +31,7 @@ exports.getOneWishlist = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail wishlist",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -70,7 +70,7 @@ exports.createWishlist = async(request, response) => {
         return response.json({
             success: true,
             message: "Create wishlist successfully",
-            result: wishlist
+            results: wishlist
         })
     }catch(err){
         return errorHandler(response, err)
@@ -135,7 +135,7 @@ exports.deleteWishlist = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete wishlist successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

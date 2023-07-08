@@ -13,7 +13,7 @@ exports.getAllReservationTickets = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all reservation tickets",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -29,7 +29,7 @@ exports.getOneReservationTicket = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail reservation ticket",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -45,7 +45,7 @@ exports.createReservationTicket = async(request, response) => {
         return response.json({
             success: true,
             message: "Create reservation ticket successfully",
-            result: profile
+            results: profile
         })
     }catch(err){
         return errorHandler(response, err)
@@ -80,7 +80,7 @@ exports.deleteReservationTicket = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete reservation ticket successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)

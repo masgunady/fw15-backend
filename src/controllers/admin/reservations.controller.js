@@ -13,7 +13,7 @@ exports.getAllReservations = async(request, response)=>{
         return response.json({
             success: true,
             message:"list of all reservations",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -29,7 +29,7 @@ exports.getOneReservation = async(request, response)=>{
         return response.json({
             success: true,
             message:"Detail reservation",
-            result:data
+            results:data
         })
     }catch(err){
         return errorHandler(response, err)
@@ -45,7 +45,7 @@ exports.createReservation = async(request, response) => {
         return response.json({
             success: true,
             message: "Create reservation successfully",
-            result: profile
+            results: profile
         })
     }catch(err){
         return errorHandler(response, err)
@@ -80,7 +80,7 @@ exports.deleteReservation = async(request, response)=>{
         return response.json({
             success: true,
             message: "Delete reservation successfully",
-            result:data
+            results:data
         })
     } catch (err) {
         return errorHandler(response,err)
