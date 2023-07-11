@@ -37,13 +37,17 @@ exports.findByUserId = async(id) => {
     return rows
 }
 
-exports.findHistoryByUserId = async(id) => {
+exports.findHistoryByUserId = async(id, sort, sortBy) => {
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
     const queries = `
     SELECT
     reservations."id", 
     events.title, 
     cities."name" AS "location", 
-    events."date"
+    events."date",
+    reservations."createdAt" AS "reservationDate",
+    "paymentMethods".name AS "paymentMethod"
   FROM
     reservations
     LEFT JOIN
@@ -54,8 +58,13 @@ exports.findHistoryByUserId = async(id) => {
     cities
     ON 
       events."cityId" = cities."id"
+    LEFT JOIN
+    "paymentMethods"
+    ON 
+      reservations."paymentMethodId" = "paymentMethods"."id"
     WHERE reservations."userId" = $1
-    `  
+    ORDER BY "${sort}" ${sortBy}
+    `
     const values = [id]
     const {rows} = await db.query(queries,values)  
     return rows

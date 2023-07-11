@@ -15,7 +15,7 @@ exports.createReservation = async (request, response) => {
             throw Error("unauthorized")
         }
         const reservationStatus = 1
-        const paymentMethod = null
+        const paymentMethod = 5
 
         const data = {
             ...request.body,
@@ -23,8 +23,6 @@ exports.createReservation = async (request, response) => {
             statusId: reservationStatus,
             paymentMethodId: paymentMethod
         }
-
-        
 
         if(data.eventId){
             const checkEvent = await eventsModel.findOne(data.eventId)
@@ -34,8 +32,6 @@ exports.createReservation = async (request, response) => {
         }
 
         const reservation = await reservationsModel.insert(data)
-
-        // return console.log(reservation)
 
         const reservationId = reservation.id
         const sectionId = request.body.sectionId
