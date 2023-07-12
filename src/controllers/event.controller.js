@@ -54,6 +54,23 @@ exports.getDetailEvent = async (request, response) => {
     }
 }
 
+exports.getDetailOurEvent = async (request, response) => {
+    try {
+        const {id} = request.user
+        const data = await eventsModel.findDetailOurEvent(request.params.id, id)
+        if(!data){
+            throw Error("data_not_found")
+        }
+        return response.json({
+            success: true,
+            message: "detail event",
+            results: data
+        })
+    } catch (err) {
+        return errorHandler(response, err)
+    }
+}
+
 exports.getOurEventCreate = async (request, response) => {
     try {
         const {id} = request.user

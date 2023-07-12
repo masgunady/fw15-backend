@@ -10,7 +10,7 @@ eventRouter.get("/manage", validate("getAll"), authMiddleware, eventController.g
 eventRouter.get("/:id", validate("getOne"), eventController.getDetailEvent)
 eventRouter.patch("/manage", authMiddleware, uploadMiddleware("picture"), validate("createEventManage"), eventController.createOurEvent)
 eventRouter.patch("/manage/:id", authMiddleware, uploadMiddleware("picture"), validate("getOne"), eventController.updateOurEvent)
-eventRouter.get("/manage/:id", authMiddleware, validate("getOne"), eventController.getDetailEvent)
+eventRouter.get("/manage/:id", authMiddleware, validate("getOne"), eventController.getDetailOurEvent)
 eventRouter.delete("/manage/:id", authMiddleware, validate("delete"), eventController.deleteEvent)
 
 // eventRouter.post("/" , eventController.manageWishlist)

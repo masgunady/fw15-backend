@@ -84,12 +84,35 @@ exports.findDetailEvent = async(id) => {
     "e"."title",
     "c"."name" AS "location",
     "e"."date",
-    "e"."descriptions"
+    "e"."descriptions",
+    "cat"."name" AS "eventCategory"
     FROM "events" "e"
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
+    JOIN "categories" "cat" ON "cat"."id" = "ec"."categoryId"
     WHERE "e"."id" = $1
     `  
     const values = [id]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+exports.findDetailOurEvent = async(id, userId) => {
+    const queries = `
+    SELECT
+    "e"."id",
+    "e"."picture",
+    "e"."title",
+    "c"."name" AS "location",
+    "e"."date",
+    "e"."descriptions",
+    "cat"."name" AS "eventCategory"
+    FROM "events" "e"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    JOIN "eventCategories" "ec" ON "ec"."eventId" = "e"."id"
+    JOIN "categories" "cat" ON "cat"."id" = "ec"."categoryId"
+    WHERE "e"."id" = $1 AND "e"."createdBy" = $2
+    `  
+    const values = [id, userId]
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
