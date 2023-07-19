@@ -7,16 +7,25 @@ const eventsModel = require("../models/events.model")
 exports.getWishlist = async (request, response) => {
     try {
         const {id} = request.user
-        const wishlist = await wishlistsModel.findOneByUserId(id)
+        if(!id){
+            throw Error("unauthorized")
+        }
+        const {page, limit, sort, sortBy} = request.query
+
+        const wishlist = await wishlistsModel.findOneByUserId(id, page, limit, sort, sortBy)
 
         if(!wishlist){
             throw Error("data_not_found")
         }
 
+        const countOurWishlist = await wishlistsModel.countOurWishlist(id)
+        const totalPage = Math.ceil(parseInt(countOurWishlist.totalData)/parseInt(limit))
+
         return response.json({
             success: true,
             message: "list our wishlist",
-            results: wishlist
+            results: wishlist,
+            totalPage: totalPage
         })
 
     } catch (err) {
@@ -74,8 +83,6 @@ exports.manageWishlist = async (request, response) => {
                 results: deleteWishlist
             })
         }
-
-
         const wishlist = await wishlistsModel.insert(data)
         if(!wishlist){
             throw Error("create_wishlist_failed")

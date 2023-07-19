@@ -25,7 +25,25 @@ exports.findOne = async(id) => {
     const {rows} = await db.query(queries,values)  
     return rows[0]
 }
-exports.findOneByUserId = async(id) => {
+
+exports.countOurWishlist = async (id) => {
+    const queries = `
+    SELECT
+    COUNT(*) AS "totalData"
+    FROM "${table}" "w"
+    WHERE "w"."userId" = $1
+    `
+    const values = [id]
+    const {rows} = await db.query(queries, values)
+    return rows[0]
+}
+
+exports.findOneByUserId = async(id, page, limit, sort, sortBy) => {
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 4
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    const offset = (page - 1) * limit
     const queries = `
     SELECT
     "e"."id" AS "eventId",
@@ -33,14 +51,15 @@ exports.findOneByUserId = async(id) => {
     "e"."date",
     "c"."name" AS "location",
     "w"."userId",
+    "w"."id",
     "w"."id" AS "wishlistId"
-    FROM "wishlists" "w"
+    FROM "${table}" "w"
     JOIN "events" "e" ON "e"."id" = "w"."eventId"
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     WHERE "userId" = $1
-
+    ORDER BY "${sort}" ${sortBy} LIMIT $2 OFFSET $3
     `  
-    const values = [id]
+    const values = [id, limit, offset]
     const {rows} = await db.query(queries,values)  
     return rows
 }
