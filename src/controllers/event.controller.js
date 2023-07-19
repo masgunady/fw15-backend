@@ -77,7 +77,10 @@ exports.getOurEventCreate = async (request, response) => {
         if(!id){
             throw Error("unauthorized")
         }
-        const eventOurCreate = await eventsModel.findEventByUserCreated(id)
+        const {page, limit, sort, sortBy} = request.query
+        const eventOurCreate = await eventsModel.findEventByUserCreated(id, page, limit, sort, sortBy)
+        const countOurEvent = await eventsModel.countOurEvent(id)
+        const totalPage = Math.ceil(parseInt(countOurEvent.totalData)/parseInt(limit))
         
         
         if(!eventOurCreate){
@@ -87,7 +90,8 @@ exports.getOurEventCreate = async (request, response) => {
         return response.json({
             success: true,
             message: "list event by you",
-            results: eventOurCreate
+            results: eventOurCreate,
+            totalPage: totalPage
         })
     } catch (err) {
         return errorHandler(response, err)

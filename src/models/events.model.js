@@ -66,6 +66,7 @@ exports.countEvent = async (searchName, searchCategory, searchLocation) => {
     return rows[0]
 }
 
+
 exports.findOne = async(id) => {
     const queries = `
     SELECT * FROM "${table}"
@@ -117,7 +118,28 @@ exports.findDetailOurEvent = async(id, userId) => {
     return rows[0]
 }
 
-exports.findEventByUserCreated = async(id) => {
+exports.countOurEvent = async (id) => {
+  
+    const queries = `
+  SELECT
+  COUNT(*) AS "totalData"
+  FROM "eventCategories" "ec"
+  JOIN "events" "e" ON "e"."id" = "ec"."eventId"
+  JOIN "categories" "c" ON "c"."id" = "ec"."categoryId"
+  JOIN "cities" "city" ON "city"."id" = "e"."cityId"
+  WHERE "e"."createdBy" = $1
+`
+    const values = [id]
+    const {rows} = await db.query(queries, values)
+    return rows[0]
+}
+
+exports.findEventByUserCreated = async(id, page, limit, sort, sortBy) => {
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 5
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    const offset = (page - 1) * limit
     const queries = `
     SELECT
     "e"."id",
@@ -128,8 +150,9 @@ exports.findEventByUserCreated = async(id) => {
     FROM "events" "e"
     JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     WHERE "e"."createdBy" = $1
+    ORDER BY "${sort}" ${sortBy} LIMIT $2 OFFSET $3
     `  
-    const values = [id]
+    const values = [id, limit, offset]
     const {rows} = await db.query(queries,values)  
     return rows
 }
