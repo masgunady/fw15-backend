@@ -7,16 +7,20 @@ exports.getHistory = async (request, response) => {
         if(!id){
             throw Error("unauthorized")
         }
-
-        const history = await reservationsModel.findHistoryByUserId(id, request.query.sort, request.query.sortBy)
+        const {page, limit, sort, sortBy} = request.query
+        const history = await reservationsModel.findHistoryByUserId(id, page, limit, sort, sortBy)
         if(!history){
             throw Error("data_not_found")
         }
 
+        const countOurHistory = await reservationsModel.countOurHistory(id)
+        const totalPage = Math.ceil(parseInt(countOurHistory.totalData)/parseInt(limit))
+
         return response.json({
             success: true,
             message: "list of your history",
-            results: history
+            results: history,
+            totalPage: totalPage
         })
     } catch (err) {
         return errorHandler(response, err)

@@ -37,9 +37,25 @@ exports.findByUserId = async(id) => {
     return rows
 }
 
-exports.findHistoryByUserId = async(id, sort, sortBy) => {
+exports.countOurHistory = async (id) => {
+  
+    const queries = `
+    SELECT
+    COUNT(*) AS "totalData"
+    FROM "${table}" "r"
+    WHERE "r"."userId" = $1
+    `
+    const values = [id]
+    const {rows} = await db.query(queries, values)
+    return rows[0]
+}
+
+exports.findHistoryByUserId = async(id, page, limit, sort, sortBy) => {
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 4
     sort = sort || "id"
     sortBy = sortBy || "ASC"
+    const offset = (page - 1) * limit
     const queries = `
     SELECT
     reservations."id", 
@@ -48,8 +64,8 @@ exports.findHistoryByUserId = async(id, sort, sortBy) => {
     events."date",
     reservations."createdAt" AS "reservationDate",
     "paymentMethods".name AS "paymentMethod"
-  FROM
-    reservations
+    FROM
+    "${table}"
     LEFT JOIN
     events
     ON 
@@ -63,9 +79,9 @@ exports.findHistoryByUserId = async(id, sort, sortBy) => {
     ON 
       reservations."paymentMethodId" = "paymentMethods"."id"
     WHERE reservations."userId" = $1
-    ORDER BY "${sort}" ${sortBy}
+    ORDER BY "${sort}" ${sortBy} LIMIT $2 OFFSET $3
     `
-    const values = [id]
+    const values = [id, limit, offset]
     const {rows} = await db.query(queries,values)  
     return rows
 }
@@ -87,7 +103,7 @@ exports.findHistoryByIdAndUserId = async(id, userId) => {
     "pm"."name" AS "paymentMethod",
     "r"."createdAt" AS "paymentDate"
 
-    FROM "reservations" "r"
+    FROM "${table}" "r"
     INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
     INNER JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     INNER JOIN "reservationStatus" "rstat" ON "rstat"."id" = "r"."statusId"
